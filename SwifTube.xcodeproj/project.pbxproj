@@ -11,8 +11,12 @@
 		A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */; };
 		A8853AFB1A484D4300B3C3B4 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */; };
 		A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */; };
+		A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8D1A485D0200E49941 /* SwifTube.swift */; };
+		A8D5CF901A485D1500E49941 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8F1A485D1500E49941 /* Item.swift */; };
+		A8D5CF961A4863D900E49941 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */; };
+		A8D5CF981A4865B500E49941 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF971A4865B500E49941 /* ItemsViewController.swift */; };
+		A8D5CF9A1A4874AF00E49941 /* SearchContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF991A4874AF00E49941 /* SearchContainerView.swift */; };
 		A8D5E63E1A41DAE900525EB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5E63D1A41DAE900525EB9 /* AppDelegate.swift */; };
-		A8D5E6401A41DAE900525EB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5E63F1A41DAE900525EB9 /* ViewController.swift */; };
 		A8D5E6431A41DAE900525EB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8D5E6411A41DAE900525EB9 /* Main.storyboard */; };
 		A8D5E6451A41DAE900525EB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D5E6441A41DAE900525EB9 /* Images.xcassets */; };
 		A8D5E6481A41DAE900525EB9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D5E6461A41DAE900525EB9 /* LaunchScreen.xib */; };
@@ -59,10 +63,15 @@
 		A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
 		A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		A8D5CF801A485B8900E49941 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		A8D5CF8D1A485D0200E49941 /* SwifTube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifTube.swift; sourceTree = "<group>"; };
+		A8D5CF8F1A485D1500E49941 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		A8D5CF911A485D3200E49941 /* SwifTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwifTube-Bridging-Header.h"; sourceTree = "<group>"; };
+		A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		A8D5CF971A4865B500E49941 /* ItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
+		A8D5CF991A4874AF00E49941 /* SearchContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchContainerView.swift; sourceTree = "<group>"; };
 		A8D5E6381A41DAE900525EB9 /* SwifTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D5E63C1A41DAE900525EB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D5E63D1A41DAE900525EB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A8D5E63F1A41DAE900525EB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A8D5E6421A41DAE900525EB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8D5E6441A41DAE900525EB9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A8D5E6471A41DAE900525EB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -104,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				A8853AF41A484C4000B3C3B4 /* SearchViewController.swift */,
+				A8D5CF971A4865B500E49941 /* ItemsViewController.swift */,
 				A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */,
 				A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */,
 				A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */,
@@ -114,6 +124,8 @@
 		A8D5CF7F1A4859DE00E49941 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A8D5CF8D1A485D0200E49941 /* SwifTube.swift */,
+				A8D5CF8F1A485D1500E49941 /* Item.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -127,15 +139,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A8D5CF941A4863A900E49941 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A8D5CF991A4874AF00E49941 /* SearchContainerView.swift */,
+				A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		A8D5E62F1A41DAE900525EB9 = {
 			isa = PBXGroup;
 			children = (
-				A8D5CF801A485B8900E49941 /* Alamofire.xcodeproj */,
 				A8D5E63A1A41DAE900525EB9 /* SwifTube */,
 				A8D5E6501A41DAE900525EB9 /* SwifTubeTests */,
 				A8D5E6391A41DAE900525EB9 /* Products */,
 				1F87EEB76147A85BA43B9404 /* Pods */,
 				B6049202F6B4D4A8D891841E /* Frameworks */,
+				A8D5CF801A485B8900E49941 /* Alamofire.xcodeproj */,
+				A8D5CF911A485D3200E49941 /* SwifTube-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,12 +174,12 @@
 			isa = PBXGroup;
 			children = (
 				A8D5E63D1A41DAE900525EB9 /* AppDelegate.swift */,
-				A8D5E63F1A41DAE900525EB9 /* ViewController.swift */,
 				A8D5E6411A41DAE900525EB9 /* Main.storyboard */,
 				A8D5E6441A41DAE900525EB9 /* Images.xcassets */,
 				A8D5E6461A41DAE900525EB9 /* LaunchScreen.xib */,
 				A8D5E63B1A41DAE900525EB9 /* Supporting Files */,
 				A8853AF71A484C5C00B3C3B4 /* View Controller */,
+				A8D5CF941A4863A900E49941 /* View */,
 				A8D5CF7F1A4859DE00E49941 /* Model */,
 			);
 			path = SwifTube;
@@ -358,7 +380,11 @@
 				A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */,
 				A8853AFB1A484D4300B3C3B4 /* PlaylistsViewController.swift in Sources */,
 				A8853AF51A484C4000B3C3B4 /* SearchViewController.swift in Sources */,
-				A8D5E6401A41DAE900525EB9 /* ViewController.swift in Sources */,
+				A8D5CF901A485D1500E49941 /* Item.swift in Sources */,
+				A8D5CF9A1A4874AF00E49941 /* SearchContainerView.swift in Sources */,
+				A8D5CF981A4865B500E49941 /* ItemsViewController.swift in Sources */,
+				A8D5CF961A4863D900E49941 /* ItemTableViewCell.swift in Sources */,
+				A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */,
 				A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */,
 				A8D5E63E1A41DAE900525EB9 /* AppDelegate.swift in Sources */,
 			);
@@ -489,9 +515,12 @@
 			baseConfigurationReference = 756A4DBA1F109F41EE03A2F3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwifTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwifTube-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -501,9 +530,11 @@
 			baseConfigurationReference = F0F01EE63968CB8BF0F0DAFC /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwifTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwifTube-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

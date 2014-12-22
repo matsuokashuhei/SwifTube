@@ -8,7 +8,9 @@
 
 import UIKit
 
-class PlaylistsViewController: UIViewController {
+class PlaylistsViewController: ItemsViewController {
+
+    var playlists: [SwifTube.Playlist] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,10 @@ class PlaylistsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func configure(tableView: UITableView) {
+        super.configure(tableView)
+        tableView.dataSource = self
+    }
 
     /*
     // MARK: - Navigation
@@ -31,5 +37,35 @@ class PlaylistsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+extension PlaylistsViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return playlists.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell  = tableView.dequeueReusableCellWithIdentifier("PlaylistTableViewCell", forIndexPath: indexPath) as PlaylistTableViewCell
+        let item = playlists[indexPath.row]
+        cell.configure(item)
+        return cell
+    }
+
+}
+
+extension PlaylistsViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        SwifTube.search(keyword: searchBar.text, completion: { (playlists: [SwifTube.Playlist]!, error: NSError!) in
+            if let playlists = playlists {
+                self.playlists = playlists
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+        })
+    }
 
 }

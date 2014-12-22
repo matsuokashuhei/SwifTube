@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ChannelsViewController: UIViewController {
+class ChannelsViewController: ItemsViewController {
+
+    var channels: [SwifTube.Channel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,10 @@ class ChannelsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func configure(tableView: UITableView) {
+        super.configure(tableView)
+        tableView.dataSource = self
+    }
 
     /*
     // MARK: - Navigation
@@ -31,5 +37,35 @@ class ChannelsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+extension ChannelsViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return channels.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as ChannelTableViewCell
+        let item = channels[indexPath.row]
+        cell.configure(item)
+        return cell
+    }
+
+}
+
+extension ChannelsViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        SwifTube.search(keyword: searchBar.text, completion: { (channels: [SwifTube.Channel]!, error: NSError!) in
+            if let channels = channels {
+                self.channels = channels
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+        })
+    }
 
 }

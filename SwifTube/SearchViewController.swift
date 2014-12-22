@@ -50,6 +50,9 @@ class SearchViewController: UIViewController {
             view.hidden = true
         }
         containerViews[sender.selectedSegmentIndex].hidden = false
+        
+        searchBarSearchButtonClicked(searchBar)
+        //println("containerViews[\(sender.selectedSegmentIndex)].hidden = false")
     }
 
     /*
@@ -67,6 +70,22 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        if searchBar.text.isEmpty {
+            return
+        }
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            let videosViewController = childViewControllers[segmentedControl.selectedSegmentIndex] as VideosViewController
+            videosViewController.searchBarSearchButtonClicked(searchBar)
+        case 1:
+            let playlistsViewController = childViewControllers[segmentedControl.selectedSegmentIndex] as PlaylistsViewController
+            playlistsViewController.searchBarSearchButtonClicked(searchBar)
+        case 2:
+            let channelsViewController = childViewControllers[segmentedControl.selectedSegmentIndex] as ChannelsViewController
+            channelsViewController.searchBarSearchButtonClicked(searchBar)
+        default:
+            break
+        }
     }
 
 }
