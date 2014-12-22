@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8853AF51A484C4000B3C3B4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AF41A484C4000B3C3B4 /* SearchViewController.swift */; };
+		A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */; };
+		A8853AFB1A484D4300B3C3B4 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */; };
+		A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */; };
 		A8D5E63E1A41DAE900525EB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5E63D1A41DAE900525EB9 /* AppDelegate.swift */; };
 		A8D5E6401A41DAE900525EB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5E63F1A41DAE900525EB9 /* ViewController.swift */; };
 		A8D5E6431A41DAE900525EB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8D5E6411A41DAE900525EB9 /* Main.storyboard */; };
 		A8D5E6451A41DAE900525EB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D5E6441A41DAE900525EB9 /* Images.xcassets */; };
 		A8D5E6481A41DAE900525EB9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D5E6461A41DAE900525EB9 /* LaunchScreen.xib */; };
 		A8D5E6541A41DAE900525EB9 /* SwifTubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5E6531A41DAE900525EB9 /* SwifTubeTests.swift */; };
+		DF170BAE5CED937300C2977C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A14ACA92A198FDEF87F82C /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +31,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29A14ACA92A198FDEF87F82C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		756A4DBA1F109F41EE03A2F3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A8853AF41A484C4000B3C3B4 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
+		A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
+		A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		A8D5E6381A41DAE900525EB9 /* SwifTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D5E63C1A41DAE900525EB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D5E63D1A41DAE900525EB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +47,7 @@
 		A8D5E64D1A41DAE900525EB9 /* SwifTubeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifTubeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D5E6521A41DAE900525EB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D5E6531A41DAE900525EB9 /* SwifTubeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifTubeTests.swift; sourceTree = "<group>"; };
+		F0F01EE63968CB8BF0F0DAFC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF170BAE5CED937300C2977C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +69,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F87EEB76147A85BA43B9404 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				756A4DBA1F109F41EE03A2F3 /* Pods.debug.xcconfig */,
+				F0F01EE63968CB8BF0F0DAFC /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A8853AF71A484C5C00B3C3B4 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A8853AF41A484C4000B3C3B4 /* SearchViewController.swift */,
+				A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */,
+				A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */,
+				A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		A8D5CF7F1A4859DE00E49941 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		A8D5E62F1A41DAE900525EB9 = {
 			isa = PBXGroup;
 			children = (
 				A8D5E63A1A41DAE900525EB9 /* SwifTube */,
 				A8D5E6501A41DAE900525EB9 /* SwifTubeTests */,
 				A8D5E6391A41DAE900525EB9 /* Products */,
+				1F87EEB76147A85BA43B9404 /* Pods */,
+				B6049202F6B4D4A8D891841E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +125,8 @@
 				A8D5E6441A41DAE900525EB9 /* Images.xcassets */,
 				A8D5E6461A41DAE900525EB9 /* LaunchScreen.xib */,
 				A8D5E63B1A41DAE900525EB9 /* Supporting Files */,
+				A8853AF71A484C5C00B3C3B4 /* View Controller */,
+				A8D5CF7F1A4859DE00E49941 /* Model */,
 			);
 			path = SwifTube;
 			sourceTree = "<group>";
@@ -112,6 +156,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B6049202F6B4D4A8D891841E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29A14ACA92A198FDEF87F82C /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +171,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8D5E6571A41DAE900525EB9 /* Build configuration list for PBXNativeTarget "SwifTube" */;
 			buildPhases = (
+				88269D31449F8D749AB65561 /* Check Pods Manifest.lock */,
 				A8D5E6341A41DAE900525EB9 /* Sources */,
 				A8D5E6351A41DAE900525EB9 /* Frameworks */,
 				A8D5E6361A41DAE900525EB9 /* Resources */,
+				A9F41AFE8B4827BE2D939A40 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,12 +261,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		88269D31449F8D749AB65561 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A9F41AFE8B4827BE2D939A40 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A8D5E6341A41DAE900525EB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */,
+				A8853AFB1A484D4300B3C3B4 /* PlaylistsViewController.swift in Sources */,
+				A8853AF51A484C4000B3C3B4 /* SearchViewController.swift in Sources */,
 				A8D5E6401A41DAE900525EB9 /* ViewController.swift in Sources */,
+				A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */,
 				A8D5E63E1A41DAE900525EB9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,21 +425,25 @@
 		};
 		A8D5E6581A41DAE900525EB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 756A4DBA1F109F41EE03A2F3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SwifTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		A8D5E6591A41DAE900525EB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0F01EE63968CB8BF0F0DAFC /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SwifTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -405,6 +500,7 @@
 				A8D5E6591A41DAE900525EB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A8D5E65A1A41DAE900525EB9 /* Build configuration list for PBXNativeTarget "SwifTubeTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +509,7 @@
 				A8D5E65C1A41DAE900525EB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
