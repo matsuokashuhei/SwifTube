@@ -162,7 +162,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistTableViewCell" id="AQe-MQ-MNW" customClass="PlaylistTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistTableViewCell" id="AQe-MQ-MNW" customClass="PlaylistTableViewCell" customModule="SwifTube" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AQe-MQ-MNW" id="CVy-F6-pA1">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -196,6 +196,7 @@
                                             <outlet property="itemCountLabel" destination="0dk-2x-adX" id="Iha-IU-6lF"/>
                                             <outlet property="thumbnailImageView" destination="MPd-YJ-ueG" id="bxo-lX-2Dy"/>
                                             <outlet property="titleLabel" destination="YYw-BK-Hjm" id="Xee-fu-Z3w"/>
+                                            <segue destination="ZhW-cR-y2g" kind="push" id="vm7-uh-deV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -211,6 +212,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWi-Pb-g82" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1196" y="503.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="nuE-Ax-CKN">
+            <objects>
+                <viewController id="ZhW-cR-y2g" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AYT-gl-nRS"/>
+                        <viewControllerLayoutGuide type="bottom" id="SXj-hF-Lrb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MGw-Hh-KF5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CF2-4U-q89"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YfB-yW-URN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1630" y="508"/>
         </scene>
         <!--Channels View Controller-->
         <scene sceneID="dN4-pb-zpY">
