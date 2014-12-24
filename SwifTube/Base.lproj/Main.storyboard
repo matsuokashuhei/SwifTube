@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YCf-z0-nIu">
@@ -43,7 +43,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q6R-qD-DSU">
                                 <rect key="frame" x="0.0" y="151" width="320" height="417"/>
                                 <connections>
-                                    <segue destination="CHI-Sm-ZeF" kind="embed" id="WwG-o9-0YX"/>
+                                    <segue destination="CHI-Sm-ZeF" kind="embed" identifier="showChannel" id="WwG-o9-0YX"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -130,6 +130,7 @@
                                             <outlet property="thumbnailImageView" destination="vHC-WS-SaS" id="bHG-OC-mZ5"/>
                                             <outlet property="titleLabel" destination="1XG-lT-JhU" id="mOV-bA-Qpq"/>
                                             <outlet property="viewCountLabel" destination="Qg8-UP-1jP" id="BCL-Pz-2BI"/>
+                                            <segue destination="O0v-cA-5RS" kind="push" identifier="showVideo" id="NtX-GD-snU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -145,6 +146,90 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WCN-N8-cAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1196" y="-34.5"/>
+        </scene>
+        <!--Video View Controller-->
+        <scene sceneID="PXx-4r-Mnz">
+            <objects>
+                <viewController id="O0v-cA-5RS" customClass="VideoViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hvn-lX-CtN"/>
+                        <viewControllerLayoutGuide type="bottom" id="4eJ-f4-roW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VXz-b3-Gy4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="373"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOf-6p-kGo">
+                                <rect key="frame" x="16" y="64" width="288" height="50"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGk-bm-cor" customClass="AVPlayerView" customModule="SwifTube" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="114" width="320" height="180"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fTd-K7-hf6">
+                                <rect key="frame" x="64" y="300" width="192" height="31"/>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQV-ro-L6I">
+                                <rect key="frame" x="16" y="304" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-cq-gF1">
+                                <rect key="frame" x="262" y="304" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60q-b9-3rv">
+                                <rect key="frame" x="16" y="338" width="80" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="◀︎">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWa-Xg-leK">
+                                <rect key="frame" x="224" y="338" width="80" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="▶︎">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkF-k1-96O">
+                                <rect key="frame" x="120" y="338" width="80" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickButton:" destination="O0v-cA-5RS" eventType="touchUpInside" id="Mgb-r4-OQm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MCe-2U-KDI"/>
+                    <connections>
+                        <outlet property="button" destination="fkF-k1-96O" id="OTq-4u-VXw"/>
+                        <outlet property="endTimeLabel" destination="3pk-cq-gF1" id="wcP-Iw-M9R"/>
+                        <outlet property="playerView" destination="kGk-bm-cor" id="j4h-57-zqU"/>
+                        <outlet property="seekBar" destination="fTd-K7-hf6" id="rDF-RA-IiJ"/>
+                        <outlet property="startTimeLabel" destination="PQV-ro-L6I" id="bJy-Uu-wwT"/>
+                        <outlet property="titleLabel" destination="mOf-6p-kGo" id="3MK-aU-S1l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LXp-ib-yuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2500" y="-34.5"/>
         </scene>
         <!--Playlists View Controller-->
         <scene sceneID="3lL-Nu-PlR">
@@ -162,7 +247,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistTableViewCell" id="AQe-MQ-MNW" customClass="PlaylistTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistTableViewCell" id="AQe-MQ-MNW" customClass="PlaylistTableViewCell" customModule="SwifTube" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AQe-MQ-MNW" id="CVy-F6-pA1">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -196,7 +281,7 @@
                                             <outlet property="itemCountLabel" destination="0dk-2x-adX" id="Iha-IU-6lF"/>
                                             <outlet property="thumbnailImageView" destination="MPd-YJ-ueG" id="bxo-lX-2Dy"/>
                                             <outlet property="titleLabel" destination="YYw-BK-Hjm" id="Xee-fu-Z3w"/>
-                                            <segue destination="ZhW-cR-y2g" kind="push" id="vm7-uh-deV"/>
+                                            <segue destination="ZhW-cR-y2g" kind="push" identifier="showPlaylist" id="vm7-uh-deV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -213,10 +298,10 @@
             </objects>
             <point key="canvasLocation" x="1196" y="503.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Playlist View Controller-->
         <scene sceneID="nuE-Ax-CKN">
             <objects>
-                <viewController id="ZhW-cR-y2g" sceneMemberID="viewController">
+                <viewController id="ZhW-cR-y2g" customClass="PlaylistViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AYT-gl-nRS"/>
                         <viewControllerLayoutGuide type="bottom" id="SXj-hF-Lrb"/>
@@ -224,9 +309,57 @@
                     <view key="view" contentMode="scaleToFill" id="MGw-Hh-KF5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jhO-F5-dz5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="rhu-mR-vOU" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rhu-mR-vOU" id="aOJ-q2-kH7">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Syh-P7-Dtk">
+                                                    <rect key="frame" x="5" y="5" width="120" height="90"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEc-fL-COw">
+                                                    <rect key="frame" x="133" y="10" width="179" height="40"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Channel Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YfK-yz-et8">
+                                                    <rect key="frame" x="133" y="56" width="179" height="21"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View count" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5GW-Q5-tMK">
+                                                    <rect key="frame" x="133" y="74" width="179" height="21"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="channelTitle" destination="YfK-yz-et8" id="rRy-px-xXr"/>
+                                            <outlet property="thumbnailImageView" destination="Syh-P7-Dtk" id="5CZ-K0-mbf"/>
+                                            <outlet property="titleLabel" destination="lEc-fL-COw" id="fPG-Le-hcV"/>
+                                            <outlet property="viewCountLabel" destination="5GW-Q5-tMK" id="YKq-0T-Qyx"/>
+                                            <segue destination="O0v-cA-5RS" kind="push" identifier="showVideo" id="1bY-A6-qBZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="CF2-4U-q89"/>
+                    <connections>
+                        <outlet property="tableView" destination="jhO-F5-dz5" id="Fon-7Y-FgU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfB-yW-URN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -248,7 +381,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="ChannelTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChannelTableViewCell" id="aQn-RP-ts9" customClass="ChannelTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="ChannelTableViewCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChannelTableViewCell" id="aQn-RP-ts9" customClass="ChannelTableViewCell" customModule="SwifTube" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aQn-RP-ts9" id="d5J-sc-vWM">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -282,6 +415,7 @@
                                             <outlet property="titleLabel" destination="o0M-VF-053" id="6ie-zT-gGy"/>
                                             <outlet property="videoCountLabel" destination="ljE-MC-V0J" id="sW0-65-3tS"/>
                                             <outlet property="viewCountLabel" destination="QOS-UN-I50" id="I61-iR-6dq"/>
+                                            <segue destination="4Yb-tw-fiF" kind="push" id="IL4-lx-qIC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -296,7 +430,204 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUw-gj-UdH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1196" y="1031.5"/>
+            <point key="canvasLocation" x="1196" y="1069.5"/>
+        </scene>
+        <!--Channel View Controller-->
+        <scene sceneID="cvW-vI-oRy">
+            <objects>
+                <viewController id="4Yb-tw-fiF" customClass="ChannelViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xTu-79-Apb"/>
+                        <viewControllerLayoutGuide type="bottom" id="X1G-YC-CZW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="08L-M0-EYV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oXz-HF-JA2">
+                                <rect key="frame" x="16" y="8" width="288" height="29"/>
+                                <segments>
+                                    <segment title="Videos"/>
+                                    <segment title="Playlists"/>
+                                </segments>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vdY-fn-TQb">
+                                <rect key="frame" x="0.0" y="44" width="320" height="373"/>
+                                <connections>
+                                    <segue destination="M8y-yo-DL1" kind="embed" id="krs-wz-yp1"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EK8-ab-Pwu">
+                                <rect key="frame" x="0.0" y="44" width="320" height="373"/>
+                                <connections>
+                                    <segue destination="Yw5-Cu-qUa" kind="embed" id="CiT-tU-aZb"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xbu-F0-700"/>
+                    <connections>
+                        <outlet property="playlistsView" destination="EK8-ab-Pwu" id="Q1O-Iv-ZmG"/>
+                        <outlet property="segmentedControl" destination="oXz-HF-JA2" id="dHj-EU-OaJ"/>
+                        <outlet property="videosView" destination="vdY-fn-TQb" id="Nlx-TA-Qtt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pb1-GO-DxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1630" y="1069.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eZq-Lb-cWd">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="82p-SP-46c" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ufQ-Tx-Kab"/>
+                        <viewControllerLayoutGuide type="bottom" id="E8J-lu-0am"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="q6U-XK-jRe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="42N-aS-Sne" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Videos View Controller-->
+        <scene sceneID="7rv-Ak-cix">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="M8y-yo-DL1" customClass="VideosViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Boh-AT-C7C"/>
+                        <viewControllerLayoutGuide type="bottom" id="pr5-lX-AtQ"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9S6-vf-Y6P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="373"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WEK-MJ-Za4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="373"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="rMc-wV-d8e" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rMc-wV-d8e" id="raz-kL-pCc">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gGC-U5-qWn">
+                                                    <rect key="frame" x="5" y="5" width="120" height="90"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKC-6Z-VAs">
+                                                    <rect key="frame" x="133" y="10" width="179" height="40"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Channel Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NvE-Ii-Q8n">
+                                                    <rect key="frame" x="133" y="56" width="179" height="21"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View count" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3p-TR-hTN">
+                                                    <rect key="frame" x="133" y="74" width="179" height="21"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="channelTitle" destination="NvE-Ii-Q8n" id="BLt-pO-E0V"/>
+                                            <outlet property="thumbnailImageView" destination="gGC-U5-qWn" id="Qje-6K-FGg"/>
+                                            <outlet property="titleLabel" destination="cKC-6Z-VAs" id="Yuk-pS-b0A"/>
+                                            <outlet property="viewCountLabel" destination="S3p-TR-hTN" id="tCl-dc-qnv"/>
+                                            <segue destination="O0v-cA-5RS" kind="push" id="z0m-3l-oBl"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="tableView" destination="WEK-MJ-Za4" id="pZb-77-tDx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ht-Oo-Qtt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1630" y="1636.5"/>
+        </scene>
+        <!--Playlist View Controller-->
+        <scene sceneID="yYF-eX-US4">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Yw5-Cu-qUa" customClass="PlaylistViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="APi-nL-RRQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="2wV-Ov-kJ3"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bFd-sZ-9Vr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="373"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dCs-yv-zbJ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="373"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="TtW-KG-zl2" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TtW-KG-zl2" id="fRL-iK-O8Z">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v4Z-03-4PV">
+                                                    <rect key="frame" x="5" y="5" width="120" height="90"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPw-Iw-gZr">
+                                                    <rect key="frame" x="133" y="10" width="179" height="40"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Channel Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMK-DA-z2f">
+                                                    <rect key="frame" x="133" y="56" width="179" height="21"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View count" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPh-M3-g4v">
+                                                    <rect key="frame" x="133" y="74" width="179" height="21"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="channelTitle" destination="yMK-DA-z2f" id="iyI-AG-TTE"/>
+                                            <outlet property="thumbnailImageView" destination="v4Z-03-4PV" id="bCp-he-NWv"/>
+                                            <outlet property="titleLabel" destination="wPw-Iw-gZr" id="7if-Nu-d1v"/>
+                                            <outlet property="viewCountLabel" destination="xPh-M3-g4v" id="xRB-cV-6wj"/>
+                                            <segue destination="O0v-cA-5RS" kind="push" identifier="showVideo" id="fvW-D6-J1o"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="tableView" destination="dCs-yv-zbJ" id="cLW-hf-k2w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="asP-QG-hnx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2059" y="1091.5"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -304,4 +635,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="fvW-D6-J1o"/>
+    </inferredMetricsTieBreakers>
 </document>

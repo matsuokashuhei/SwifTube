@@ -1,21 +1,30 @@
 //
-//  VideosViewController.swift
+//  PlaylistViewController.swift
 //  SwifTube
 //
-//  Created by matsuosh on 2014/12/22.
+//  Created by matsuosh on 2014/12/25.
 //  Copyright (c) 2014年 matsuosh. All rights reserved.
 //
 
 import UIKit
 
-class VideosViewController: ItemsViewController {
+class PlaylistViewController: ItemsViewController {
 
+    var playlist: SwifTube.Playlist!
     var videos: [SwifTube.Video] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        playlist.videos() { (videos: [SwifTube.Video]!, error: NSError!) in
+            if let videos = videos {
+                self.videos = videos
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,7 +38,6 @@ class VideosViewController: ItemsViewController {
     }
 
     // MARK: - Navigation
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showVideo" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
@@ -41,7 +49,7 @@ class VideosViewController: ItemsViewController {
 
 }
 
-extension VideosViewController: UITableViewDataSource {
+extension PlaylistViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return videos.count
@@ -52,21 +60,6 @@ extension VideosViewController: UITableViewDataSource {
         let item = videos[indexPath.row]
         cell.configure(item)
         return cell
-    }
-
-}
-
-extension VideosViewController: UISearchBarDelegate {
-
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searcher.search(keyword: searchBar.text, page: .First, completion: { (videos: [SwifTube.Video]!, error: NSError!) in
-            if let videos = videos {
-                self.videos = videos
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-            }
-        })
     }
 
 }

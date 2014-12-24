@@ -28,15 +28,19 @@ class PlaylistsViewController: ItemsViewController {
         tableView.dataSource = self
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showPlaylist" {
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                let destinationViewController = segue.destinationViewController as PlaylistViewController
+                destinationViewController.playlist = playlists[indexPath.row]
+            }
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }
 
