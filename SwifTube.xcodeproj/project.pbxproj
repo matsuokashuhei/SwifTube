@@ -113,11 +113,11 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A8853AF71A484C5C00B3C3B4 /* View Controller */ = {
+		A8853AF71A484C5C00B3C3B4 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A8853AF41A484C4000B3C3B4 /* SearchViewController.swift */,
 				A8D5CF971A4865B500E49941 /* ItemsViewController.swift */,
+				A8853AF41A484C4000B3C3B4 /* SearchViewController.swift */,
 				A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */,
 				A86A6CF81A4B1B6C00896865 /* VideoViewController.swift */,
 				A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */,
@@ -125,16 +125,16 @@
 				A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */,
 				A86A6CFA1A4B2CF100896865 /* ChannelViewController.swift */,
 			);
-			name = "View Controller";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		A8D5CF7F1A4859DE00E49941 /* Model */ = {
+		A8D5CF7F1A4859DE00E49941 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				A8D5CF8D1A485D0200E49941 /* SwifTube.swift */,
 				A8D5CF8F1A485D1500E49941 /* Item.swift */,
 			);
-			name = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A8D5CF811A485B8900E49941 /* Products */ = {
@@ -146,12 +146,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A8D5CF941A4863A900E49941 /* View */ = {
+		A8D5CF941A4863A900E49941 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */,
 			);
-			name = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A8D5E62F1A41DAE900525EB9 = {
@@ -184,9 +184,9 @@
 				A8D5E6441A41DAE900525EB9 /* Images.xcassets */,
 				A8D5E6461A41DAE900525EB9 /* LaunchScreen.xib */,
 				A8D5E63B1A41DAE900525EB9 /* Supporting Files */,
-				A8853AF71A484C5C00B3C3B4 /* View Controller */,
-				A8D5CF941A4863A900E49941 /* View */,
-				A8D5CF7F1A4859DE00E49941 /* Model */,
+				A8853AF71A484C5C00B3C3B4 /* View Controllers */,
+				A8D5CF941A4863A900E49941 /* Views */,
+				A8D5CF7F1A4859DE00E49941 /* Models */,
 			);
 			path = SwifTube;
 			sourceTree = "<group>";
