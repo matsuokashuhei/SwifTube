@@ -56,10 +56,21 @@ extension VideosViewController: UITableViewDataSource {
 
 }
 
+extension VideosViewController: UITableViewDelegate {
+    
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let item = videos[indexPath.row]
+//        performSegueWithIdentifier("showVideo", sender: nil)
+//    }
+    
+}
+
+
 extension VideosViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searcher.search(keyword: searchBar.text, page: .First, completion: { (videos: [SwifTube.Video]!, error: NSError!) in
+        //searcher.search(keyword: searchBar.text, page: .First, completion: { (videos: [SwifTube.Video]!, error: NSError!) in
+        searcher.search(keyword: searchBar.text, completion: { (videos: [SwifTube.Video]!, error: NSError!) in
             if let videos = videos {
                 self.videos = videos
                 dispatch_async(dispatch_get_main_queue()) {

@@ -23,6 +23,7 @@
 		A8D5E6451A41DAE900525EB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D5E6441A41DAE900525EB9 /* Images.xcassets */; };
 		A8D5E6481A41DAE900525EB9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D5E6461A41DAE900525EB9 /* LaunchScreen.xib */; };
 		A8D5E6541A41DAE900525EB9 /* SwifTubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5E6531A41DAE900525EB9 /* SwifTubeTests.swift */; };
+		A8E8EAFD1A4F1D6A007A9F31 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E8EAFC1A4F1D6A007A9F31 /* API.swift */; };
 		DF170BAE5CED937300C2977C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A14ACA92A198FDEF87F82C /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		A8D5E64D1A41DAE900525EB9 /* SwifTubeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifTubeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D5E6521A41DAE900525EB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D5E6531A41DAE900525EB9 /* SwifTubeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifTubeTests.swift; sourceTree = "<group>"; };
+		A8E8EAFC1A4F1D6A007A9F31 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F0F01EE63968CB8BF0F0DAFC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,8 +118,8 @@
 		A8853AF71A484C5C00B3C3B4 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A8D5CF971A4865B500E49941 /* ItemsViewController.swift */,
 				A8853AF41A484C4000B3C3B4 /* SearchViewController.swift */,
+				A8D5CF971A4865B500E49941 /* ItemsViewController.swift */,
 				A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */,
 				A86A6CF81A4B1B6C00896865 /* VideoViewController.swift */,
 				A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */,
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				A8D5CF8D1A485D0200E49941 /* SwifTube.swift */,
+				A8E8EAFC1A4F1D6A007A9F31 /* API.swift */,
 				A8D5CF8F1A485D1500E49941 /* Item.swift */,
 			);
 			path = Models;
@@ -179,10 +182,10 @@
 		A8D5E63A1A41DAE900525EB9 /* SwifTube */ = {
 			isa = PBXGroup;
 			children = (
-				A8D5E63D1A41DAE900525EB9 /* AppDelegate.swift */,
 				A8D5E6411A41DAE900525EB9 /* Main.storyboard */,
-				A8D5E6441A41DAE900525EB9 /* Images.xcassets */,
 				A8D5E6461A41DAE900525EB9 /* LaunchScreen.xib */,
+				A8D5E6441A41DAE900525EB9 /* Images.xcassets */,
+				A8D5E63D1A41DAE900525EB9 /* AppDelegate.swift */,
 				A8D5E63B1A41DAE900525EB9 /* Supporting Files */,
 				A8853AF71A484C5C00B3C3B4 /* View Controllers */,
 				A8D5CF941A4863A900E49941 /* Views */,
@@ -391,6 +394,7 @@
 				A86A6CFB1A4B2CF100896865 /* ChannelViewController.swift in Sources */,
 				A8D5CF981A4865B500E49941 /* ItemsViewController.swift in Sources */,
 				A8D5CF961A4863D900E49941 /* ItemTableViewCell.swift in Sources */,
+				A8E8EAFD1A4F1D6A007A9F31 /* API.swift in Sources */,
 				A86A6CF61A4B179B00896865 /* PlaylistViewController.swift in Sources */,
 				A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */,
 				A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */,

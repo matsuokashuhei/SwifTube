@@ -10,18 +10,18 @@ import Foundation
 import UIKit
 import Alamofire
 
+
 extension SwifTube {
-    
-    class Item  {
+
+    class Item {
         
         let id: String
-        //let publishedAt: String
         let publishedAt: NSDate
         let title: String
         let description: String
         let thumbnailURL: String!
         
-        init(item: NSDictionary) {
+        required init(item: NSDictionary) {
             let snippet = item["snippet"] as NSDictionary
             let thumbnails = snippet["thumbnails"] as NSDictionary
             
@@ -49,6 +49,7 @@ extension SwifTube {
                 }
             }
         }
+        
     }
     
     class Video: Item {
@@ -64,7 +65,7 @@ extension SwifTube {
             case FullHigh = 37
         }
         
-        override init(item: NSDictionary) {
+        required init(item: NSDictionary) {
             let snippet = item["snippet"] as NSDictionary
             let contentDetails = item["contentDetails"] as NSDictionary
             let statistics = item["statistics"] as NSDictionary
@@ -90,6 +91,7 @@ extension SwifTube {
                 }
             }
         }
+        
     }
     
     class Playlist: Item {
@@ -97,7 +99,7 @@ extension SwifTube {
         let channelTitle: String
         let itemCount: Int?
         
-        override init(item: NSDictionary) {
+        required init(item: NSDictionary) {
             let snippet = item["snippet"] as NSDictionary
             let contentDetails = item["contentDetails"] as NSDictionary
             
@@ -109,7 +111,7 @@ extension SwifTube {
         }
         
         func videos(completion: (videos: [Video]!, error: NSError!) -> Void) {
-            SwifTube.search(playlistId: id) { (videos: [Video]!, error: NSError!) in
+            SwifTube.playlistItems(id: id) { (videos: [Video]!, error: NSError!) in
                 if let videos = videos {
                     completion(videos: videos, error: error)
                 } else {
@@ -126,7 +128,7 @@ extension SwifTube {
         let subscriberCount: Int?
         let videoCount: Int?
         
-        override init(item: NSDictionary) {
+        required init(item: NSDictionary) {
             let statistics = item["statistics"] as NSDictionary
             if let viewCount = statistics["viewCount"] as? String {
                 self.viewCount = viewCount.toInt()
@@ -160,5 +162,31 @@ extension SwifTube {
             }
         }
         
+    }
+    
+}
+
+protocol Serializable {
+    init(item: NSDictionary)
+}
+
+protocol APICaller: Serializable {
+    class func callAPI(ids: [String]) -> SwifTube.API
+}
+
+extension SwifTube.Video: APICaller {
+    class func callAPI(ids: [String]) -> SwifTube.API {
+        return SwifTube.API.Videos(ids: ids)
+    }
+}
+
+extension SwifTube.Playlist: APICaller {
+    class func callAPI(ids: [String]) -> SwifTube.API {
+        return SwifTube.API.Playlists(ids: ids)
+    }
+}
+extension SwifTube.Channel: APICaller {
+    class func callAPI(ids: [String]) -> SwifTube.API {
+        return SwifTube.API.Channels(ids: ids)
     }
 }
