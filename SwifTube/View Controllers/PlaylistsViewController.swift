@@ -14,17 +14,14 @@ class PlaylistsViewController: ItemsViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    override func configure(tableView: UITableView) {
-        super.configure(tableView)
+    override func configure(#tableView: UITableView) {
+        super.configure(tableView: tableView)
         tableView.dataSource = self
     }
 
@@ -38,8 +35,19 @@ class PlaylistsViewController: ItemsViewController {
                 destinationViewController.playlist = playlists[indexPath.row]
             }
         }
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    }
+    
+    override func search(#conditions: [String: String]) {
+        if let keyword = conditions["keyword"] {
+            searcher.search(keyword: keyword, completion: { (playlists: [SwifTube.Playlist]!, error: NSError!) in
+                if let playlists = playlists {
+                    self.playlists = playlists
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
+                }
+            })
+        }
     }
 
 }
@@ -59,17 +67,32 @@ extension PlaylistsViewController: UITableViewDataSource {
 
 }
 
-extension PlaylistsViewController: UISearchBarDelegate {
+extension PlaylistsViewController: UITableViewDelegate {
 
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        SwifTube.search(keyword: searchBar.text, completion: { (playlists: [SwifTube.Playlist]!, error: NSError!) in
-            if let playlists = playlists {
-                self.playlists = playlists
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
+    override func populateItems() {
+        if populatingItems {
+            return
+        }
+        populatingItems = true
+        if let keyword = searchConditions["keyword"] {
+            searcher.search(keyword: keyword, page: .Next) { (playlists: [SwifTube.Playlist]!, error: NSError!) in
+                if let playlists = playlists {
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                        let lastIndex = self.playlists.count
+                        for playlist in playlists {
+                            self.playlists.append(playlist)
+                        }
+                        let indexPaths = (lastIndex ..< self.playlists.count).map { (transform: Int) -> NSIndexPath in
+                            return NSIndexPath(forItem: transform, inSection: 0)
+                        }
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+                            self.populatingItems = false
+                        }
+                    }
                 }
             }
-        })
+        }
     }
 
 }

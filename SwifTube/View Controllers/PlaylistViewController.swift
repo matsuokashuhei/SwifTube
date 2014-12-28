@@ -16,6 +16,8 @@ class PlaylistViewController: ItemsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = playlist.title
+
         // Do any additional setup after loading the view.
         playlist.videos() { (videos: [SwifTube.Video]!, error: NSError!) in
             if let videos = videos {
@@ -32,8 +34,8 @@ class PlaylistViewController: ItemsViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func configure(tableView: UITableView) {
-        super.configure(tableView)
+    override func configure(#tableView: UITableView) {
+        super.configure(tableView: tableView)
         tableView.dataSource = self
     }
 

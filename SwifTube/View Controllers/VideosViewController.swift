@@ -14,17 +14,14 @@ class VideosViewController: ItemsViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    override func configure(tableView: UITableView) {
-        super.configure(tableView)
+    override func configure(#tableView: UITableView) {
+        super.configure(tableView: tableView)
         tableView.dataSource = self
     }
 
@@ -39,6 +36,18 @@ class VideosViewController: ItemsViewController {
         }
     }
 
+    override func search(#conditions: [String: String]) {
+        if let keyword = conditions["keyword"] {
+            searcher.search(keyword: keyword, completion: { (videos: [SwifTube.Video]!, error: NSError!) in
+                if let videos = videos {
+                    self.videos = videos
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
+                }
+            })
+        }
+    }
 }
 
 extension VideosViewController: UITableViewDataSource {
@@ -57,27 +66,32 @@ extension VideosViewController: UITableViewDataSource {
 }
 
 extension VideosViewController: UITableViewDelegate {
-    
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let item = videos[indexPath.row]
-//        performSegueWithIdentifier("showVideo", sender: nil)
-//    }
-    
-}
 
-
-extension VideosViewController: UISearchBarDelegate {
-
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        //searcher.search(keyword: searchBar.text, page: .First, completion: { (videos: [SwifTube.Video]!, error: NSError!) in
-        searcher.search(keyword: searchBar.text, completion: { (videos: [SwifTube.Video]!, error: NSError!) in
-            if let videos = videos {
-                self.videos = videos
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
+    override func populateItems() {
+        if populatingItems {
+            return
+        }
+        populatingItems = true
+        if let keyword = searchConditions["keyword"] {
+            searcher.search(keyword: keyword, page: .Next) { (videos: [SwifTube.Video]!, error: NSError!) in
+                if let videos = videos {
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                        let lastIndex = self.videos.count
+                        for video in videos {
+                            self.videos.append(video)
+                        }
+                        let indexPaths = (lastIndex ..< self.videos.count).map { (transform: Int) -> NSIndexPath in
+                            return NSIndexPath(forItem: transform, inSection: 0)
+                        }
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+                            //self.tableView.reloadData()
+                            self.populatingItems = false
+                        }
+                    }
                 }
             }
-        })
+        }
     }
 
 }

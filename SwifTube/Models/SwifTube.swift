@@ -164,6 +164,12 @@ struct SwifTube {
             showLoadingIndicator(true)
             Alamofire.request(API.PlaylistItems(id: id)).responseJSON { (_, _, JSON, error) -> Void in
                 if let JSON = JSON as? NSDictionary {
+                    if let nextPageToken = JSON["nextPageToken"] as? String {
+                        self.tokens.next = nextPageToken
+                    }
+                    if let prevPageToken = JSON["prevPageToken"] as? String {
+                        self.tokens.prev = prevPageToken
+                    }
                     let objects = JSON["items"] as [NSDictionary]
                     let ids = objects.map { (object: NSDictionary) -> String in
                         let contentDetails = object["contentDetails"] as NSDictionary
@@ -183,6 +189,12 @@ struct SwifTube {
             showLoadingIndicator(true)
             Alamofire.request(API.Search(conditions: parameters)).responseJSON { (_, _, JSON, error) -> Void in
                 if let JSON = JSON as? NSDictionary {
+                    if let nextPageToken = JSON["nextPageToken"] as? String {
+                        self.tokens.next = nextPageToken
+                    }
+                    if let prevPageToken = JSON["prevPageToken"] as? String {
+                        self.tokens.prev = prevPageToken
+                    }
                     let type = parameters["type"] as String!
                     let objects = JSON["items"] as [NSDictionary]
                     let ids = objects.map { (object: NSDictionary) -> String in
