@@ -11,10 +11,10 @@ import UIKit
 class ChannelViewController: UIViewController {
 
     @IBOutlet var segmentedControl: UISegmentedControl!
-    @IBOutlet var videosView: UIView!
-    @IBOutlet var playlistsView: UIView!
+    @IBOutlet var containerView: UIView!
 
-    var containerViews: [UIView] = []
+    var itemsViewControllers: [ItemsViewController]!
+    var currentItemsViewController: ItemsViewController!
 
     var channel: SwifTube.Channel!
     var playlists: [SwifTube.Playlist]!
@@ -23,8 +23,13 @@ class ChannelViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        containerViews = [videosView, playlistsView,]
         configure(segmentedControl)
+        itemsViewControllers = [
+            storyboard?.instantiateViewControllerWithIdentifier("VideosViewController") as VideosViewController,
+            storyboard?.instantiateViewControllerWithIdentifier("PlaylistsViewController") as PlaylistsViewController,
+        ]
+        configure(itemsViewControllers)
+        currentItemsViewController = viewControllerForSegmentIndex()
         segmentChanged(segmentedControl)
         
         if let videosViewController = childViewControllers[0] as? VideosViewController {
@@ -57,9 +62,29 @@ class ChannelViewController: UIViewController {
         segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
     }
     
+    func configure(itemsViewControllers: [ItemsViewController]) {
+        for itemsViewController in itemsViewControllers {
+            addChildViewController(itemsViewController)
+            configure(itemsViewController)
+        }
+    }
+
+    func configure(itemsViewController: ItemsViewController) {
+        itemsViewController.view.frame = containerView.bounds
+    }
+    
+    func configure(containerView: UIView) {
+        for subview in containerView.subviews {
+            subview.removeFromSuperview()
+        }
+        containerView.addSubview(currentItemsViewController.view)
+    }
+
     func segmentChanged(sender: UISegmentedControl) {
-        for view in containerViews {
-            view.hidden = true
+        var itemsViewController = viewControllerForSegmentIndex()
+        transitionFromViewController(currentItemsViewController, toViewController: itemsViewController, duration: 0, options: UIViewAnimationOptions.TransitionNone, animations: nil) { (finished) -> Void in
+            self.currentItemsViewController = itemsViewController
+            self.configure(self.containerView)
         }
         switch sender.selectedSegmentIndex {
         case 0:
@@ -87,10 +112,10 @@ class ChannelViewController: UIViewController {
         default:
             break
         }
-        self.containerViews[sender.selectedSegmentIndex].hidden = false
     }
 
-    func configure(videosViewController: VideosViewController) {
+    func viewControllerForSegmentIndex() -> ItemsViewController {
+        return itemsViewControllers[segmentedControl.selectedSegmentIndex]
     }
 
     /*

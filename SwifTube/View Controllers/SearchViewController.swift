@@ -13,22 +13,33 @@ class SearchViewController: UIViewController {
 
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var segmentedControl: UISegmentedControl!
-    @IBOutlet var videosView: UIView!
-    @IBOutlet var playlistsView: UIView!
-    @IBOutlet var channelsView: UIView!
+    @IBOutlet var containerView: UIView!
 
-    var containerViews: [UIView] = []
+    var itemsViewControllers: [ItemsViewController]!
+    var currentItemsViewController: ItemsViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        containerViews = [videosView, playlistsView, channelsView]
-
         configure(segmentedControl)
         configure(searchBar)
+
+        itemsViewControllers = [
+            storyboard?.instantiateViewControllerWithIdentifier("VideosViewController") as VideosViewController,
+            storyboard?.instantiateViewControllerWithIdentifier("PlaylistsViewController") as PlaylistsViewController,
+            storyboard?.instantiateViewControllerWithIdentifier("ChannelsViewController") as ChannelsViewController,
+        ]
+        configure(itemsViewControllers)
+        currentItemsViewController = viewControllerForSegmentIndex()
+
+        configure(containerView)
     
         segmentChanged(segmentedControl)
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,26 +55,37 @@ class SearchViewController: UIViewController {
     func configure(searchBar: UISearchBar) {
         searchBar.delegate = self
     }
-
-    func segmentChanged(sender: UISegmentedControl) {
-        for view in containerViews {
-            view.hidden = true
+    
+    func configure(itemsViewControllers: [ItemsViewController]) {
+        for itemsViewController in itemsViewControllers {
+            addChildViewController(itemsViewController)
+            configure(itemsViewController)
         }
-        containerViews[sender.selectedSegmentIndex].hidden = false
-        
+    }
+
+    func configure(itemsViewController: ItemsViewController) {
+        itemsViewController.view.frame = containerView.bounds
+    }
+    
+    func configure(containerView: UIView) {
+        for subview in containerView.subviews {
+            subview.removeFromSuperview()
+        }
+        containerView.addSubview(currentItemsViewController.view)
+    }
+    
+    func segmentChanged(sender: UISegmentedControl) {
+        var itemsViewController = viewControllerForSegmentIndex()
+        transitionFromViewController(currentItemsViewController, toViewController: itemsViewController, duration: 0, options: UIViewAnimationOptions.TransitionNone, animations: nil) { (finished) -> Void in
+            self.currentItemsViewController = itemsViewController
+            self.configure(self.containerView)
+        }
         searchBarSearchButtonClicked(searchBar)
-        //println("containerViews[\(sender.selectedSegmentIndex)].hidden = false")
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func viewControllerForSegmentIndex() -> ItemsViewController {
+        return itemsViewControllers[segmentedControl.selectedSegmentIndex]
     }
-    */
 
 }
 
