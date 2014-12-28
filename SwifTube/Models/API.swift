@@ -15,11 +15,12 @@ extension SwifTube {
         private static let baseURLString = "https://www.googleapis.com/youtube/v3"
         private static let secretKey = "AIzaSyBkKOxRcHXfTvMrKHRsWy2cO5dF899agZg"
         
-        case Search(conditions: [String: String])
+        case Search(parameters: [String: String])
         case Videos(ids: [String])
         case Playlists(ids: [String])
         case Channels(ids: [String])
-        case PlaylistItems(id: String)
+        //case PlaylistItems(id: String)
+        case PlaylistItems(parameters: [String: String])
 
         private var path: String {
             get {
@@ -57,22 +58,26 @@ extension SwifTube {
         }
         var URLRequest: NSURLRequest {
             let (path: String, parameters: [String: AnyObject]) = {
-                var parameters = self.baseParameters
+                var requestParameters = self.baseParameters
                 switch self {
-                case .Search(let conditions):
-                    for (key, value) in conditions as [String: String] {
-                        parameters.updateValue(value, forKey: key)
+                case .Search(let searchParameters):
+                    for (key, value) in searchParameters as [String: String] {
+                        requestParameters.updateValue(value, forKey: key)
                     }
                 case .Videos(let ids):
-                    parameters.updateValue(",".join(ids), forKey: "id")
+                    requestParameters.updateValue(",".join(ids), forKey: "id")
                 case .Playlists(let ids):
-                    parameters.updateValue(",".join(ids), forKey: "id")
+                    requestParameters.updateValue(",".join(ids), forKey: "id")
                 case .Channels(let ids):
-                    parameters.updateValue(",".join(ids), forKey: "id")
-                case .PlaylistItems(let id):
-                    parameters.updateValue(id, forKey: "playlistId")
+                    requestParameters.updateValue(",".join(ids), forKey: "id")
+//                case .PlaylistItems(let id):
+//                    requestParameters.updateValue(id, forKey: "playlistId")
+                case .PlaylistItems(let searchParameters):
+                    for (key, value) in searchParameters as [String: String] {
+                        requestParameters.updateValue(value, forKey: key)
+                    }
                 }
-                return (self.path, parameters)
+                return (self.path, requestParameters)
             }()
             let URL = NSURL(string: API.baseURLString)
             let URLRequest = NSURLRequest(URL: URL!.URLByAppendingPathComponent(path))

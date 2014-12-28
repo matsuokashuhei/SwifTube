@@ -37,17 +37,16 @@ class PlaylistsViewController: ItemsViewController {
         }
     }
     
-    override func search(#conditions: [String: String]) {
-        if let keyword = conditions["keyword"] {
-            searcher.search(keyword: keyword, completion: { (playlists: [SwifTube.Playlist]!, error: NSError!) in
-                if let playlists = playlists {
-                    self.playlists = playlists
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.reloadData()
-                    }
+    override func search() {
+        SwifTube.search(parameters: searchParameters, completion: { (playlists: [SwifTube.Playlist]!, token: SwifTube.PageToken!, error: NSError!) in
+            if let playlists = playlists {
+                self.updateSearchParameters(token: token)
+                self.playlists = playlists
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
                 }
-            })
-        }
+            }
+        })
     }
 
 }
@@ -74,21 +73,20 @@ extension PlaylistsViewController: UITableViewDelegate {
             return
         }
         populatingItems = true
-        if let keyword = searchConditions["keyword"] {
-            searcher.search(keyword: keyword, page: .Next) { (playlists: [SwifTube.Playlist]!, error: NSError!) in
-                if let playlists = playlists {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                        let lastIndex = self.playlists.count
-                        for playlist in playlists {
-                            self.playlists.append(playlist)
-                        }
-                        let indexPaths = (lastIndex ..< self.playlists.count).map { (transform: Int) -> NSIndexPath in
-                            return NSIndexPath(forItem: transform, inSection: 0)
-                        }
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                            self.populatingItems = false
-                        }
+        SwifTube.search(parameters: searchParameters) { (playlists: [SwifTube.Playlist]!, token: SwifTube.PageToken!, error: NSError!) in
+            if let playlists = playlists {
+                self.updateSearchParameters(token: token)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                    let lastIndex = self.playlists.count
+                    for playlist in playlists {
+                        self.playlists.append(playlist)
+                    }
+                    let indexPaths = (lastIndex ..< self.playlists.count).map { (transform: Int) -> NSIndexPath in
+                        return NSIndexPath(forItem: transform, inSection: 0)
+                    }
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+                        self.populatingItems = false
                     }
                 }
             }

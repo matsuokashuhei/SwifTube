@@ -22,12 +22,12 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         containerViews = [videosView, playlistsView, channelsView]
         
         configure(navigationItem: navigationItem)
         configure(segmentedControl: segmentedControl)
         configure(searchBar: searchBar)
+        configure(containerViews: containerViews)
         segmentChanged(segmentedControl)
     }
 
@@ -37,7 +37,6 @@ class SearchViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func configure(#navigationItem: UINavigationItem) {
@@ -48,40 +47,30 @@ class SearchViewController: UIViewController {
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
     }
-    
-    func configure(#searchBar: UISearchBar) {
-        searchBar.delegate = self
-    }
-    
-    func segmentChanged(sender: UISegmentedControl) {
+
+    func configure(#containerViews: [UIView]) {
         for view in containerViews {
             view.hidden = true
         }
-        containerViews[sender.selectedSegmentIndex].hidden = false
-        searchBarSearchButtonClicked(searchBar)
+        containerViewAtSelectedSegmentIndex().hidden = false
     }
 
-}
-
-extension SearchViewController: UISearchBarDelegate {
-
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        if searchBar.text.isEmpty {
-            return
-        }
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            let videosViewController = childViewControllers[segmentedControl.selectedSegmentIndex] as VideosViewController
-            videosViewController.searchBarSearchButtonClicked(searchBar)
-        case 1:
-            let playlistsViewController = childViewControllers[segmentedControl.selectedSegmentIndex] as PlaylistsViewController
-            playlistsViewController.searchBarSearchButtonClicked(searchBar)
-        case 2:
-            let channelsViewController = childViewControllers[segmentedControl.selectedSegmentIndex] as ChannelsViewController
-            channelsViewController.searchBarSearchButtonClicked(searchBar)
-        default:
-            break
-        }
+    func configure(#searchBar: UISearchBar) {
+        //searchBar.delegate = self
+        searchBar.delegate = itemViewControllerAtSelectedSegmentIndex()
+    }
+    
+    func segmentChanged(sender: UISegmentedControl) {
+        configure(containerViews: containerViews)
+        searchBar.delegate = itemViewControllerAtSelectedSegmentIndex()
+        searchBar.delegate!.searchBarSearchButtonClicked!(searchBar)
     }
 
+    func containerViewAtSelectedSegmentIndex() -> UIView {
+        return containerViews[segmentedControl.selectedSegmentIndex]
+    }
+
+    func itemViewControllerAtSelectedSegmentIndex() -> ItemsViewController {
+        return childViewControllers[segmentedControl.selectedSegmentIndex] as ItemsViewController
+    }
 }

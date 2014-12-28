@@ -9,11 +9,11 @@
 import UIKit
 
 class ItemsViewController: UIViewController {
-
+    
     @IBOutlet var tableView: UITableView!
 
-    var searcher = SwifTube.Client()
-    var searchConditions = [String: String]()
+    //var searcher = (client: SwifTube.Client(), parameters: [String: String]())
+    var searchParameters = [String: String]()
     var populatingItems = false
 
     override func viewDidLoad() {
@@ -37,7 +37,14 @@ class ItemsViewController: UIViewController {
         tableView.delegate = self
     }
 
-    func search(#conditions: [String: String]) {
+    func search() {
+    }
+    
+    func updateSearchParameters(#token: SwifTube.PageToken!) {
+        println("searchParameters: \(searchParameters)")
+        if let token = token {
+            searchParameters["pageToken"] = token.next
+        }
     }
 
 }
@@ -57,8 +64,11 @@ extension ItemsViewController: UITableViewDelegate {
 extension ItemsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchConditions = ["keyword": searchBar.text]
-        search(conditions: searchConditions)
+        if searchBar.text.isEmpty {
+            return
+        }
+        searchParameters = ["q": searchBar.text]
+        search()
     }
     
 }

@@ -36,17 +36,16 @@ class VideosViewController: ItemsViewController {
         }
     }
 
-    override func search(#conditions: [String: String]) {
-        if let keyword = conditions["keyword"] {
-            searcher.search(keyword: keyword, completion: { (videos: [SwifTube.Video]!, error: NSError!) in
-                if let videos = videos {
-                    self.videos = videos
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.reloadData()
-                    }
+    override func search() {
+        SwifTube.search(parameters: searchParameters, completion: { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
+            if let videos = videos {
+                self.updateSearchParameters(token: token)
+                self.videos = videos
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
                 }
-            })
-        }
+            }
+        })
     }
 }
 
@@ -72,22 +71,20 @@ extension VideosViewController: UITableViewDelegate {
             return
         }
         populatingItems = true
-        if let keyword = searchConditions["keyword"] {
-            searcher.search(keyword: keyword, page: .Next) { (videos: [SwifTube.Video]!, error: NSError!) in
-                if let videos = videos {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                        let lastIndex = self.videos.count
-                        for video in videos {
-                            self.videos.append(video)
-                        }
-                        let indexPaths = (lastIndex ..< self.videos.count).map { (transform: Int) -> NSIndexPath in
-                            return NSIndexPath(forItem: transform, inSection: 0)
-                        }
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                            //self.tableView.reloadData()
-                            self.populatingItems = false
-                        }
+        SwifTube.search(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
+            if let videos = videos {
+                self.updateSearchParameters(token: token)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                    let lastIndex = self.videos.count
+                    for video in videos {
+                        self.videos.append(video)
+                    }
+                    let indexPaths = (lastIndex ..< self.videos.count).map { (transform: Int) -> NSIndexPath in
+                        return NSIndexPath(forItem: transform, inSection: 0)
+                    }
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+                        self.populatingItems = false
                     }
                 }
             }

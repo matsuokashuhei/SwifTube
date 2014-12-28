@@ -110,15 +110,15 @@ extension SwifTube {
             super.init(item: item)
         }
         
-        func videos(completion: (videos: [Video]!, error: NSError!) -> Void) {
-            SwifTube.playlistItems(id: id) { (videos: [Video]!, error: NSError!) in
-                if let videos = videos {
-                    completion(videos: videos, error: error)
-                } else {
-                    completion(videos: nil, error: error)
-                }
-            }
-        }
+//        func videos(completion: (videos: [Video]!, token: PageToken!, error: NSError!) -> Void) {
+//            SwifTube.playlistItems(id: id) { (videos: [Video]!, token: PageToken!, error: NSError!) in
+//                if let videos = videos {
+//                    completion(videos: videos, token: token, error: error)
+//                } else {
+//                    completion(videos: nil, token: nil, error: error)
+//                }
+//            }
+//        }
         
     }
     
@@ -143,7 +143,7 @@ extension SwifTube {
         }
         
         func videos(completion: (videos: [Video]!, error: NSError!) -> Void) {
-            SwifTube.search(channelId: id) { (videos: [Video]!, error: NSError!) in
+            SwifTube.search(parameters: ["channelId": id]) { (videos: [Video]!, token: PageToken!, error: NSError!) in
                 if let videos = videos {
                     completion(videos: videos, error: error)
                 } else {
@@ -153,7 +153,7 @@ extension SwifTube {
         }
         
         func playlists(completion: (playlists: [Playlist]!, error: NSError!) -> Void) {
-            SwifTube.search(channelId: id) { (playlists: [Playlist]!, error: NSError!) in
+            SwifTube.search(parameters: ["channelId": id]) { (playlists: [Playlist]!, token: PageToken!, error: NSError!) in
                 if let playlists = playlists {
                     completion(playlists: playlists, error: error)
                 } else {

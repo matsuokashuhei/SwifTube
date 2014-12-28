@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8390C0B1A5082E900AAEFC1 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8390C0A1A5082E900AAEFC1 /* Async.swift */; };
 		A86A6CF61A4B179B00896865 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A6CF51A4B179B00896865 /* PlaylistViewController.swift */; };
 		A86A6CF91A4B1B6C00896865 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A6CF81A4B1B6C00896865 /* VideoViewController.swift */; };
 		A86A6CFB1A4B2CF100896865 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A6CFA1A4B2CF100896865 /* ChannelViewController.swift */; };
@@ -61,6 +62,7 @@
 /* Begin PBXFileReference section */
 		29A14ACA92A198FDEF87F82C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		756A4DBA1F109F41EE03A2F3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A8390C0A1A5082E900AAEFC1 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		A86A6CF51A4B179B00896865 /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		A86A6CF81A4B1B6C00896865 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		A86A6CFA1A4B2CF100896865 /* ChannelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,14 @@
 				F0F01EE63968CB8BF0F0DAFC /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A8390C091A50825A00AAEFC1 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				A8390C0A1A5082E900AAEFC1 /* Async.swift */,
+			);
+			path = Externals;
 			sourceTree = "<group>";
 		};
 		A8853AF71A484C5C00B3C3B4 /* View Controllers */ = {
@@ -190,6 +200,7 @@
 				A8853AF71A484C5C00B3C3B4 /* View Controllers */,
 				A8D5CF941A4863A900E49941 /* Views */,
 				A8D5CF7F1A4859DE00E49941 /* Models */,
+				A8390C091A50825A00AAEFC1 /* Externals */,
 			);
 			path = SwifTube;
 			sourceTree = "<group>";
@@ -396,6 +407,7 @@
 				A8D5CF961A4863D900E49941 /* ItemTableViewCell.swift in Sources */,
 				A8E8EAFD1A4F1D6A007A9F31 /* API.swift in Sources */,
 				A86A6CF61A4B179B00896865 /* PlaylistViewController.swift in Sources */,
+				A8390C0B1A5082E900AAEFC1 /* Async.swift in Sources */,
 				A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */,
 				A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */,
 				A8D5E63E1A41DAE900525EB9 /* AppDelegate.swift in Sources */,

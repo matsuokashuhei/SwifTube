@@ -19,8 +19,10 @@ class PlaylistViewController: ItemsViewController {
         navigationItem.title = playlist.title
 
         // Do any additional setup after loading the view.
-        playlist.videos() { (videos: [SwifTube.Video]!, error: NSError!) in
+        searchParameters = ["playlistId": playlist.id]
+        SwifTube.playlistItems(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
             if let videos = videos {
+                self.updateSearchParameters(token: token)
                 self.videos = videos
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
@@ -62,6 +64,35 @@ extension PlaylistViewController: UITableViewDataSource {
         let item = videos[indexPath.row]
         cell.configure(item)
         return cell
+    }
+
+}
+
+extension PlaylistViewController: UITableViewDelegate {
+
+    override func populateItems() {
+        if populatingItems {
+            return
+        }
+        populatingItems = true
+        SwifTube.playlistItems(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
+            if let videos = videos {
+                self.updateSearchParameters(token: token)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                    let lastIndex = self.videos.count
+                    for video in videos {
+                        self.videos.append(video)
+                    }
+                    let indexPaths = (lastIndex ..< self.videos.count).map { (transform: Int) -> NSIndexPath in
+                        return NSIndexPath(forItem: transform, inSection: 0)
+                    }
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+                        self.populatingItems = false
+                    }
+                }
+            }
+        }
     }
 
 }
