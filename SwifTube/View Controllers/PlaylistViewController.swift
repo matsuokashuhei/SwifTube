@@ -56,25 +56,34 @@ class PlaylistViewController: ItemsViewController {
 extension PlaylistViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if videos.count > 0 {
+            return videos.count + 1
+        }
         return videos.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell  = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as VideoTableViewCell
-        let item = videos[indexPath.row]
-        cell.configure(item)
-        return cell
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row < videos.count {
+            return 100
+        } else {
+            return 50
+        }
     }
 
-}
-
-extension PlaylistViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row < videos.count {
+            var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as VideoTableViewCell
+            let item = videos[indexPath.row]
+            cell.configure(item)
+            return cell
+        } else {
+            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as LoadMoreTableViewCell
+            cell.button.addTarget(self, action: "populateItems", forControlEvents: UIControlEvents.TouchUpInside)
+            return cell
+        }
+    }
 
     override func populateItems() {
-        if populatingItems {
-            return
-        }
-        populatingItems = true
         SwifTube.playlistItems(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
             if let videos = videos {
                 self.updateSearchParameters(token: token)
@@ -88,11 +97,12 @@ extension PlaylistViewController: UITableViewDelegate {
                     }
                     dispatch_async(dispatch_get_main_queue()) {
                         self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                        self.populatingItems = false
                     }
                 }
             }
         }
     }
+}
 
+extension PlaylistViewController: UITableViewDelegate {
 }

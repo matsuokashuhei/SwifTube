@@ -52,25 +52,35 @@ class VideosViewController: ItemsViewController {
 extension VideosViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return videos.count
+        if videos.count > 0 {
+            return videos.count + 1
+        } else {
+            return videos.count
+        }
+    }
+
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row < videos.count {
+            return 100
+        } else {
+            return 50
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell  = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as VideoTableViewCell
-        let item = videos[indexPath.row]
-        cell.configure(item)
-        return cell
-    }
-
-}
-
-extension VideosViewController: UITableViewDelegate {
-
-    override func populateItems() {
-        if populatingItems {
-            return
+        if indexPath.row < videos.count {
+            var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as VideoTableViewCell
+            let item = videos[indexPath.row]
+            cell.configure(item)
+            return cell
+        } else {
+            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as LoadMoreTableViewCell
+            cell.button.addTarget(self, action: "populateItems", forControlEvents: UIControlEvents.TouchUpInside)
+            return cell
         }
-        populatingItems = true
+    }
+    
+    override func populateItems() {
         SwifTube.search(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
             if let videos = videos {
                 self.updateSearchParameters(token: token)
@@ -84,11 +94,13 @@ extension VideosViewController: UITableViewDelegate {
                     }
                     dispatch_async(dispatch_get_main_queue()) {
                         self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                        self.populatingItems = false
                     }
                 }
             }
         }
     }
 
+}
+
+extension VideosViewController: UITableViewDelegate {
 }

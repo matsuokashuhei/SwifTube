@@ -115,6 +115,25 @@
                                             <segue destination="O0v-cA-5RS" kind="push" identifier="showVideo" id="Omj-26-Qei"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" rowHeight="50" id="1B8-42-tNg" customClass="LoadMoreTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1B8-42-tNg" id="mis-Rc-MbC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-WF-jgU">
+                                                    <rect key="frame" x="8" y="8" width="304" height="34"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                    <state key="normal" title="Load more">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="zpZ-WF-jgU" id="uCk-vI-1B2"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -270,6 +289,25 @@
                                             <segue destination="ZhW-cR-y2g" kind="push" identifier="showPlaylist" id="AXL-ZE-gJv"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" rowHeight="50" id="Fzf-nx-TsL" customClass="LoadMoreTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fzf-nx-TsL" id="aeo-Da-54F">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yLH-yH-9sG">
+                                                    <rect key="frame" x="8" y="8" width="304" height="34"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                    <state key="normal" title="Load more">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="yLH-yH-9sG" id="QiK-7n-oX5"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -340,6 +378,25 @@
                                             <segue destination="O0v-cA-5RS" kind="push" identifier="showVideo" id="CTJ-GF-VE1"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" rowHeight="50" id="5Lt-0B-Zyg" customClass="LoadMoreTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Lt-0B-Zyg" id="MB6-vr-vZA">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhQ-ed-XIx">
+                                                    <rect key="frame" x="8" y="8" width="304" height="34"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                    <state key="normal" title="Load more">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="XhQ-ed-XIx" id="135-i2-Cgd"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -406,6 +463,25 @@
                                             <outlet property="videoCountLabel" destination="ljE-MC-V0J" id="sW0-65-3tS"/>
                                             <outlet property="viewCountLabel" destination="QOS-UN-I50" id="I61-iR-6dq"/>
                                             <segue destination="4Yb-tw-fiF" kind="push" identifier="showChannel" id="Olo-RP-l0W"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" rowHeight="50" id="iVV-1V-Af2" customClass="LoadMoreTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iVV-1V-Af2" id="72a-WI-Zbb">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZj-tw-Aa5">
+                                                    <rect key="frame" x="8" y="8" width="304" height="34"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                    <state key="normal" title="Load more">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="vZj-tw-Aa5" id="Xoc-xR-Vqe"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -489,24 +565,6 @@
             </objects>
             <point key="canvasLocation" x="1035" y="649"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="qxG-NQ-pk5">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="6Pa-o9-4lL" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="aVg-ub-FQT"/>
-                        <viewControllerLayoutGuide type="bottom" id="2c3-Ps-2Oa"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="DhX-Cp-4yq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VZj-JW-sTV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -516,6 +574,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="CT7-3a-3i8"/>
         <segue reference="IF4-VN-mbs"/>
-        <segue reference="CTJ-GF-VE1"/>
+        <segue reference="Omj-26-Qei"/>
     </inferredMetricsTieBreakers>
 </document>

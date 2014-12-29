@@ -12,9 +12,9 @@ class ItemsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
 
-    //var searcher = (client: SwifTube.Client(), parameters: [String: String]())
+    var items: [SwifTube.Item] = []
+
     var searchParameters = [String: String]()
-    var populatingItems = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ extension ItemsViewController: UITableViewDelegate {
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y + view.frame.size.height > scrollView.contentSize.height * 0.8 {
-            populateItems()
+            //populateItems()
         }
     }
 

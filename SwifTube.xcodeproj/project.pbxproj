@@ -15,6 +15,7 @@
 		A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */; };
 		A8853AFB1A484D4300B3C3B4 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */; };
 		A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */; };
+		A8C300441A51213300944165 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */; };
 		A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8D1A485D0200E49941 /* SwifTube.swift */; };
 		A8D5CF901A485D1500E49941 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8F1A485D1500E49941 /* Item.swift */; };
 		A8D5CF961A4863D900E49941 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */; };
@@ -70,6 +71,7 @@
 		A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
 		A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
+		A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		A8D5CF801A485B8900E49941 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		A8D5CF8D1A485D0200E49941 /* SwifTube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifTube.swift; sourceTree = "<group>"; };
 		A8D5CF8F1A485D1500E49941 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */,
+				A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				A86A6CF61A4B179B00896865 /* PlaylistViewController.swift in Sources */,
 				A8390C0B1A5082E900AAEFC1 /* Async.swift in Sources */,
 				A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */,
+				A8C300441A51213300944165 /* LoadMoreTableViewCell.swift in Sources */,
 				A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */,
 				A8D5E63E1A41DAE900525EB9 /* AppDelegate.swift in Sources */,
 			);

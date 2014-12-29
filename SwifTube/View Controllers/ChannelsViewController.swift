@@ -52,25 +52,34 @@ class ChannelsViewController: ItemsViewController {
 extension ChannelsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if channels.count > 0 {
+            return channels.count + 1
+        }
         return channels.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as ChannelTableViewCell
-        let item = channels[indexPath.row]
-        cell.configure(item)
-        return cell
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row < channels.count {
+            return 100
+        } else {
+            return 50
+        }
     }
 
-}
-
-extension ChannelsViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row < channels.count {
+            var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as ChannelTableViewCell
+            let item = channels[indexPath.row]
+            cell.configure(item)
+            return cell
+        } else {
+            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as LoadMoreTableViewCell
+            cell.button.addTarget(self, action: "populateItems", forControlEvents: UIControlEvents.TouchUpInside)
+            return cell
+        }
+    }
 
     override func populateItems() {
-        if populatingItems {
-            return
-        }
-        populatingItems = true
         SwifTube.search(parameters: searchParameters) { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
             if let channels = channels {
                 self.updateSearchParameters(token: token)
@@ -84,11 +93,12 @@ extension ChannelsViewController: UITableViewDelegate {
                     }
                     dispatch_async(dispatch_get_main_queue()) {
                         self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                        self.populatingItems = false
                     }
                 }
             }
         }
     }
+}
 
+extension ChannelsViewController: UITableViewDelegate {
 }
