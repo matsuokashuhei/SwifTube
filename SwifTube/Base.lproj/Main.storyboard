@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2aO-uJ-lfz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2aO-uJ-lfz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -9,45 +9,65 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="SearchViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="QIg-Bo-pwY"/>
+                        <viewControllerLayoutGuide type="bottom" id="dQg-Fj-2lI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IWc-ET-kr3">
-                                <rect key="frame" x="16" y="115" width="288" height="29"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YCf-z0-nIu">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaH-RO-UJm">
+                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
+                                <connections>
+                                    <segue destination="0Wt-AE-bJR" kind="embed" id="IF4-VN-mbs"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJP-XS-aML">
+                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
+                                <connections>
+                                    <segue destination="zyt-ZO-2Tf" kind="embed" id="CT7-3a-3i8"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brx-M4-tQ6">
+                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
+                                <connections>
+                                    <segue destination="CHI-Sm-ZeF" kind="embed" id="IxO-uA-xky"/>
+                                </connections>
+                            </containerView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IWc-ET-kr3">
+                                <rect key="frame" x="16" y="115" width="568" height="29"/>
                                 <segments>
                                     <segment title="Videos"/>
                                     <segment title="Playlists"/>
                                     <segment title="Channels"/>
                                 </segments>
                             </segmentedControl>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YCf-z0-nIu">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PaH-RO-UJm">
-                                <rect key="frame" x="0.0" y="151" width="320" height="417"/>
-                                <connections>
-                                    <segue destination="0Wt-AE-bJR" kind="embed" id="IF4-VN-mbs"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJP-XS-aML">
-                                <rect key="frame" x="0.0" y="151" width="320" height="417"/>
-                                <connections>
-                                    <segue destination="zyt-ZO-2Tf" kind="embed" id="CT7-3a-3i8"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="brx-M4-tQ6">
-                                <rect key="frame" x="0.0" y="151" width="320" height="417"/>
-                                <connections>
-                                    <segue destination="CHI-Sm-ZeF" kind="embed" id="IxO-uA-xky"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IWc-ET-kr3" firstAttribute="top" secondItem="YCf-z0-nIu" secondAttribute="bottom" constant="7" id="3V8-1c-m3W"/>
+                            <constraint firstItem="YCf-z0-nIu" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="64" id="8sd-AV-yg7"/>
+                            <constraint firstAttribute="trailing" secondItem="IWc-ET-kr3" secondAttribute="trailing" constant="16" id="AGR-jt-EHD"/>
+                            <constraint firstAttribute="bottom" secondItem="brx-M4-tQ6" secondAttribute="bottom" id="GyI-dZ-JYg"/>
+                            <constraint firstAttribute="trailing" secondItem="YCf-z0-nIu" secondAttribute="trailing" id="IsV-LZ-u9T"/>
+                            <constraint firstItem="YCf-z0-nIu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="JjR-is-VRU"/>
+                            <constraint firstAttribute="bottom" secondItem="cJP-XS-aML" secondAttribute="bottom" id="Odb-yH-nno"/>
+                            <constraint firstAttribute="bottom" secondItem="PaH-RO-UJm" secondAttribute="bottom" id="RoH-pK-Uk2"/>
+                            <constraint firstItem="PaH-RO-UJm" firstAttribute="top" secondItem="IWc-ET-kr3" secondAttribute="bottom" constant="8" id="V5c-UE-uqL"/>
+                            <constraint firstAttribute="trailing" secondItem="brx-M4-tQ6" secondAttribute="trailing" id="Xb3-lD-h2K"/>
+                            <constraint firstItem="cJP-XS-aML" firstAttribute="top" secondItem="IWc-ET-kr3" secondAttribute="bottom" constant="8" id="dcH-KI-oy3"/>
+                            <constraint firstItem="IWc-ET-kr3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="iwX-vh-afs"/>
+                            <constraint firstItem="brx-M4-tQ6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="kWm-yH-lyN"/>
+                            <constraint firstItem="brx-M4-tQ6" firstAttribute="top" secondItem="IWc-ET-kr3" secondAttribute="bottom" constant="8" id="koe-ZQ-xho"/>
+                            <constraint firstAttribute="trailing" secondItem="cJP-XS-aML" secondAttribute="trailing" id="lOg-4O-9Ke"/>
+                            <constraint firstItem="cJP-XS-aML" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="qGs-35-Edp"/>
+                            <constraint firstAttribute="trailing" secondItem="PaH-RO-UJm" secondAttribute="trailing" id="sWh-g9-kUW"/>
+                            <constraint firstItem="PaH-RO-UJm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="xB1-Yn-QeP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qKj-fi-VY2"/>
                     <connections>
@@ -60,22 +80,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1495" y="639"/>
+            <point key="canvasLocation" x="2860" y="669"/>
         </scene>
         <!--Videos View Controller-->
         <scene sceneID="iU3-rf-c73">
             <objects>
                 <viewController storyboardIdentifier="VideosViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Wt-AE-bJR" customClass="VideosViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gUT-zy-XxY"/>
-                        <viewControllerLayoutGuide type="bottom" id="SHg-eK-Ei6"/>
+                        <viewControllerLayoutGuide type="top" id="CUi-6R-ZBg"/>
+                        <viewControllerLayoutGuide type="bottom" id="LI6-cE-13g"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="F7f-Mm-Kyq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="44" width="600" height="449"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="videosViewController" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vNS-0f-rjs">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="videosViewController" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vNS-0f-rjs">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="kQr-4n-gmC" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -84,35 +104,58 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vHC-WS-SaS">
-                                                    <rect key="frame" x="5" y="5" width="120" height="90"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XG-lT-JhU">
-                                                    <rect key="frame" x="133" y="10" width="179" height="40"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XG-lT-JhU">
+                                                    <rect key="frame" x="133" y="5" width="459" height="46"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="459" id="bfy-ac-I1m"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Channel Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBy-TY-hZI">
-                                                    <rect key="frame" x="133" y="56" width="179" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBy-TY-hZI">
+                                                    <rect key="frame" x="133" y="56" width="459" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="459" id="4x9-KJ-Cl3"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View count" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qg8-UP-1jP">
-                                                    <rect key="frame" x="133" y="74" width="179" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View count" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qg8-UP-1jP">
+                                                    <rect key="frame" x="133" y="78" width="459" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="459" id="fct-o8-50O"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vHC-WS-SaS">
+                                                    <rect key="frame" x="5" y="5" width="120" height="90"/>
+                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Qg8-UP-1jP" secondAttribute="trailing" constant="8" id="0a2-Hg-8FI"/>
+                                                <constraint firstAttribute="bottom" secondItem="vHC-WS-SaS" secondAttribute="bottom" constant="5" id="3ZJ-cV-KEM"/>
+                                                <constraint firstItem="fBy-TY-hZI" firstAttribute="top" secondItem="1XG-lT-JhU" secondAttribute="bottom" constant="5" id="8lK-pA-WXs"/>
+                                                <constraint firstItem="Qg8-UP-1jP" firstAttribute="top" secondItem="fBy-TY-hZI" secondAttribute="bottom" constant="5" id="TaW-RN-IG3"/>
+                                                <constraint firstAttribute="trailing" secondItem="1XG-lT-JhU" secondAttribute="trailing" constant="8" id="UEb-iK-A3X"/>
+                                                <constraint firstAttribute="bottom" secondItem="Qg8-UP-1jP" secondAttribute="bottom" constant="5" id="aAQ-gJ-l45"/>
+                                                <constraint firstItem="1XG-lT-JhU" firstAttribute="leading" secondItem="hjv-pf-YDn" secondAttribute="leading" constant="133" id="j9d-sd-aIi"/>
+                                                <constraint firstItem="1XG-lT-JhU" firstAttribute="top" secondItem="hjv-pf-YDn" secondAttribute="top" constant="5" id="rZm-G7-T3I"/>
+                                                <constraint firstAttribute="trailing" secondItem="fBy-TY-hZI" secondAttribute="trailing" constant="8" id="s0z-Cz-TEB"/>
+                                                <constraint firstItem="vHC-WS-SaS" firstAttribute="top" secondItem="hjv-pf-YDn" secondAttribute="top" constant="5" id="s1v-UN-OjH"/>
+                                                <constraint firstItem="vHC-WS-SaS" firstAttribute="leading" secondItem="hjv-pf-YDn" secondAttribute="leading" constant="5" id="tgH-Wg-GBo"/>
+                                                <constraint firstItem="1XG-lT-JhU" firstAttribute="leading" secondItem="vHC-WS-SaS" secondAttribute="trailing" constant="8" id="xVe-nv-2xd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="channelTitle" destination="fBy-TY-hZI" id="L9v-zi-H6X"/>
                                             <outlet property="thumbnailImageView" destination="vHC-WS-SaS" id="bHG-OC-mZ5"/>
                                             <outlet property="titleLabel" destination="1XG-lT-JhU" id="mOV-bA-Qpq"/>
                                             <outlet property="viewCountLabel" destination="Qg8-UP-1jP" id="BCL-Pz-2BI"/>
-                                            <segue destination="O0v-cA-5RS" kind="push" identifier="showVideo" id="Omj-26-Qei"/>
+                                            <segue destination="O0v-cA-5RS" kind="show" identifier="showVideo" id="Omj-26-Qei"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" rowHeight="50" id="1B8-42-tNg" customClass="LoadMoreTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -121,14 +164,19 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1B8-42-tNg" id="mis-Rc-MbC">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-WF-jgU">
-                                                    <rect key="frame" x="8" y="8" width="304" height="34"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-WF-jgU">
+                                                    <rect key="frame" x="8" y="8" width="584" height="33"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                     <state key="normal" title="Load more">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="zpZ-WF-jgU" firstAttribute="top" secondItem="mis-Rc-MbC" secondAttribute="top" constant="8" id="7sY-hG-kC3"/>
+                                                <constraint firstItem="zpZ-WF-jgU" firstAttribute="leading" secondItem="mis-Rc-MbC" secondAttribute="leading" constant="8" id="OT5-4A-Tw0"/>
+                                                <constraint firstAttribute="trailing" secondItem="zpZ-WF-jgU" secondAttribute="trailing" constant="8" id="nzr-y6-hvx"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="button" destination="zpZ-WF-jgU" id="uCk-vI-1B2"/>
@@ -138,29 +186,33 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vNS-0f-rjs" secondAttribute="trailing" id="9Ym-FK-Zm1"/>
+                            <constraint firstItem="vNS-0f-rjs" firstAttribute="leading" secondItem="F7f-Mm-Kyq" secondAttribute="leading" id="FVr-5Z-3hp"/>
+                            <constraint firstAttribute="bottom" secondItem="vNS-0f-rjs" secondAttribute="bottom" id="b3O-Ey-FtT"/>
+                            <constraint firstItem="vNS-0f-rjs" firstAttribute="top" secondItem="F7f-Mm-Kyq" secondAttribute="top" id="ihJ-gE-k4Y"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iBv-Wg-xWR"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="tableView" destination="vNS-0f-rjs" id="B6N-Fy-NRT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WCN-N8-cAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2592" y="-17"/>
+            <point key="canvasLocation" x="4192" y="12.5"/>
         </scene>
         <!--Video View Controller-->
         <scene sceneID="PXx-4r-Mnz">
             <objects>
                 <viewController id="O0v-cA-5RS" customClass="VideoViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hvn-lX-CtN"/>
-                        <viewControllerLayoutGuide type="bottom" id="4eJ-f4-roW"/>
+                        <viewControllerLayoutGuide type="top" id="qNn-iG-kfw"/>
+                        <viewControllerLayoutGuide type="bottom" id="AWo-Kz-5lc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VXz-b3-Gy4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOf-6p-kGo">
@@ -234,15 +286,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LXp-ib-yuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3369" y="-17"/>
+            <point key="canvasLocation" x="6316.875" y="-17.95774647887324"/>
         </scene>
         <!--Playlists View Controller-->
         <scene sceneID="3lL-Nu-PlR">
             <objects>
                 <viewController storyboardIdentifier="PlaylistsViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zyt-ZO-2Tf" customClass="PlaylistsViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JVA-EW-FUh"/>
-                        <viewControllerLayoutGuide type="bottom" id="fMr-0C-0Zj"/>
+                        <viewControllerLayoutGuide type="top" id="eMR-P6-sOg"/>
+                        <viewControllerLayoutGuide type="bottom" id="GzC-sO-Zim"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Fxb-Ml-8gL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -252,7 +304,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistTableViewCell" id="AQe-MQ-MNW" customClass="PlaylistTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistTableViewCell" id="AQe-MQ-MNW" customClass="PlaylistTableViewCell" customModule="SwifTube" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AQe-MQ-MNW" id="CVy-F6-pA1">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -286,7 +338,7 @@
                                             <outlet property="itemCountLabel" destination="0dk-2x-adX" id="Iha-IU-6lF"/>
                                             <outlet property="thumbnailImageView" destination="MPd-YJ-ueG" id="bxo-lX-2Dy"/>
                                             <outlet property="titleLabel" destination="YYw-BK-Hjm" id="Xee-fu-Z3w"/>
-                                            <segue destination="ZhW-cR-y2g" kind="push" identifier="showPlaylist" id="AXL-ZE-gJv"/>
+                                            <segue destination="ZhW-cR-y2g" kind="show" identifier="showPlaylist" id="AXL-ZE-gJv"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" rowHeight="50" id="Fzf-nx-TsL" customClass="LoadMoreTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -323,15 +375,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWi-Pb-g82" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2592" y="649"/>
+            <point key="canvasLocation" x="4860" y="685.56338028169012"/>
         </scene>
         <!--Playlist View Controller-->
         <scene sceneID="nuE-Ax-CKN">
             <objects>
                 <viewController id="ZhW-cR-y2g" customClass="PlaylistViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="AYT-gl-nRS"/>
-                        <viewControllerLayoutGuide type="bottom" id="SXj-hF-Lrb"/>
+                        <viewControllerLayoutGuide type="top" id="ulf-ib-4qW"/>
+                        <viewControllerLayoutGuide type="bottom" id="TU4-Yw-jiX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MGw-Hh-KF5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -341,7 +393,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="rhu-mR-vOU" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="rhu-mR-vOU" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rhu-mR-vOU" id="aOJ-q2-kH7">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
@@ -375,7 +427,7 @@
                                             <outlet property="thumbnailImageView" destination="Syh-P7-Dtk" id="5CZ-K0-mbf"/>
                                             <outlet property="titleLabel" destination="lEc-fL-COw" id="fPG-Le-hcV"/>
                                             <outlet property="viewCountLabel" destination="5GW-Q5-tMK" id="YKq-0T-Qyx"/>
-                                            <segue destination="O0v-cA-5RS" kind="push" identifier="showVideo" id="CTJ-GF-VE1"/>
+                                            <segue destination="O0v-cA-5RS" kind="show" identifier="showVideo" id="CTJ-GF-VE1"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" rowHeight="50" id="5Lt-0B-Zyg" customClass="LoadMoreTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -410,15 +462,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfB-yW-URN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2979" y="649"/>
+            <point key="canvasLocation" x="5585.625" y="685.56338028169012"/>
         </scene>
         <!--Channels View Controller-->
         <scene sceneID="dN4-pb-zpY">
             <objects>
                 <viewController storyboardIdentifier="ChannelsViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CHI-Sm-ZeF" customClass="ChannelsViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hZf-EJ-BJ3"/>
-                        <viewControllerLayoutGuide type="bottom" id="Efx-K5-E7V"/>
+                        <viewControllerLayoutGuide type="top" id="UQX-Z2-Xwt"/>
+                        <viewControllerLayoutGuide type="bottom" id="Z4t-Jf-E3b"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="NHs-ii-y4O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -428,7 +480,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="ChannelTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChannelTableViewCell" id="aQn-RP-ts9" customClass="ChannelTableViewCell" customModule="SwifTube" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="ChannelTableViewCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChannelTableViewCell" id="aQn-RP-ts9" customClass="ChannelTableViewCell" customModule="SwifTube" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aQn-RP-ts9" id="d5J-sc-vWM">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -462,7 +514,7 @@
                                             <outlet property="titleLabel" destination="o0M-VF-053" id="6ie-zT-gGy"/>
                                             <outlet property="videoCountLabel" destination="ljE-MC-V0J" id="sW0-65-3tS"/>
                                             <outlet property="viewCountLabel" destination="QOS-UN-I50" id="I61-iR-6dq"/>
-                                            <segue destination="4Yb-tw-fiF" kind="push" identifier="showChannel" id="Olo-RP-l0W"/>
+                                            <segue destination="4Yb-tw-fiF" kind="show" identifier="showChannel" id="Olo-RP-l0W"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" rowHeight="50" id="iVV-1V-Af2" customClass="LoadMoreTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -499,15 +551,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUw-gj-UdH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1495" y="1390"/>
+            <point key="canvasLocation" x="2803.125" y="1468.3098591549287"/>
         </scene>
         <!--Channel View Controller-->
         <scene sceneID="cvW-vI-oRy">
             <objects>
                 <viewController id="4Yb-tw-fiF" customClass="ChannelViewController" customModule="SwifTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xTu-79-Apb"/>
-                        <viewControllerLayoutGuide type="bottom" id="X1G-YC-CZW"/>
+                        <viewControllerLayoutGuide type="top" id="byu-na-cKG"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Ef-cT-leM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="08L-M0-EYV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -545,7 +597,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pb1-GO-DxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1974" y="1390"/>
+            <point key="canvasLocation" x="3701.25" y="1468.3098591549287"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h8v-7N-fXJ">
@@ -563,17 +615,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ybY-Lv-zpg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1035" y="649"/>
+            <point key="canvasLocation" x="1936.875" y="675"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="CT7-3a-3i8"/>
+        <segue reference="Omj-26-Qei"/>
         <segue reference="IF4-VN-mbs"/>
-        <segue reference="CTJ-GF-VE1"/>
+        <segue reference="CT7-3a-3i8"/>
     </inferredMetricsTieBreakers>
 </document>
