@@ -93,11 +93,11 @@
                         <viewControllerLayoutGuide type="bottom" id="LI6-cE-13g"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="F7f-Mm-Kyq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="videosViewController" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vNS-0f-rjs">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="kQr-4n-gmC" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -275,6 +275,9 @@
                                         <exclude reference="fKc-vx-RTO"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="playNextVideo" destination="O0v-cA-5RS" eventType="touchUpInside" id="6F9-7B-C2X"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60q-b9-3rv">
                                 <rect key="frame" x="140" y="350" width="80" height="30"/>
@@ -294,6 +297,9 @@
                                         <exclude reference="yiQ-4f-NJs"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="playPrevVideo" destination="O0v-cA-5RS" eventType="touchUpInside" id="qWz-6V-oGT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkF-k1-96O">
                                 <rect key="frame" x="250" y="350" width="100" height="30"/>
@@ -347,8 +353,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
-                        <outlet property="button" destination="fkF-k1-96O" id="OTq-4u-VXw"/>
+                        <outlet property="nextButton" destination="jWa-Xg-leK" id="1ZS-6o-1cn"/>
+                        <outlet property="playButton" destination="fkF-k1-96O" id="b6h-Y1-m0U"/>
                         <outlet property="playerView" destination="kGk-bm-cor" id="j4h-57-zqU"/>
+                        <outlet property="prevButton" destination="60q-b9-3rv" id="itT-P9-FVJ"/>
                         <outlet property="seekBar" destination="FUt-i4-1Rl" id="TFl-hk-mWp"/>
                     </connections>
                 </viewController>
@@ -365,11 +373,11 @@
                         <viewControllerLayoutGuide type="bottom" id="GzC-sO-Zim"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Fxb-Ml-8gL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="c8h-18-rR3">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistTableViewCell" id="AQe-MQ-MNW" customClass="PlaylistTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -488,11 +496,11 @@
                         <viewControllerLayoutGuide type="bottom" id="TU4-Yw-jiX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MGw-Hh-KF5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jhO-F5-dz5">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="c3g-3T-d37" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -746,6 +754,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oXz-HF-JA2">
+                                <rect key="frame" x="16" y="72" width="568" height="29"/>
+                                <segments>
+                                    <segment title="Videos"/>
+                                    <segment title="Playlists"/>
+                                </segments>
+                            </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpd-r2-9k7">
                                 <rect key="frame" x="0.0" y="108" width="600" height="341"/>
                                 <connections>
@@ -758,13 +773,6 @@
                                     <segue destination="zyt-ZO-2Tf" kind="embed" id="O04-aI-xPh"/>
                                 </connections>
                             </containerView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oXz-HF-JA2">
-                                <rect key="frame" x="16" y="72" width="568" height="29"/>
-                                <segments>
-                                    <segment title="Videos"/>
-                                    <segment title="Playlists"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -814,8 +822,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Od9-vA-JDb"/>
-        <segue reference="CT7-3a-3i8"/>
-        <segue reference="IF4-VN-mbs"/>
+        <segue reference="O04-aI-xPh"/>
+        <segue reference="sOW-rP-g7e"/>
+        <segue reference="Omj-26-Qei"/>
     </inferredMetricsTieBreakers>
 </document>

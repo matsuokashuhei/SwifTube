@@ -30,6 +30,7 @@ class VideosViewController: ItemsViewController {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let destinationViewController = segue.destinationViewController as VideoViewController
                 destinationViewController.video = items[indexPath.row] as SwifTube.Video
+                destinationViewController.delegate = self
             }
         }
     }
@@ -68,3 +69,36 @@ extension VideosViewController: UITableViewDataSource {
 
 extension VideosViewController: UITableViewDelegate {
 }
+
+extension VideosViewController: VideoPlayerDelegate {
+    
+    func canPlayNextVideo(videoViewController: VideoViewController) -> Bool {
+        let index = NSArray(array: items).indexOfObject(videoViewController.video)
+        return index + 1 < items.count
+    }
+
+    func canPlayPrevVideo(videoViewController: VideoViewController) -> Bool {
+        let index = NSArray(array: items).indexOfObject(videoViewController.video)
+        println("index: \(index), items.count: \(items.count)")
+        return index > 0
+    }
+
+    func playNextVideo(videoViewController: VideoViewController) {
+        let index = NSArray(array: items).indexOfObject(videoViewController.video)
+        if index + 1 < items.count {
+            let nextVideo = items[index + 1] as SwifTube.Video
+            videoViewController.video = nextVideo
+            videoViewController.showVideo()
+        }
+    }
+    
+    func playPrevVideo(videoViewController: VideoViewController) {
+        let index = NSArray(array: items).indexOfObject(videoViewController.video)
+        if index > 0 {
+            let prevVideo = items[index - 1] as SwifTube.Video
+            videoViewController.video = prevVideo
+            videoViewController.showVideo()
+        }
+    }
+}
+
