@@ -19,14 +19,12 @@ class ItemsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         configure(navigationItem: navigationItem)
         configure(tableView: tableView)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func configure(#navigationItem: UINavigationItem) {
@@ -39,25 +37,41 @@ class ItemsViewController: UIViewController {
 
     func search() {
     }
+    func populateItems() {
+    }
     
     func updateSearchParameters(#token: SwifTube.PageToken!) {
-        println("searchParameters: \(searchParameters)")
         if let token = token {
-            searchParameters["pageToken"] = token.next
+            if !token.next.isEmpty {
+                searchParameters["pageToken"] = token.next
+            } else {
+                searchParameters["pageToken"] = ""
+            }
         }
+        println("searchParameters: \(searchParameters)")
     }
 
 }
 
 extension ItemsViewController: UITableViewDelegate {
-
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y + view.frame.size.height > scrollView.contentSize.height * 0.8 {
-            //populateItems()
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if items.count > 0 {
+            if let nextPageToken = searchParameters["pageToken"] {
+                if !nextPageToken.isEmpty {
+                    return items.count + 1
+                }
+            }
         }
+        return items.count
     }
 
-    func populateItems() {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row < items.count {
+            return 100
+        } else {
+            return 50
+        }
     }
 }
 

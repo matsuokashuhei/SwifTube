@@ -10,8 +10,6 @@ import UIKit
 
 class ChannelsViewController: ItemsViewController {
 
-    var channels: [SwifTube.Channel] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -31,7 +29,7 @@ class ChannelsViewController: ItemsViewController {
         if segue.identifier == "showChannel" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let destinationViewController = segue.destinationViewController as ChannelViewController
-                destinationViewController.channel = channels[indexPath.row]
+                destinationViewController.channel = items[indexPath.row] as SwifTube.Channel
             }
         }
     }
@@ -40,7 +38,7 @@ class ChannelsViewController: ItemsViewController {
         SwifTube.search(parameters: searchParameters, completion: { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
             if let channels = channels {
                 self.updateSearchParameters(token: token)
-                self.channels = channels
+                self.items = channels
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
                 }
@@ -51,25 +49,10 @@ class ChannelsViewController: ItemsViewController {
 
 extension ChannelsViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if channels.count > 0 {
-            return channels.count + 1
-        }
-        return channels.count
-    }
-
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row < channels.count {
-            return 100
-        } else {
-            return 50
-        }
-    }
-
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row < channels.count {
+        if indexPath.row < items.count {
             var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as ChannelTableViewCell
-            let item = channels[indexPath.row]
+            let item = items[indexPath.row] as SwifTube.Channel
             cell.configure(item)
             return cell
         } else {
@@ -84,11 +67,11 @@ extension ChannelsViewController: UITableViewDataSource {
             if let channels = channels {
                 self.updateSearchParameters(token: token)
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                    let lastIndex = self.channels.count
+                    let lastIndex = self.items.count
                     for channel in channels {
-                        self.channels.append(channel)
+                        self.items.append(channel)
                     }
-                    let indexPaths = (lastIndex ..< self.channels.count).map { (transform: Int) -> NSIndexPath in
+                    let indexPaths = (lastIndex ..< self.items.count).map { (transform: Int) -> NSIndexPath in
                         return NSIndexPath(forItem: transform, inSection: 0)
                     }
                     dispatch_async(dispatch_get_main_queue()) {

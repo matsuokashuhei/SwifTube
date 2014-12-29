@@ -10,6 +10,7 @@ import Alamofire
 
 struct SwifTube {
     
+    static let debug = false
     
     /**
     ビデオを検索します。
@@ -109,7 +110,6 @@ struct SwifTube {
 
         func playlistItems<T: APICaller>(#parameters: [String: String], completion: (items: [T]!, token: PageToken!, error: NSError!) -> Void) {
             if let token = parameters["pageToken"] {
-                println("token: \(token)")
                 if token.isEmpty {
                     completion(items: [], token: (next: "", prev: ""), error: nil)
                     return
@@ -117,7 +117,9 @@ struct SwifTube {
             }
             showLoadingIndicator(true)
             let request = Alamofire.request(API.PlaylistItems(parameters: parameters))
-            debugPrintln(request)
+            if SwifTube.debug {
+                debugPrintln(request)
+            }
             request.responseJSON { (_, _, JSON, error) -> Void in
                 if let JSON = JSON as? NSDictionary {
                     let token = self.extractPageToken(JSON: JSON)
@@ -139,7 +141,6 @@ struct SwifTube {
 
         func _search<T: APICaller>(#parameters: [String: String], completion: (items: [T]!, token: PageToken!, error: NSError!) -> Void) {
             if let token = parameters["pageToken"] {
-                println("token: \(token)")
                 if token.isEmpty {
                     completion(items: [], token: (next: "", prev: ""), error: nil)
                     return
@@ -147,7 +148,9 @@ struct SwifTube {
             }
             showLoadingIndicator(true)
             let request = Alamofire.request(API.Search(parameters: parameters))
-            debugPrintln(request)
+            if SwifTube.debug {
+                debugPrintln(request)
+            }
             request.responseJSON { (_, _, JSON, error) -> Void in
                 if let JSON = JSON as? NSDictionary {
                     let token = self.extractPageToken(JSON: JSON)
@@ -171,7 +174,9 @@ struct SwifTube {
         func find<T: APICaller>(#ids: [String], completion: (items: [T]!, error: NSError!) -> Void) {
             showLoadingIndicator(true)
             let request = Alamofire.request(T.callAPI(ids))
-            //debugPrintln(request)
+            if SwifTube.debug {
+                debugPrintln(request)
+            }
             request.responseJSON { (_, _, JSON, error) -> Void in
                 if error == nil {
                     let objects = (JSON as NSDictionary).valueForKey("items") as [NSDictionary]

@@ -31,22 +31,29 @@ class ChannelViewController: UIViewController {
         segmentChanged(segmentedControl)
         
         if let videosViewController = childViewControllers[0] as? VideosViewController {
-            channel.videos { (items, error) -> Void in
-                if let items = items {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        videosViewController.videos = items
-                    }
-                }
-            }
+//            channel.videos { (items, error) -> Void in
+//                if let items = items {
+//                    dispatch_async(dispatch_get_main_queue()) {
+//                        videosViewController.items = items
+//                        videosViewController.searchParameters = ["channelId": self.channel.id]
+//                    }
+//                }
+//            }
+            videosViewController.searchParameters = ["channelId": self.channel.id]
+            videosViewController.search()
         }
         if let playlistsViewController = childViewControllers[1] as? PlaylistsViewController {
+            /*
             channel.playlists { (items, error) -> Void in
                 if let items = items {
                     dispatch_async(dispatch_get_main_queue()) {
-                        playlistsViewController.playlists = items
+                        playlistsViewController.items = items
                     }
                 }
             }
+            */
+            playlistsViewController.searchParameters = ["channelId": self.channel.id]
+            playlistsViewController.search()
         }
     }
 
@@ -68,25 +75,34 @@ class ChannelViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             if let videosViewController = childViewControllers[sender.selectedSegmentIndex] as? VideosViewController {
+                /*
                 channel.videos { (items, error) -> Void in
                     if let items = items {
                         dispatch_async(dispatch_get_main_queue()) {
-                            videosViewController.videos = items
+                            //videosViewController.videos = items
+                            videosViewController.items = items
                             videosViewController.tableView.reloadData()
                         }
                     }
                 }
+                */
+                videosViewController.searchParameters = ["channelId": self.channel.id]
+                videosViewController.search()
             }
         case 1:
             if let playlistsViewController = childViewControllers[sender.selectedSegmentIndex] as? PlaylistsViewController {
+                /*
                 channel.playlists { (items, error) -> Void in
                     if let items = items {
                         dispatch_async(dispatch_get_main_queue()) {
-                            playlistsViewController.playlists = items
+                            playlistsViewController.items = items
                             playlistsViewController.tableView.reloadData()
                         }
                     }
                 }
+                */
+                playlistsViewController.searchParameters = ["channelId": self.channel.id]
+                playlistsViewController.search()
             }
         default:
             break

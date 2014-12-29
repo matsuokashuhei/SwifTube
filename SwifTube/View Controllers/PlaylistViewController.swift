@@ -11,7 +11,6 @@ import UIKit
 class PlaylistViewController: ItemsViewController {
 
     var playlist: SwifTube.Playlist!
-    var videos: [SwifTube.Video] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,7 @@ class PlaylistViewController: ItemsViewController {
         SwifTube.playlistItems(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
             if let videos = videos {
                 self.updateSearchParameters(token: token)
-                self.videos = videos
+                self.items = videos
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
                 }
@@ -46,7 +45,7 @@ class PlaylistViewController: ItemsViewController {
         if segue.identifier == "showVideo" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let destinationViewController = segue.destinationViewController as VideoViewController
-                destinationViewController.video = videos[indexPath.row]
+                destinationViewController.video = items[indexPath.row] as SwifTube.Video
             }
         }
     }
@@ -54,26 +53,11 @@ class PlaylistViewController: ItemsViewController {
 }
 
 extension PlaylistViewController: UITableViewDataSource {
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if videos.count > 0 {
-            return videos.count + 1
-        }
-        return videos.count
-    }
-
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row < videos.count {
-            return 100
-        } else {
-            return 50
-        }
-    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row < videos.count {
+        if indexPath.row < items.count {
             var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as VideoTableViewCell
-            let item = videos[indexPath.row]
+            let item = items[indexPath.row] as SwifTube.Video
             cell.configure(item)
             return cell
         } else {
@@ -88,11 +72,11 @@ extension PlaylistViewController: UITableViewDataSource {
             if let videos = videos {
                 self.updateSearchParameters(token: token)
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                    let lastIndex = self.videos.count
+                    let lastIndex = self.items.count
                     for video in videos {
-                        self.videos.append(video)
+                        self.items.append(video)
                     }
-                    let indexPaths = (lastIndex ..< self.videos.count).map { (transform: Int) -> NSIndexPath in
+                    let indexPaths = (lastIndex ..< self.items.count).map { (transform: Int) -> NSIndexPath in
                         return NSIndexPath(forItem: transform, inSection: 0)
                     }
                     dispatch_async(dispatch_get_main_queue()) {
