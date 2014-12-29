@@ -26,7 +26,7 @@ class ItemsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
@@ -35,22 +35,52 @@ class ItemsViewController: UIViewController {
         tableView.delegate = self
     }
 
-    func search() {
-    }
-    func populateItems() {
+    func searchItems(#parameters: [String: String]) {
+        searchParameters = parameters
     }
     
-    func updateSearchParameters(#token: SwifTube.PageToken!) {
-        if let token = token {
-            if !token.next.isEmpty {
-                searchParameters["pageToken"] = token.next
-            } else {
-                searchParameters["pageToken"] = ""
-            }
-        }
-        println("searchParameters: \(searchParameters)")
+    func loadMoreItems() {
     }
 
+    func setTokenToSearchParameters(#token: SwifTube.PageToken!) {
+        if let token = token {
+            searchParameters["pageToken"] = token.next.isEmpty ? "" : token.next
+        }
+    }
+
+    func searchItemsCompletion(#items: [SwifTube.Item]!, token: SwifTube.PageToken!, error: NSError!) {
+        if let items = items {
+            self.setTokenToSearchParameters(token: token)
+            self.items = items
+            dispatch_async(dispatch_get_main_queue()) {
+                self.tableView.reloadData()
+            }
+        }
+    }
+
+    func loadMoreItemsCompletion(#items: [SwifTube.Item]!, token: SwifTube.PageToken!, error: NSError!) {
+        if let items = items {
+            self.setTokenToSearchParameters(token: token)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                for item in items {
+                    self.items.append(item)
+                }
+                /*
+                let lastIndex = self.items.count
+                let indexPaths = (lastIndex ..< self.items.count).map { (transform: Int) -> NSIndexPath in
+                    return NSIndexPath(forItem: transform, inSection: 0)
+                }
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+                }
+                */
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
 }
 
 extension ItemsViewController: UITableViewDelegate {
@@ -81,8 +111,7 @@ extension ItemsViewController: UISearchBarDelegate {
         if searchBar.text.isEmpty {
             return
         }
-        searchParameters = ["q": searchBar.text]
-        search()
+        searchItems(parameters: ["q": searchBar.text])
     }
     
 }

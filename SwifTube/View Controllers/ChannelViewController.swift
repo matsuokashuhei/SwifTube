@@ -21,7 +21,6 @@ class ChannelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         containerViews = [videosView, playlistsView]
 
         navigationItem.title = channel.title
@@ -31,35 +30,15 @@ class ChannelViewController: UIViewController {
         segmentChanged(segmentedControl)
         
         if let videosViewController = childViewControllers[0] as? VideosViewController {
-//            channel.videos { (items, error) -> Void in
-//                if let items = items {
-//                    dispatch_async(dispatch_get_main_queue()) {
-//                        videosViewController.items = items
-//                        videosViewController.searchParameters = ["channelId": self.channel.id]
-//                    }
-//                }
-//            }
-            videosViewController.searchParameters = ["channelId": self.channel.id]
-            videosViewController.search()
+            videosViewController.searchItems(parameters: ["channelId": self.channel.id])
         }
         if let playlistsViewController = childViewControllers[1] as? PlaylistsViewController {
-            /*
-            channel.playlists { (items, error) -> Void in
-                if let items = items {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        playlistsViewController.items = items
-                    }
-                }
-            }
-            */
-            playlistsViewController.searchParameters = ["channelId": self.channel.id]
-            playlistsViewController.search()
+            playlistsViewController.searchItems(parameters: ["channelId": self.channel.id])
         }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func configure(segmentedControl: UISegmentedControl) {
@@ -75,48 +54,15 @@ class ChannelViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             if let videosViewController = childViewControllers[sender.selectedSegmentIndex] as? VideosViewController {
-                /*
-                channel.videos { (items, error) -> Void in
-                    if let items = items {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            //videosViewController.videos = items
-                            videosViewController.items = items
-                            videosViewController.tableView.reloadData()
-                        }
-                    }
-                }
-                */
-                videosViewController.searchParameters = ["channelId": self.channel.id]
-                videosViewController.search()
+                videosViewController.searchItems(parameters: ["channelId": self.channel.id])
             }
         case 1:
             if let playlistsViewController = childViewControllers[sender.selectedSegmentIndex] as? PlaylistsViewController {
-                /*
-                channel.playlists { (items, error) -> Void in
-                    if let items = items {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            playlistsViewController.items = items
-                            playlistsViewController.tableView.reloadData()
-                        }
-                    }
-                }
-                */
-                playlistsViewController.searchParameters = ["channelId": self.channel.id]
-                playlistsViewController.search()
+                playlistsViewController.searchItems(parameters: ["channelId": self.channel.id])
             }
         default:
             break
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

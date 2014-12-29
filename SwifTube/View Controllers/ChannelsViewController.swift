@@ -34,16 +34,17 @@ class ChannelsViewController: ItemsViewController {
         }
     }
 
-    override func search() {
-        SwifTube.search(parameters: searchParameters, completion: { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
-            if let channels = channels {
-                self.updateSearchParameters(token: token)
-                self.items = channels
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-            }
-        })
+    override func searchItems(#parameters: [String: String]) {
+        super.searchItems(parameters: parameters)
+        SwifTube.search(parameters: parameters) { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
+            self.searchItemsCompletion(items: channels, token: token, error: error)
+        }
+    }
+    
+    override func loadMoreItems() {
+        SwifTube.search(parameters: searchParameters) { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
+            self.loadMoreItemsCompletion(items: channels, token: token, error: error)
+        }
     }
 }
 
@@ -57,30 +58,11 @@ extension ChannelsViewController: UITableViewDataSource {
             return cell
         } else {
             var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as LoadMoreTableViewCell
-            cell.button.addTarget(self, action: "populateItems", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.button.addTarget(self, action: "loadMoreItems", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
     }
 
-    override func populateItems() {
-        SwifTube.search(parameters: searchParameters) { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
-            if let channels = channels {
-                self.updateSearchParameters(token: token)
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                    let lastIndex = self.items.count
-                    for channel in channels {
-                        self.items.append(channel)
-                    }
-                    let indexPaths = (lastIndex ..< self.items.count).map { (transform: Int) -> NSIndexPath in
-                        return NSIndexPath(forItem: transform, inSection: 0)
-                    }
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                    }
-                }
-            }
-        }
-    }
 }
 
 extension ChannelsViewController: UITableViewDelegate {

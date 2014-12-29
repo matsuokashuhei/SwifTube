@@ -34,16 +34,17 @@ class VideosViewController: ItemsViewController {
         }
     }
 
-    override func search() {
-        SwifTube.search(parameters: searchParameters, completion: { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
-            if let videos = videos {
-                self.updateSearchParameters(token: token)
-                self.items = videos
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-            }
+    override func searchItems(#parameters: [String: String]) {
+        super.searchItems(parameters: parameters)
+        SwifTube.search(parameters: parameters, completion: { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
+            self.searchItemsCompletion(items: videos, token: token, error: error)
         })
+    }
+
+    override func loadMoreItems() {
+        SwifTube.search(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
+            self.loadMoreItemsCompletion(items: videos, token: token, error: error)
+        }
     }
 }
 
@@ -57,30 +58,11 @@ extension VideosViewController: UITableViewDataSource {
             return cell
         } else {
             var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as LoadMoreTableViewCell
-            cell.button.addTarget(self, action: "populateItems", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.button.addTarget(self, action: "loadMoreItems", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
     }
     
-    override func populateItems() {
-        SwifTube.search(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
-            if let videos = videos {
-                self.updateSearchParameters(token: token)
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                    let lastIndex = self.items.count
-                    for video in videos {
-                        self.items.append(video)
-                    }
-                    let indexPaths = (lastIndex ..< self.items.count).map { (transform: Int) -> NSIndexPath in
-                        return NSIndexPath(forItem: transform, inSection: 0)
-                    }
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                    }
-                }
-            }
-        }
-    }
 
 }
 

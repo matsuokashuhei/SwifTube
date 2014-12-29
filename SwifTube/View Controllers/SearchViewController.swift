@@ -28,6 +28,7 @@ class SearchViewController: UIViewController {
         configure(segmentedControl: segmentedControl)
         configure(searchBar: searchBar)
         configure(containerViews: containerViews)
+
         segmentChanged(segmentedControl)
     }
 

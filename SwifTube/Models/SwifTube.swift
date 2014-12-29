@@ -10,7 +10,7 @@ import Alamofire
 
 struct SwifTube {
     
-    static let debug = false
+    static let debug = true
     
     /**
     ビデオを検索します。

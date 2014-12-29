@@ -18,21 +18,11 @@ class PlaylistViewController: ItemsViewController {
         navigationItem.title = playlist.title
 
         // Do any additional setup after loading the view.
-        searchParameters = ["playlistId": playlist.id]
-        SwifTube.playlistItems(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
-            if let videos = videos {
-                self.updateSearchParameters(token: token)
-                self.items = videos
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-            }
-        }
+        searchItems(parameters: ["playlistId": playlist.id])
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func configure(#tableView: UITableView) {
@@ -50,6 +40,18 @@ class PlaylistViewController: ItemsViewController {
         }
     }
 
+    override func searchItems(#parameters: [String: String]) {
+        super.searchItems(parameters: parameters)
+        SwifTube.playlistItems(parameters: parameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
+            self.searchItemsCompletion(items: videos, token: token, error: error)
+        }
+    }
+    
+    override func loadMoreItems() {
+        SwifTube.playlistItems(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
+            self.loadMoreItemsCompletion(items: videos, token: token, error: error)
+        }
+    }
 }
 
 extension PlaylistViewController: UITableViewDataSource {
@@ -62,30 +64,11 @@ extension PlaylistViewController: UITableViewDataSource {
             return cell
         } else {
             var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as LoadMoreTableViewCell
-            cell.button.addTarget(self, action: "populateItems", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.button.addTarget(self, action: "loadMoreItems", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
     }
 
-    override func populateItems() {
-        SwifTube.playlistItems(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
-            if let videos = videos {
-                self.updateSearchParameters(token: token)
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                    let lastIndex = self.items.count
-                    for video in videos {
-                        self.items.append(video)
-                    }
-                    let indexPaths = (lastIndex ..< self.items.count).map { (transform: Int) -> NSIndexPath in
-                        return NSIndexPath(forItem: transform, inSection: 0)
-                    }
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                    }
-                }
-            }
-        }
-    }
 }
 
 extension PlaylistViewController: UITableViewDelegate {
