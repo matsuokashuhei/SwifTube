@@ -15,6 +15,7 @@
 		A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */; };
 		A8853AFB1A484D4300B3C3B4 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */; };
 		A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */; };
+		A8B4B3311A51997C00EE4ABB /* SeekBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B4B3301A51997C00EE4ABB /* SeekBar.swift */; };
 		A8C300441A51213300944165 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */; };
 		A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8D1A485D0200E49941 /* SwifTube.swift */; };
 		A8D5CF901A485D1500E49941 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8F1A485D1500E49941 /* Item.swift */; };
@@ -71,6 +72,7 @@
 		A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
 		A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
+		A8B4B3301A51997C00EE4ABB /* SeekBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBar.swift; sourceTree = "<group>"; };
 		A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		A8D5CF801A485B8900E49941 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		A8D5CF8D1A485D0200E49941 /* SwifTube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifTube.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */,
 				A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */,
+				A8B4B3301A51997C00EE4ABB /* SeekBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				A86A6CF91A4B1B6C00896865 /* VideoViewController.swift in Sources */,
 				A8853AF51A484C4000B3C3B4 /* SearchViewController.swift in Sources */,
 				A8D5CF901A485D1500E49941 /* Item.swift in Sources */,
+				A8B4B3311A51997C00EE4ABB /* SeekBar.swift in Sources */,
 				A86A6CFB1A4B2CF100896865 /* ChannelViewController.swift in Sources */,
 				A8D5CF981A4865B500E49941 /* ItemsViewController.swift in Sources */,
 				A8D5CF961A4863D900E49941 /* ItemTableViewCell.swift in Sources */,

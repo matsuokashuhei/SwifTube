@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
 
         containerViews = [videosView, playlistsView, channelsView]
-        
+
         configure(navigationItem: navigationItem)
         configure(segmentedControl: segmentedControl)
         configure(searchBar: searchBar)

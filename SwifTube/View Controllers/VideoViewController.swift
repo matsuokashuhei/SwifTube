@@ -11,12 +11,9 @@ import AVFoundation
 
 class VideoViewController: UIViewController {
     
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var button: UIButton!
-    @IBOutlet weak var seekBar: UISlider!
-    @IBOutlet weak var startTimeLabel: UILabel!
-    @IBOutlet weak var endTimeLabel: UILabel!
+    @IBOutlet weak var seekBar: SeekBar!
     
     var video: SwifTube.Video!
     var player: AVPlayer!
@@ -25,21 +22,22 @@ class VideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = video.title
+        
         // Do any additional setup after loading the view.
         video.streamURL(completion: { (streamURL, error) -> Void in
             if streamURL != nil {
-                self.titleLabel.text = self.video.title
                 // Playerの作成
                 var playerItem = AVPlayerItem(asset: AVURLAsset(URL: streamURL, options: nil))
                 self.player = AVPlayer(playerItem: playerItem)
                 // PlayerLayerの作成
                 var playerLayer = self.playerView.layer as AVPlayerLayer
-                playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+                playerLayer.videoGravity = AVLayerVideoGravityResizeAspect
                 playerLayer.player = self.player
                 // オブザーバーの登録
                 playerLayer.addObserver(self, forKeyPath: "readyForDisplay", options: NSKeyValueObservingOptions.New, context: nil)
                 // シークバーのイベンントの登録
-                self.seekBar.addTarget(self, action: "onSliderValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                self.seekBar.slider.addTarget(self, action: "onSliderValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
             } else {
                 println(error?.localizedDescription)
             }
@@ -80,40 +78,14 @@ class VideoViewController: UIViewController {
         }
     }
     
-    func configureSeekBar() {
-        seekBar.minimumValue = 0
-        seekBar.maximumValue = 0
-        setTime()
-    }
-    
     func configureSeekBar(playerItem: AVPlayerItem) {
-        seekBar.minimumValue = 0
-        seekBar.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
-        setTime()
+        seekBar.configure(playerItem.duration)
     }
-    
-    func setTime() {
-        startTimeLabel.text = formatTime(CMTimeMakeWithSeconds(Float64(seekBar.minimumValue), Int32(NSEC_PER_SEC)))
-        endTimeLabel.text = formatTime(CMTimeMakeWithSeconds(Float64(seekBar.maximumValue), Int32(NSEC_PER_SEC)))
-    }
-    
-    func setTime(playerItem: AVPlayerItem) {
-        startTimeLabel.text = formatTime(playerItem.currentTime())
-        let secondsOfEndTime = CMTimeGetSeconds(playerItem.duration) - CMTimeGetSeconds(playerItem.currentTime())
-        endTimeLabel.text = formatTime(CMTimeMakeWithSeconds(secondsOfEndTime, Int32(NSEC_PER_SEC)))
-    }
-    
-    func formatTime(time: CMTime) -> String {
-        let minutes = Int(CMTimeGetSeconds(time) / 60)
-        let seconds = Int(CMTimeGetSeconds(time) % 60)
-        return NSString(format: "%02ld:%02ld", minutes, seconds)
-    }
-    
+
     func addPeriodicTimeObserverForInterval() {
         let time = CMTimeMakeWithSeconds(1, Int32(NSEC_PER_SEC))
         playerObserver = self.player.addPeriodicTimeObserverForInterval(time, queue: nil) { (time) -> Void in
-            self.seekBar.value = Float(CMTimeGetSeconds(time))
-            self.setTime(self.player.currentItem)
+            self.seekBar.setTime(time, duration: self.player.currentItem.duration)
         }
     }
     
