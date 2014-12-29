@@ -23,9 +23,7 @@ class ChannelViewController: UIViewController {
 
         containerViews = [videosView, playlistsView]
 
-        navigationItem.title = channel.title
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-
+        configure(navigationItem: navigationItem)
         configure(segmentedControl)
         segmentChanged(segmentedControl)
         
@@ -41,6 +39,11 @@ class ChannelViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    func configure(#navigationItem: UINavigationItem) {
+        navigationItem.title = channel.title
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+    }
+
     func configure(segmentedControl: UISegmentedControl) {
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
