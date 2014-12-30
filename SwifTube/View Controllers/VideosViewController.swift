@@ -79,7 +79,6 @@ extension VideosViewController: VideoPlayerDelegate {
 
     func canPlayPrevVideo(videoViewController: VideoViewController) -> Bool {
         let index = NSArray(array: items).indexOfObject(videoViewController.video)
-        println("index: \(index), items.count: \(items.count)")
         return index > 0
     }
 
@@ -88,7 +87,7 @@ extension VideosViewController: VideoPlayerDelegate {
         if index + 1 < items.count {
             let nextVideo = items[index + 1] as SwifTube.Video
             videoViewController.video = nextVideo
-            videoViewController.showVideo()
+            videoViewController.startPlayVideo()
         }
     }
     
@@ -97,7 +96,7 @@ extension VideosViewController: VideoPlayerDelegate {
         if index > 0 {
             let prevVideo = items[index - 1] as SwifTube.Video
             videoViewController.video = prevVideo
-            videoViewController.showVideo()
+            videoViewController.startPlayVideo()
         }
     }
 }

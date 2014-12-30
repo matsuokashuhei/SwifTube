@@ -13,8 +13,11 @@ class VideoViewController: UIViewController {
     
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var seekBar: SeekBar!
+    /** 前へボタン */
     @IBOutlet weak var prevButton: UIButton!
+    /** 再生・停止へボタン */
     @IBOutlet weak var playButton: UIButton!
+    /** 次へボタン */
     @IBOutlet weak var nextButton: UIButton!
     
     var video: SwifTube.Video!
@@ -26,7 +29,7 @@ class VideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        showVideo()
+        startPlayVideo()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -38,17 +41,18 @@ class VideoViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+
+    /**
     
+    */
     func configurePlayerController() {
         if let delegate = delegate {
-            prevButton.enabled = delegate.canPlayPrevVideo(self) ? true : false
-            nextButton.enabled = delegate.canPlayNextVideo(self) ? true : false
+            prevButton.hidden = delegate.canPlayPrevVideo(self) ? false : true
+            nextButton.hidden = delegate.canPlayNextVideo(self) ? false : true
         }
-        
     }
-    
+
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if keyPath == "readyForDisplay" {
             // オブザーバーを消す。
@@ -62,12 +66,17 @@ class VideoViewController: UIViewController {
             player.play()
             // タイマーをONにする。
             addPeriodicTimeObserverForInterval()
+            // 終了を通知するオブザーバーを登録する。
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         }
     }
     
     func playerItemDidPlayToEndTime(notification: NSNotification) {
         if let playerItem = notification.object as? AVPlayerItem {
             playButton.setTitle("Play", forState: UIControlState.Normal)
+        }
+        if let delegate = delegate {
+            delegate.playNextVideo(self)
         }
     }
 
@@ -81,10 +90,10 @@ class VideoViewController: UIViewController {
             self.seekBar.setTime(time, duration: self.player.currentItem.duration)
         }
     }
-    
-    func showVideo() {
-        configurePlayerController()
+
+    func startPlayVideo() {
         navigationItem.title = video.title
+        configurePlayerController()
         video.streamURL(completion: { (streamURL, error) -> Void in
             if let streamURL = streamURL {
                 // Playerの作成
@@ -101,7 +110,7 @@ class VideoViewController: UIViewController {
             }
         })
     }
-    
+
     @IBAction func clickButton(sender: UIButton) {
         if player.rate > 0 && player.error == nil {
             pauseVideo()
@@ -146,6 +155,10 @@ class VideoViewController: UIViewController {
                 playButton.setTitle("Play", forState: UIControlState.Normal)
             }
         }
+    }
+    
+    func playerItemDidPlayToEndTime() {
+        delegate?.playNextVideo(self)
     }
     
 }

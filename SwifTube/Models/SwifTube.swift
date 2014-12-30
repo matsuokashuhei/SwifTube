@@ -1,6 +1,6 @@
 //
-//  YouTube.swift
-//  YouTubeApp
+//  SwifTube.swift
+//  SwifTube
 //
 //  Created by matsuosh on 2014/12/16.
 //  Copyright (c) 2014年 matsuosh. All rights reserved.
@@ -22,7 +22,7 @@ struct SwifTube {
         println("parameters: \(parameters)")
         Client.sharedInstance.search(parameters: parameters, completion: completion)
     }
-    
+
     /**
     プレイリストを検索します。
     
@@ -42,26 +42,6 @@ struct SwifTube {
     static func search(#parameters: [String: String], completion: (channels: [Channel]!, token: PageToken!, error: NSError!) -> Void) {
         Client.sharedInstance.search(parameters: parameters, completion: completion)
     }
-    
-    /**
-    チャンネルのビデオを検索します。
-    
-    :param: channelId チャンネルID
-    :param: completion ハンドラー
-    */
-//    static func search(#channelId: String, completion: (videos: [Video]!, error: NSError!) -> Void) {
-//        Client.sharedInstance.search(channelId: channelId, completion: completion)
-//    }
-    
-    /**
-    チャンネルのプレイリストを検索します。
-    
-    :param: channelId チャンネルのID
-    :param: completion ハンドラー
-    */
-//    static func search(#channelId: String, completion: (playlists: [Playlist]!, error: NSError!) -> Void) {
-//        Client.sharedInstance.search(channelId: channelId, completion: completion)
-//    }
     
     /**
     プレイリストのビデオを検索します。
@@ -85,7 +65,7 @@ struct SwifTube {
         }
 
         func search(#parameters: [String: String], completion: (videos: [Video]!, token: PageToken!, error: NSError!) -> Void) {
-            var APIParameters = ["type": "video"]
+            var APIParameters = ["type": "video",]
             for (key, value) in parameters {
                 APIParameters.updateValue(value, forKey: key)
             }
@@ -93,7 +73,8 @@ struct SwifTube {
         }
 
         func search(#parameters: [String: String], completion: (playlists: [Playlist]!, token: PageToken!, error: NSError!) -> Void) {
-            var APIParameters = ["type": "playlist", "order": "viewCount"]
+            //var APIParameters = ["type": "playlist", "order": "viewCount"]
+            var APIParameters = ["type": "playlist",]
             for (key, value) in parameters {
                 APIParameters.updateValue(value, forKey: key)
             }
@@ -101,7 +82,8 @@ struct SwifTube {
         }
 
         func search(#parameters: [String: String], completion: (channels: [Channel]!, token: PageToken!, error: NSError!) -> Void) {
-            var APIParameters = ["type": "channel", "order": "viewCount"]
+            //var APIParameters = ["type": "channel", "order": "viewCount"]
+            var APIParameters = ["type": "channel",]
             for (key, value) in parameters {
                 APIParameters.updateValue(value, forKey: key)
             }

@@ -1,6 +1,6 @@
 //
 //  ItemTableTableViewCell.swift
-//  YouTubeApp
+//  SwifTube
 //
 //  Created by matsuosh on 2014/12/21.
 //  Copyright (c) 2014年 matsuosh. All rights reserved.

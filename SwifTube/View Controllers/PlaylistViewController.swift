@@ -92,7 +92,7 @@ extension PlaylistViewController: VideoPlayerDelegate {
         if index + 1 < items.count {
             let nextVideo = items[index + 1] as SwifTube.Video
             videoViewController.video = nextVideo
-            videoViewController.showVideo()
+            videoViewController.startPlayVideo()
         }
     }
     
@@ -101,7 +101,7 @@ extension PlaylistViewController: VideoPlayerDelegate {
         if index > 0 {
             let prevVideo = items[index - 1] as SwifTube.Video
             videoViewController.video = prevVideo
-            videoViewController.showVideo()
+            videoViewController.startPlayVideo()
         }
     }
 }

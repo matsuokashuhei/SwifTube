@@ -1,6 +1,6 @@
 //
 //  Item.swift
-//  YouTubeApp
+//  SwifTube
 //
 //  Created by matsuosh on 2014/12/17.
 //  Copyright (c) 2014年 matsuosh. All rights reserved.
