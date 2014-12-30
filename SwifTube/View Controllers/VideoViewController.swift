@@ -43,9 +43,6 @@ class VideoViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    /**
-    
-    */
     func configurePlayerController() {
         if let delegate = delegate {
             prevButton.hidden = delegate.canPlayPrevVideo(self) ? false : true
