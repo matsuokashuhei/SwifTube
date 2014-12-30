@@ -22,18 +22,6 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJP-XS-aML">
-                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
-                                <connections>
-                                    <segue destination="zyt-ZO-2Tf" kind="embed" id="CT7-3a-3i8"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brx-M4-tQ6">
-                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
-                                <connections>
-                                    <segue destination="CHI-Sm-ZeF" kind="embed" id="IxO-uA-xky"/>
-                                </connections>
-                            </containerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IWc-ET-kr3">
                                 <rect key="frame" x="16" y="115" width="568" height="29"/>
                                 <segments>
@@ -46,6 +34,18 @@
                                 <rect key="frame" x="0.0" y="151" width="600" height="449"/>
                                 <connections>
                                     <segue destination="0Wt-AE-bJR" kind="embed" id="IF4-VN-mbs"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJP-XS-aML">
+                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
+                                <connections>
+                                    <segue destination="zyt-ZO-2Tf" kind="embed" id="CT7-3a-3i8"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brx-M4-tQ6">
+                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
+                                <connections>
+                                    <segue destination="CHI-Sm-ZeF" kind="embed" id="IxO-uA-xky"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -322,6 +322,10 @@
                                     <action selector="clickButton:" destination="O0v-cA-5RS" eventType="touchUpInside" id="Mgb-r4-OQm"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Uf-p5-TT9">
+                                <rect key="frame" x="276" y="409" width="300" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

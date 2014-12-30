@@ -50,10 +50,12 @@ class ItemsViewController: UIViewController {
 
     func searchItemsCompletion(#items: [SwifTube.Item]!, token: SwifTube.PageToken!, error: NSError!) {
         if let items = items {
-            self.setTokenToSearchParameters(token: token)
-            self.items = items
-            dispatch_async(dispatch_get_main_queue()) {
-                self.tableView.reloadData()
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                self.setTokenToSearchParameters(token: token)
+                self.items = items
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -111,6 +113,8 @@ extension ItemsViewController: UISearchBarDelegate {
         if searchBar.text.isEmpty {
             return
         }
+        items = []
+        tableView.reloadData()
         searchBar.resignFirstResponder()
         searchItems(parameters: ["q": searchBar.text])
     }
