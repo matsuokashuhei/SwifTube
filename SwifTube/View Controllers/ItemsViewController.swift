@@ -111,6 +111,7 @@ extension ItemsViewController: UISearchBarDelegate {
         if searchBar.text.isEmpty {
             return
         }
+        searchBar.resignFirstResponder()
         searchItems(parameters: ["q": searchBar.text])
     }
     

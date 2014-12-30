@@ -15,6 +15,8 @@
 		A8853AF91A484D3500B3C3B4 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */; };
 		A8853AFB1A484D4300B3C3B4 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */; };
 		A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */; };
+		A898780C1A52AC11001D8CED /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D5CF861A485B8900E49941 /* Alamofire.framework */; };
+		A898780E1A52AC66001D8CED /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8D5CF861A485B8900E49941 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8B4B3311A51997C00EE4ABB /* SeekBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B4B3301A51997C00EE4ABB /* SeekBar.swift */; };
 		A8C300441A51213300944165 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */; };
 		A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8D1A485D0200E49941 /* SwifTube.swift */; };
@@ -31,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A898780F1A52AC66001D8CED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8D5CF801A485B8900E49941 /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = Alamofire;
+		};
 		A8D5CF851A485B8900E49941 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A8D5CF801A485B8900E49941 /* Alamofire.xcodeproj */;
@@ -60,6 +69,20 @@
 			remoteInfo = SwifTube;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A89878111A52AC66001D8CED /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A898780E1A52AC66001D8CED /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		29A14ACA92A198FDEF87F82C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A898780C1A52AC11001D8CED /* Alamofire.framework in Frameworks */,
 				DF170BAE5CED937300C2977C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,11 +280,13 @@
 				A8D5E6351A41DAE900525EB9 /* Frameworks */,
 				A8D5E6361A41DAE900525EB9 /* Resources */,
 				A9F41AFE8B4827BE2D939A40 /* Copy Pods Resources */,
+				A89878111A52AC66001D8CED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				A8D5CF8C1A485BF900E49941 /* PBXTargetDependency */,
+				A89878101A52AC66001D8CED /* PBXTargetDependency */,
 			);
 			name = SwifTube;
 			productName = SwifTube;
@@ -296,6 +322,7 @@
 				TargetAttributes = {
 					A8D5E6371A41DAE900525EB9 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 3WLQSD636A;
 					};
 					A8D5E64C1A41DAE900525EB9 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -433,6 +460,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A89878101A52AC66001D8CED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			targetProxy = A898780F1A52AC66001D8CED /* PBXContainerItemProxy */;
+		};
 		A8D5CF8C1A485BF900E49941 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Alamofire;
@@ -548,10 +580,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwifTube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwifTube-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -564,10 +600,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwifTube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwifTube-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

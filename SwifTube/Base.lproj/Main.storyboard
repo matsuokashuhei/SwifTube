@@ -15,19 +15,13 @@
                         <viewControllerLayoutGuide type="bottom" id="dQg-Fj-2lI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YCf-z0-nIu">
+                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="YCf-z0-nIu">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaH-RO-UJm">
-                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
-                                <connections>
-                                    <segue destination="0Wt-AE-bJR" kind="embed" id="IF4-VN-mbs"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJP-XS-aML">
                                 <rect key="frame" x="0.0" y="151" width="600" height="449"/>
                                 <connections>
@@ -48,11 +42,16 @@
                                     <segment title="Channels"/>
                                 </segments>
                             </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaH-RO-UJm">
+                                <rect key="frame" x="0.0" y="151" width="600" height="449"/>
+                                <connections>
+                                    <segue destination="0Wt-AE-bJR" kind="embed" id="IF4-VN-mbs"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IWc-ET-kr3" firstAttribute="top" secondItem="YCf-z0-nIu" secondAttribute="bottom" constant="7" id="3V8-1c-m3W"/>
-                            <constraint firstItem="YCf-z0-nIu" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="64" id="8sd-AV-yg7"/>
                             <constraint firstAttribute="trailing" secondItem="IWc-ET-kr3" secondAttribute="trailing" constant="16" id="AGR-jt-EHD"/>
                             <constraint firstAttribute="bottom" secondItem="brx-M4-tQ6" secondAttribute="bottom" id="GyI-dZ-JYg"/>
                             <constraint firstAttribute="trailing" secondItem="YCf-z0-nIu" secondAttribute="trailing" id="IsV-LZ-u9T"/>
@@ -67,6 +66,7 @@
                             <constraint firstItem="brx-M4-tQ6" firstAttribute="top" secondItem="IWc-ET-kr3" secondAttribute="bottom" constant="8" id="koe-ZQ-xho"/>
                             <constraint firstAttribute="trailing" secondItem="cJP-XS-aML" secondAttribute="trailing" id="lOg-4O-9Ke"/>
                             <constraint firstItem="cJP-XS-aML" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="qGs-35-Edp"/>
+                            <constraint firstItem="YCf-z0-nIu" firstAttribute="top" secondItem="QIg-Bo-pwY" secondAttribute="bottom" id="sMo-1w-BNx"/>
                             <constraint firstAttribute="trailing" secondItem="PaH-RO-UJm" secondAttribute="trailing" id="sWh-g9-kUW"/>
                             <constraint firstItem="PaH-RO-UJm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="xB1-Yn-QeP"/>
                         </constraints>
@@ -93,11 +93,11 @@
                         <viewControllerLayoutGuide type="bottom" id="LI6-cE-13g"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="F7f-Mm-Kyq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="videosViewController" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vNS-0f-rjs">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="kQr-4n-gmC" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -373,11 +373,11 @@
                         <viewControllerLayoutGuide type="bottom" id="GzC-sO-Zim"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Fxb-Ml-8gL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="c8h-18-rR3">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistTableViewCell" id="AQe-MQ-MNW" customClass="PlaylistTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -496,11 +496,11 @@
                         <viewControllerLayoutGuide type="bottom" id="TU4-Yw-jiX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MGw-Hh-KF5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jhO-F5-dz5">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="341"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="449"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" id="c3g-3T-d37" customClass="VideoTableViewCell" customModule="SwifTube" customModuleProvider="target">
@@ -761,14 +761,12 @@
                                     <segment title="Playlists"/>
                                 </segments>
                             </segmentedControl>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpd-r2-9k7">
-                                <rect key="frame" x="0.0" y="108" width="600" height="341"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpd-r2-9k7">
                                 <connections>
                                     <segue destination="0Wt-AE-bJR" kind="embed" id="sOW-rP-g7e"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQU-N1-EU3">
-                                <rect key="frame" x="0.0" y="108" width="600" height="341"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQU-N1-EU3">
                                 <connections>
                                     <segue destination="zyt-ZO-2Tf" kind="embed" id="O04-aI-xPh"/>
                                 </connections>
@@ -822,8 +820,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="O04-aI-xPh"/>
-        <segue reference="sOW-rP-g7e"/>
+        <segue reference="CT7-3a-3i8"/>
+        <segue reference="IF4-VN-mbs"/>
         <segue reference="Omj-26-Qei"/>
     </inferredMetricsTieBreakers>
 </document>
