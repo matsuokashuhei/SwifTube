@@ -51,8 +51,8 @@ class VideoViewController: UIViewController {
         prevButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
         prevButton.setTitle(NSString.awesomeIcon(FaBackward), forState: .Normal)
         // Play/Pause Button
-        playButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 30)
-        playButton.setTitle(NSString.awesomeIcon(FaPlay), forState: .Normal)
+        playButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 40)
+        playButton.setTitle(NSString.awesomeIcon(FaPlayCircleO), forState: .Normal)
         // Next Button
         nextButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
         nextButton.setTitle(NSString.awesomeIcon(FaForward), forState: .Normal)
@@ -93,7 +93,7 @@ class VideoViewController: UIViewController {
         log.debug("sender: \(sender)")
         if movieView.playing {
             movieView.pause()
-            playButton.setTitle(NSString.awesomeIcon(FaPlay), forState: .Normal)
+            playButton.setTitle(NSString.awesomeIcon(FaPlayCircleO), forState: .Normal)
         } else {
             movieView.play()
             playButton.setTitle(NSString.awesomeIcon(FaPause), forState: .Normal)
@@ -129,7 +129,7 @@ extension VideoViewController: MovieViewDelegate {
 
     func didPlayToEndTime(sender: MovieView) {
         log.debug("sender: \(sender)")
-        playButton.setTitle(NSString.awesomeIcon(FaPlay), forState: .Normal)
+        playButton.setTitle(NSString.awesomeIcon(FaPlayCircleO), forState: .Normal)
         if let delegate = delegate {
             if delegate.canPlayNextVideo(self) {
                 delegate.playNextVideo(self)
