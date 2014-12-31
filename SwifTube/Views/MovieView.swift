@@ -135,8 +135,8 @@ class MovieView: UIView {
         log.debug("")
         if let player = player {
             log.debug("player: \(player)")
+            pause()
             player.removeTimeObserver(self.periodicTimeObserver)
-            player.pause()
             NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: item)
             let layer = self.layer as AVPlayerLayer
             layer.player = nil
