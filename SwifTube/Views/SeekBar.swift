@@ -40,7 +40,7 @@ class SeekBar: UIView {
     }
     
     func setTime(currentTime: CMTime, duration: CMTime) {
-        log.debug("currentTime: \(currentTime), duration: \(duration)")
+        log.verbose("currentTime: \(currentTime), duration: \(duration)")
         slider.value = Float(CMTimeGetSeconds(currentTime))
         startTimeLabel.text = formatTime(currentTime)
         let secondsOfEndTime = CMTimeGetSeconds(duration) - CMTimeGetSeconds(currentTime)
@@ -48,7 +48,7 @@ class SeekBar: UIView {
     }
 
     private func formatTime(time: CMTime) -> String {
-        log.debug("time: \(time)")
+        log.verbose("time: \(time)")
         let minutes = Int(CMTimeGetSeconds(time) / 60)
         let seconds = Int(CMTimeGetSeconds(time) % 60)
         return NSString(format: "%02ld:%02ld", minutes, seconds)

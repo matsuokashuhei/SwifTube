@@ -62,7 +62,7 @@ class VideoViewController: UIViewController {
         // Next Button
         nextButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
         nextButton.setTitle(NSString.awesomeIcon(FaForward), forState: .Normal)
-        //
+
         if let delegate = delegate {
             if delegate.canPlayPrevVideo(self) {
                 prevButton.setTitle(NSString.awesomeIcon(FaBackward), forState: .Normal)
@@ -77,6 +77,15 @@ class VideoViewController: UIViewController {
                 nextButton.setTitleColor(UIColor.blackColor(), forState: .Disabled)
             }
         }
+    }
+
+    func play(#video: SwifTube.Video) {
+        video.streamURL(completion: { (streamURL, error) -> Void in
+            if let URL = streamURL {
+                self.movieView.delegate = self
+                self.movieView.prepareToPlay(URL)
+            }
+        })
     }
 
     func onSliderValueChanged(sender: UISlider) {
