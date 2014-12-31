@@ -9,9 +9,7 @@
 import Alamofire
 
 struct SwifTube {
-    
-    static let debug = true
-    
+
     /**
     ビデオを検索します。
     
@@ -19,7 +17,6 @@ struct SwifTube {
     :param: completion ハンドラー
     */
     static func search(#parameters: [String: String], completion: (videos: [Video]!, token: PageToken!, error: NSError!) -> Void) {
-        println("parameters: \(parameters)")
         Client.sharedInstance.search(parameters: parameters, completion: completion)
     }
 
@@ -99,9 +96,7 @@ struct SwifTube {
             }
             showLoadingIndicator(true)
             let request = Alamofire.request(API.PlaylistItems(parameters: parameters))
-            if SwifTube.debug {
-                debugPrintln(request)
-            }
+            debugPrintln(request)
             request.responseJSON { (_, _, JSON, error) -> Void in
                 if let JSON = JSON as? NSDictionary {
                     let token = self.extractPageToken(JSON: JSON)
@@ -130,9 +125,7 @@ struct SwifTube {
             }
             showLoadingIndicator(true)
             let request = Alamofire.request(API.Search(parameters: parameters))
-            if SwifTube.debug {
-                debugPrintln(request)
-            }
+            debugPrintln(request)
             request.responseJSON { (_, _, JSON, error) -> Void in
                 if let JSON = JSON as? NSDictionary {
                     let token = self.extractPageToken(JSON: JSON)
@@ -156,9 +149,7 @@ struct SwifTube {
         func find<T: APICaller>(#ids: [String], completion: (items: [T]!, error: NSError!) -> Void) {
             showLoadingIndicator(true)
             let request = Alamofire.request(T.callAPI(ids))
-            if SwifTube.debug {
-                debugPrintln(request)
-            }
+            debugPrintln(request)
             request.responseJSON { (_, _, JSON, error) -> Void in
                 if error == nil {
                     let objects = (JSON as NSDictionary).valueForKey("items") as [NSDictionary]

@@ -76,7 +76,7 @@ extension PlaylistViewController: UITableViewDelegate {
 }
 
 extension PlaylistViewController: VideoPlayerDelegate {
-    
+
     func canPlayNextVideo(videoViewController: VideoViewController) -> Bool {
         let index = NSArray(array: items).indexOfObject(videoViewController.video)
         return index + 1 < items.count
@@ -92,7 +92,7 @@ extension PlaylistViewController: VideoPlayerDelegate {
         if index + 1 < items.count {
             let nextVideo = items[index + 1] as SwifTube.Video
             videoViewController.video = nextVideo
-            videoViewController.startPlayVideo()
+            videoViewController.viewDidLoad()
         }
     }
     
@@ -101,7 +101,7 @@ extension PlaylistViewController: VideoPlayerDelegate {
         if index > 0 {
             let prevVideo = items[index - 1] as SwifTube.Video
             videoViewController.video = prevVideo
-            videoViewController.startPlayVideo()
+            videoViewController.viewDidLoad()
         }
     }
 }

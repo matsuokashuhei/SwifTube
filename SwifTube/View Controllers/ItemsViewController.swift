@@ -21,6 +21,7 @@ class ItemsViewController: UIViewController {
 
         configure(navigationItem: navigationItem)
         configure(tableView: tableView)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,6 +33,7 @@ class ItemsViewController: UIViewController {
     }
 
     func configure(#tableView: UITableView) {
+        tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive
         tableView.delegate = self
     }
 
@@ -50,6 +52,7 @@ class ItemsViewController: UIViewController {
 
     func searchItemsCompletion(#items: [SwifTube.Item]!, token: SwifTube.PageToken!, error: NSError!) {
         if let items = items {
+            /*
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 self.setTokenToSearchParameters(token: token)
                 self.items = items
@@ -57,28 +60,35 @@ class ItemsViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }
+            */
+            Async.background {
+                self.setTokenToSearchParameters(token: token)
+                self.items = items
+            }.main {
+                self.tableView.reloadData()
+            }
         }
     }
 
     func loadMoreItemsCompletion(#items: [SwifTube.Item]!, token: SwifTube.PageToken!, error: NSError!) {
         if let items = items {
             self.setTokenToSearchParameters(token: token)
+            /*
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 for item in items {
                     self.items.append(item)
                 }
-                /*
-                let lastIndex = self.items.count
-                let indexPaths = (lastIndex ..< self.items.count).map { (transform: Int) -> NSIndexPath in
-                    return NSIndexPath(forItem: transform, inSection: 0)
-                }
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-                }
-                */
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
                 }
+            }
+            */
+            Async.background {
+                for item in items {
+                    self.items.append(item)
+                }
+            }.main {
+                self.tableView.reloadData()
             }
         }
     }
@@ -110,9 +120,6 @@ extension ItemsViewController: UITableViewDelegate {
 extension ItemsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        if searchBar.text.isEmpty {
-            return
-        }
         items = []
         tableView.reloadData()
         searchBar.resignFirstResponder()

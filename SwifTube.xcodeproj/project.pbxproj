@@ -17,8 +17,11 @@
 		A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */; };
 		A898780C1A52AC11001D8CED /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D5CF861A485B8900E49941 /* Alamofire.framework */; };
 		A898780E1A52AC66001D8CED /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8D5CF861A485B8900E49941 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A89878141A52D826001D8CED /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A89878131A52D826001D8CED /* fontawesome-webfont.ttf */; };
 		A8B4B3311A51997C00EE4ABB /* SeekBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B4B3301A51997C00EE4ABB /* SeekBar.swift */; };
+		A8BFC7AA1A532A7F00CDD4B1 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BFC7A91A532A7F00CDD4B1 /* MovieView.swift */; };
 		A8C300441A51213300944165 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */; };
+		A8CAD9071A5437A300942DAA /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CAD9061A5437A300942DAA /* XCGLogger.swift */; };
 		A8D5CF8E1A485D0200E49941 /* SwifTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8D1A485D0200E49941 /* SwifTube.swift */; };
 		A8D5CF901A485D1500E49941 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF8F1A485D1500E49941 /* Item.swift */; };
 		A8D5CF961A4863D900E49941 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */; };
@@ -95,8 +98,11 @@
 		A8853AF81A484D3500B3C3B4 /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		A8853AFA1A484D4300B3C3B4 /* PlaylistsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
 		A8853AFC1A484D4E00B3C3B4 /* ChannelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
+		A89878131A52D826001D8CED /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		A8B4B3301A51997C00EE4ABB /* SeekBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBar.swift; sourceTree = "<group>"; };
+		A8BFC7A91A532A7F00CDD4B1 /* MovieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
+		A8CAD9061A5437A300942DAA /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCGLogger.swift; sourceTree = "<group>"; };
 		A8D5CF801A485B8900E49941 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		A8D5CF8D1A485D0200E49941 /* SwifTube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifTube.swift; sourceTree = "<group>"; };
 		A8D5CF8F1A485D1500E49941 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -148,7 +154,9 @@
 		A8390C091A50825A00AAEFC1 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				A89878131A52D826001D8CED /* fontawesome-webfont.ttf */,
 				A8390C0A1A5082E900AAEFC1 /* Async.swift */,
+				A8CAD9061A5437A300942DAA /* XCGLogger.swift */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -193,6 +201,7 @@
 				A8D5CF951A4863D900E49941 /* ItemTableViewCell.swift */,
 				A8C300431A51213300944165 /* LoadMoreTableViewCell.swift */,
 				A8B4B3301A51997C00EE4ABB /* SeekBar.swift */,
+				A8BFC7A91A532A7F00CDD4B1 /* MovieView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -378,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8D5E6431A41DAE900525EB9 /* Main.storyboard in Resources */,
+				A89878141A52D826001D8CED /* fontawesome-webfont.ttf in Resources */,
 				A8D5E6481A41DAE900525EB9 /* LaunchScreen.xib in Resources */,
 				A8D5E6451A41DAE900525EB9 /* Images.xcassets in Resources */,
 			);
@@ -433,10 +443,12 @@
 				A8853AFD1A484D4E00B3C3B4 /* ChannelsViewController.swift in Sources */,
 				A8853AFB1A484D4300B3C3B4 /* PlaylistsViewController.swift in Sources */,
 				A86A6CF91A4B1B6C00896865 /* VideoViewController.swift in Sources */,
+				A8BFC7AA1A532A7F00CDD4B1 /* MovieView.swift in Sources */,
 				A8853AF51A484C4000B3C3B4 /* SearchViewController.swift in Sources */,
 				A8D5CF901A485D1500E49941 /* Item.swift in Sources */,
 				A8B4B3311A51997C00EE4ABB /* SeekBar.swift in Sources */,
 				A86A6CFB1A4B2CF100896865 /* ChannelViewController.swift in Sources */,
+				A8CAD9071A5437A300942DAA /* XCGLogger.swift in Sources */,
 				A8D5CF981A4865B500E49941 /* ItemsViewController.swift in Sources */,
 				A8D5CF961A4863D900E49941 /* ItemTableViewCell.swift in Sources */,
 				A8E8EAFD1A4F1D6A007A9F31 /* API.swift in Sources */,
@@ -590,7 +602,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwifTube-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -609,7 +621,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwifTube-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

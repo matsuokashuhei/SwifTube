@@ -11,167 +11,127 @@ import AVFoundation
 
 class VideoViewController: UIViewController {
     
-    @IBOutlet weak var playerView: AVPlayerView!
+    let log = XCGLogger.defaultInstance()
+
+    @IBOutlet weak var movieView: MovieView!
     @IBOutlet weak var seekBar: SeekBar!
-    /** 前へボタン */
     @IBOutlet weak var prevButton: UIButton!
-    /** 再生・停止へボタン */
     @IBOutlet weak var playButton: UIButton!
-    /** 次へボタン */
     @IBOutlet weak var nextButton: UIButton!
     
     var video: SwifTube.Video!
-    var player: AVPlayer!
-    var playerObserver: AnyObject!
-    
     var delegate: VideoPlayerDelegate?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        startPlayVideo()
+        configure(seekBar: seekBar)
+        configure(prevButton: prevButton, playButton: playButton, nextButton: nextButton)
+        
+
+        video.streamURL(completion: { (streamURL, error) -> Void in
+            if let URL = streamURL {
+                self.movieView.delegate = self
+                self.movieView.prepareToPlay(URL)
+            }
+        })
     }
-    
+
     override func viewDidDisappear(animated: Bool) {
-        if let observer: AnyObject = playerObserver {
-            player.removeTimeObserver(observer)
-        }
-        pauseVideo()
+        super.viewDidDisappear(animated)
+        movieView.clear()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    func configurePlayerController() {
+    func configure(#seekBar: SeekBar) {
+        log.debug("seekBar: \(seekBar)")
+        seekBar.slider.addTarget(self, action: "onSliderValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+    }
+
+    func configure(#prevButton: UIButton, playButton: UIButton, nextButton: UIButton) {
+        log.debug("prevButton: \(prevButton), playButton: \(playButton), nextButton: \(nextButton)")
+        // Prev Button
+        prevButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
+        prevButton.setTitle(NSString.awesomeIcon(FaBackward), forState: .Normal)
+        // Play/Pause Button
+        playButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 30)
+        playButton.setTitle(NSString.awesomeIcon(FaPlay), forState: .Normal)
+        // Next Button
+        nextButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
+        nextButton.setTitle(NSString.awesomeIcon(FaForward), forState: .Normal)
+        //
         if let delegate = delegate {
-            prevButton.hidden = delegate.canPlayPrevVideo(self) ? false : true
-            nextButton.hidden = delegate.canPlayNextVideo(self) ? false : true
-        }
-    }
-
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-        if keyPath == "readyForDisplay" {
-            // オブザーバーを消す。
-            let playerLayer = playerView.layer as AVPlayerLayer
-            playerLayer.removeObserver(self, forKeyPath: "readyForDisplay")
-            // ボタン名をポーズにする。
-            playButton.setTitle("Pause", forState: UIControlState.Normal)
-            // シークバーに時間を入れる。
-            configureSeekBar(player.currentItem)
-            // 動画を再生する。
-            player.play()
-            // タイマーをONにする。
-            addPeriodicTimeObserverForInterval()
-            // 終了を通知するオブザーバーを登録する。
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
-        }
-    }
-    
-    func playerItemDidPlayToEndTime(notification: NSNotification) {
-        if let playerItem = notification.object as? AVPlayerItem {
-            playButton.setTitle("Play", forState: UIControlState.Normal)
-        }
-        if let delegate = delegate {
-            delegate.playNextVideo(self)
-        }
-    }
-
-    func configureSeekBar(playerItem: AVPlayerItem) {
-        seekBar.configure(playerItem.duration)
-    }
-
-    func addPeriodicTimeObserverForInterval() {
-        let time = CMTimeMakeWithSeconds(1, Int32(NSEC_PER_SEC))
-        playerObserver = self.player.addPeriodicTimeObserverForInterval(time, queue: nil) { (time) -> Void in
-            self.seekBar.setTime(time, duration: self.player.currentItem.duration)
-        }
-    }
-
-    func startPlayVideo() {
-        navigationItem.title = video.title
-        configurePlayerController()
-        video.streamURL(completion: { (streamURL, error) -> Void in
-            if let streamURL = streamURL {
-                // Playerの作成
-                var playerItem = AVPlayerItem(asset: AVURLAsset(URL: streamURL, options: nil))
-                self.player = AVPlayer(playerItem: playerItem)
-                // PlayerLayerの作成
-                var playerLayer = self.playerView.layer as AVPlayerLayer
-                playerLayer.videoGravity = AVLayerVideoGravityResizeAspect
-                playerLayer.player = self.player
-                // オブザーバーの登録
-                playerLayer.addObserver(self, forKeyPath: "readyForDisplay", options: NSKeyValueObservingOptions.New, context: nil)
-                // シークバーのイベンントの登録
-                self.seekBar.slider.addTarget(self, action: "onSliderValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+            if delegate.canPlayPrevVideo(self) {
+                prevButton.setTitle(NSString.awesomeIcon(FaBackward), forState: .Normal)
+            } else {
+                prevButton.setTitle(NSString.awesomeIcon(FaBackward), forState: .Disabled)
+                prevButton.setTitleColor(UIColor.blackColor(), forState: .Disabled)
             }
-        })
+            if delegate.canPlayNextVideo(self) {
+                nextButton.setTitle(NSString.awesomeIcon(FaForward), forState: .Normal)
+            } else {
+                nextButton.setTitle(NSString.awesomeIcon(FaForward), forState: .Disabled)
+                nextButton.setTitleColor(UIColor.blackColor(), forState: .Disabled)
+            }
+        }
+    }
+
+    func onSliderValueChanged(sender: UISlider) {
+        log.debug("sender: \(sender)")
+        movieView.pause()
+        movieView.seekToSeconds(sender.value)
+        movieView.play()
     }
 
     @IBAction func clickButton(sender: UIButton) {
-        if player.rate > 0 && player.error == nil {
-            pauseVideo()
-            return
-        }
-        if player.rate == 0 && player.error == nil {
-            playVideo()
-            return
+        log.debug("sender: \(sender)")
+        if movieView.playing {
+            movieView.pause()
+            playButton.setTitle(NSString.awesomeIcon(FaPlay), forState: .Normal)
+        } else {
+            movieView.play()
+            playButton.setTitle(NSString.awesomeIcon(FaPause), forState: .Normal)
         }
     }
     
     @IBAction func playNextVideo() {
+        log.debug("")
         delegate?.playNextVideo(self)
     }
     
     
     @IBAction func playPrevVideo() {
+        log.debug("")
         delegate?.playPrevVideo(self)
     }
-    
-    func onSliderValueChanged(sender: UISlider) {
-        if player.rate > 0 {
-            pauseVideo()
-        }
-        player.seekToTime(CMTimeMakeWithSeconds(Float64(sender.value), Int32(NSEC_PER_SEC)))
-        playVideo()
-    }
-    
-    func playVideo() {
-        if let player = player {
-            if player.rate == 0 && player.error == nil {
-                player.play()
-                playButton.setTitle("Pause", forState: UIControlState.Normal)
-            }
-        }
-    }
-    
-    func pauseVideo() {
-        if let player = player {
-            if player.rate > 0 && player.error == nil {
-                player.pause()
-                playButton.setTitle("Play", forState: UIControlState.Normal)
-            }
-        }
-    }
-    
-    func playerItemDidPlayToEndTime() {
-        delegate?.playNextVideo(self)
-    }
-    
+
 }
 
-class AVPlayerView: UIView {
-
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+extension VideoViewController: MovieViewDelegate {
+    
+    func willStartPlaying(sender: MovieView, item: AVPlayerItem) {
+        log.debug("sender: \(sender), item: \(item)")
+        navigationItem.title = video.title
+        seekBar.configure(item.duration)
+        playButton.setTitle(NSString.awesomeIcon(FaPause), forState: .Normal)
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    func playAtTime(sender: MovieView, time: CMTime, duration: CMTime) {
+        log.debug("sender: \(sender), time: \(time), duration: \(duration)")
+        self.seekBar.setTime(time, duration: duration)
     }
 
-    override class func layerClass() -> AnyClass {
-        return AVPlayerLayer.self
+    func didPlayToEndTime(sender: MovieView) {
+        log.debug("sender: \(sender)")
+        playButton.setTitle(NSString.awesomeIcon(FaPlay), forState: .Normal)
+        if let delegate = delegate {
+            if delegate.canPlayNextVideo(self) {
+                delegate.playNextVideo(self)
+            }
+        }
     }
 
 }

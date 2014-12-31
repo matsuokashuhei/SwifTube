@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 
 class SearchViewController: UIViewController {
+    
 
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var segmentedControl: UISegmentedControl!
@@ -29,7 +30,6 @@ class SearchViewController: UIViewController {
         configure(searchBar: searchBar)
         configure(containerViews: containerViews)
 
-        segmentChanged(segmentedControl)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -57,7 +57,6 @@ class SearchViewController: UIViewController {
     }
 
     func configure(#searchBar: UISearchBar) {
-        //searchBar.delegate = self
         searchBar.delegate = itemViewControllerAtSelectedSegmentIndex()
     }
     
@@ -74,4 +73,5 @@ class SearchViewController: UIViewController {
     func itemViewControllerAtSelectedSegmentIndex() -> ItemsViewController {
         return childViewControllers[segmentedControl.selectedSegmentIndex] as ItemsViewController
     }
+    
 }
