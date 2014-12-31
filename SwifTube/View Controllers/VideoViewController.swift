@@ -28,13 +28,7 @@ class VideoViewController: UIViewController {
         configure(seekBar: seekBar)
         configure(prevButton: prevButton, playButton: playButton, nextButton: nextButton)
         
-
-        video.streamURL(completion: { (streamURL, error) -> Void in
-            if let URL = streamURL {
-                self.movieView.delegate = self
-                self.movieView.prepareToPlay(URL)
-            }
-        })
+        play(video: video)
     }
 
     override func viewDidDisappear(animated: Bool) {
