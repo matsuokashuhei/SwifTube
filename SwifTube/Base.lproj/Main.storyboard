@@ -248,7 +248,6 @@
                                         <rect key="frame" x="45" y="2" width="509" height="31"/>
                                     </slider>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="fTd-K7-hf6" firstAttribute="top" secondItem="FUt-i4-1Rl" secondAttribute="top" constant="2" id="7Va-fH-HZw"/>
                                     <constraint firstAttribute="bottom" secondItem="PQV-ro-L6I" secondAttribute="bottom" constant="8" id="CvA-iP-yeu"/>
@@ -317,16 +316,38 @@
                             <constraint firstItem="jWa-Xg-leK" firstAttribute="leading" secondItem="fkF-k1-96O" secondAttribute="trailing" constant="50" id="J4h-H8-m8Y"/>
                             <constraint firstItem="fkF-k1-96O" firstAttribute="top" secondItem="FUt-i4-1Rl" secondAttribute="bottom" constant="8" id="Tyu-jA-5bv"/>
                             <constraint firstItem="jWa-Xg-leK" firstAttribute="centerY" secondItem="60q-b9-3rv" secondAttribute="centerY" id="YyQ-3U-j3l"/>
+                            <constraint firstAttribute="bottom" secondItem="fkF-k1-96O" secondAttribute="bottom" constant="10" id="aY7-74-HM6"/>
                             <constraint firstAttribute="trailing" secondItem="FUt-i4-1Rl" secondAttribute="trailing" id="bG9-Sr-bXL"/>
                             <constraint firstItem="FUt-i4-1Rl" firstAttribute="top" secondItem="kGk-bm-cor" secondAttribute="bottom" constant="8" id="fPq-VB-bFK"/>
                             <constraint firstItem="FUt-i4-1Rl" firstAttribute="leading" secondItem="VXz-b3-Gy4" secondAttribute="leading" id="kTR-Vh-2sZ"/>
                             <constraint firstItem="FUt-i4-1Rl" firstAttribute="leading" secondItem="VXz-b3-Gy4" secondAttribute="leading" id="khN-9b-In2"/>
+                            <constraint firstItem="kGk-bm-cor" firstAttribute="top" secondItem="VXz-b3-Gy4" secondAttribute="top" id="tmC-15-9eU"/>
                             <constraint firstItem="60q-b9-3rv" firstAttribute="top" secondItem="FUt-i4-1Rl" secondAttribute="bottom" constant="8" id="wHE-0M-A3I"/>
                             <constraint firstAttribute="trailing" secondItem="kGk-bm-cor" secondAttribute="trailing" id="wUm-cA-DzI"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="COp-D7-DcK"/>
+                                <exclude reference="tmC-15-9eU"/>
+                                <exclude reference="fPq-VB-bFK"/>
+                                <exclude reference="aY7-74-HM6"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="tmC-15-9eU"/>
+                                <include reference="aY7-74-HM6"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="constraints">
+                                <include reference="2gH-u1-fyN"/>
+                                <include reference="COp-D7-DcK"/>
+                                <include reference="fPq-VB-bFK"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="MCe-2U-KDI"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
@@ -585,7 +606,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfB-yW-URN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5473" y="1413.5"/>
+            <point key="canvasLocation" x="5473" y="1806.75"/>
         </scene>
         <!--Channels View Controller-->
         <scene sceneID="dN4-pb-zpY">
