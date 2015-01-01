@@ -86,7 +86,9 @@ class VideoViewController: UIViewController {
                 self.movieView.delegate = self
                 self.movieView.prepareToPlay(URL)
             } else {
-                SVProgressHUD.dismiss()
+                self.log.error(error.localizedDescription)
+                SVProgressHUD.showErrorWithStatus("ERROR", maskType: SVProgressHUDMaskType.Black)
+                self.navigationController?.popViewControllerAnimated(true)
             }
         })
     }

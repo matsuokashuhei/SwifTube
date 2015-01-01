@@ -219,14 +219,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGk-bm-cor" customClass="MovieView" customModule="SwifTube" customModuleProvider="target">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGk-bm-cor" customClass="MovieView" customModule="SwifTube" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="338"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="kGk-bm-cor" secondAttribute="height" multiplier="300:169" id="Dpp-Za-YRE"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUt-i4-1Rl" customClass="SeekBar" customModule="SwifTube" customModuleProvider="target">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FUt-i4-1Rl" customClass="SeekBar" customModule="SwifTube" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="402" width="600" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQV-ro-L6I">
@@ -831,8 +831,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Od9-vA-JDb"/>
         <segue reference="CT7-3a-3i8"/>
         <segue reference="IF4-VN-mbs"/>
+        <segue reference="Omj-26-Qei"/>
     </inferredMetricsTieBreakers>
 </document>
