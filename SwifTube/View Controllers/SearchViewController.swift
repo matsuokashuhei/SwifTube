@@ -64,6 +64,7 @@ class SearchViewController: UIViewController {
     func segmentChanged(sender: UISegmentedControl) {
         configure(containerViews: containerViews)
         searchBar.delegate = itemViewControllerAtSelectedSegmentIndex()
+        // TODO: 無駄に検索しない。
         searchBar.delegate!.searchBarSearchButtonClicked!(searchBar)
     }
 
