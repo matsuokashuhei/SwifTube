@@ -27,8 +27,14 @@ class VideoViewController: UIViewController {
 
         configure(seekBar: seekBar)
         configure(prevButton: prevButton, playButton: playButton, nextButton: nextButton)
-        
+        movieView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "toggleNavigationControll"))
+
         play(video: video)
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func viewDidDisappear(animated: Bool) {
@@ -114,6 +120,32 @@ class VideoViewController: UIViewController {
         delegate?.playPrevVideo(self)
     }
 
+    func toggleNavigationControll() {
+        switch UIDevice.currentDevice().orientation {
+        case .LandscapeLeft, .LandscapeRight:
+            navigationController?.setNavigationBarHidden(!navigationController!.navigationBarHidden, animated: false)
+            for view in [seekBar, prevButton, playButton, nextButton] {
+                view.hidden = !view.hidden
+            }
+        default:
+            return
+        }
+        /*
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            switch UIDevice.currentDevice().orientation {
+            case .LandscapeLeft, .LandscapeRight:
+                for view in [seekBar, prevButton, playButton, nextButton] {
+                    view.hidden = !view.hidden
+                }
+            default:
+                return
+            }
+        default:
+            return
+        }
+        */
+    }
 }
 
 extension VideoViewController: MovieViewDelegate {

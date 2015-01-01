@@ -43,6 +43,7 @@ class PlaylistsViewController: ItemsViewController {
     }
 
     override func loadMoreItems() {
+        super.loadMoreItems()
         SwifTube.search(parameters: searchParameters) { (playlists: [SwifTube.Playlist]!, token: SwifTube.PageToken!, error: NSError!) in
             self.loadMoreItemsCompletion(items: playlists, token: token, error: error)
         }

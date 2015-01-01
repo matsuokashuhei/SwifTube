@@ -43,6 +43,7 @@ class VideosViewController: ItemsViewController {
     }
 
     override func loadMoreItems() {
+        super.loadMoreItems()
         SwifTube.search(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
             self.loadMoreItemsCompletion(items: videos, token: token, error: error)
         }

@@ -15,16 +15,24 @@ class PlaylistViewController: ItemsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = playlist.title
-
-        // Do any additional setup after loading the view.
         searchItems(parameters: ["playlistId": playlist.id])
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
+    override func configure(#navigationItem: UINavigationItem) {
+        navigationItem.title = playlist.title
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+    }
+
     override func configure(#tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self
@@ -49,6 +57,7 @@ class PlaylistViewController: ItemsViewController {
     }
     
     override func loadMoreItems() {
+        super.loadMoreItems()
         SwifTube.playlistItems(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
             self.loadMoreItemsCompletion(items: videos, token: token, error: error)
         }

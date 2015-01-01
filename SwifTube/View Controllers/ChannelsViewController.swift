@@ -42,6 +42,7 @@ class ChannelsViewController: ItemsViewController {
     }
     
     override func loadMoreItems() {
+        super.loadMoreItems()
         SwifTube.search(parameters: searchParameters) { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
             self.loadMoreItemsCompletion(items: channels, token: token, error: error)
         }
