@@ -230,19 +230,19 @@
                                 <rect key="frame" x="0.0" y="402" width="600" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQV-ro-L6I">
-                                        <rect key="frame" x="8" y="8" width="31.5" height="16.5"/>
+                                        <rect key="frame" x="8" y="8" width="32" height="17"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-cq-gF1">
-                                        <rect key="frame" x="560.5" y="8" width="31.5" height="16.5"/>
+                                        <rect key="frame" x="561" y="8" width="32" height="17"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fTd-K7-hf6">
-                                        <rect key="frame" x="45" y="1" width="509" height="33.5"/>
+                                        <rect key="frame" x="45" y="1" width="509" height="34"/>
                                     </slider>
                                 </subviews>
                                 <constraints>
@@ -314,6 +314,7 @@
                             <constraint firstItem="kGk-bm-cor" firstAttribute="leading" secondItem="VXz-b3-Gy4" secondAttribute="leading" id="WrT-Vm-3MS"/>
                             <constraint firstItem="FUt-i4-1Rl" firstAttribute="leading" secondItem="VXz-b3-Gy4" secondAttribute="leading" id="Xza-S2-cn1"/>
                             <constraint firstAttribute="trailing" secondItem="kGk-bm-cor" secondAttribute="trailing" id="Z0p-Zq-ST1"/>
+                            <constraint firstItem="kGk-bm-cor" firstAttribute="top" secondItem="VXz-b3-Gy4" secondAttribute="top" id="cDS-rR-eCN"/>
                             <constraint firstItem="fkF-k1-96O" firstAttribute="top" secondItem="FUt-i4-1Rl" secondAttribute="bottom" constant="8" id="f1V-zT-VhI"/>
                             <constraint firstItem="FUt-i4-1Rl" firstAttribute="top" secondItem="kGk-bm-cor" secondAttribute="bottom" id="hdt-Pb-UfP"/>
                             <constraint firstAttribute="centerX" secondItem="fkF-k1-96O" secondAttribute="centerX" id="jGM-xF-kTr"/>
@@ -322,6 +323,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="cDS-rR-eCN"/>
                                 <exclude reference="QnC-Vw-iDP"/>
                                 <exclude reference="RWj-C3-E0a"/>
                                 <exclude reference="f1V-zT-VhI"/>
@@ -329,6 +331,7 @@
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
+                                <include reference="cDS-rR-eCN"/>
                                 <include reference="QnC-Vw-iDP"/>
                                 <exclude reference="hdt-Pb-UfP"/>
                                 <include reference="RWj-C3-E0a"/>
