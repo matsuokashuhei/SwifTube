@@ -123,30 +123,24 @@ class VideoViewController: UIViewController {
     }
 
     func toggleNavigationControll() {
-        switch UIDevice.currentDevice().orientation {
-        case .LandscapeLeft, .LandscapeRight:
-            navigationController?.setNavigationBarHidden(!navigationController!.navigationBarHidden, animated: false)
-            for view in [seekBar, prevButton, playButton, nextButton] {
-                view.hidden = !view.hidden
-            }
-        default:
-            return
-        }
-        /*
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
-            switch UIDevice.currentDevice().orientation {
+        let device = UIDevice.currentDevice()
+        if device.userInterfaceIdiom == .Phone {
+            switch device.orientation {
             case .LandscapeLeft, .LandscapeRight:
+                navigationController?.setNavigationBarHidden(!navigationController!.navigationBarHidden, animated: false)
                 for view in [seekBar, prevButton, playButton, nextButton] {
                     view.hidden = !view.hidden
                 }
             default:
                 return
             }
-        default:
-            return
         }
-        */
+        // TODO: iPadときはMovieViewの位置を直す。ナビゲーションバーが消えると位置が変わるため。
+        // 仮コード（正しく動かない）
+        //if device.userInterfaceIdiom == .Pad {
+        //    movieView.frame.origin.y = 42
+        //}
+        // TODO: ナビゲーションバーその他が消えているときにポートレイトモードに変わるとナビゲーションバーがないため、操作できなくなる。
     }
 }
 
