@@ -70,6 +70,7 @@ class MovieView: UIView {
     */
     func startPlay() {
         log.debug("")
+        SVProgressHUD.dismiss()
         // 再生の開始のデリゲート
         delegate?.willStartPlaying(self, item: item!)
         // 再生

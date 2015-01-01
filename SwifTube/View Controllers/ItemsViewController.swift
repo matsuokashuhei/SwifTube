@@ -21,7 +21,7 @@ class ItemsViewController: UIViewController {
 
         configure(navigationItem: navigationItem)
         configure(tableView: tableView)
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,10 +38,12 @@ class ItemsViewController: UIViewController {
     }
 
     func searchItems(#parameters: [String: String]) {
+        SVProgressHUD.show()
         searchParameters = parameters
     }
-    
+
     func loadMoreItems() {
+        SVProgressHUD.show()
     }
 
     func setTokenToSearchParameters(#token: SwifTube.PageToken!) {
@@ -66,6 +68,7 @@ class ItemsViewController: UIViewController {
                 self.items = items
             }.main {
                 self.tableView.reloadData()
+                SVProgressHUD.dismiss()
             }
         }
     }
@@ -89,6 +92,7 @@ class ItemsViewController: UIViewController {
                 }
             }.main {
                 self.tableView.reloadData()
+                SVProgressHUD.dismiss()
             }
         }
     }

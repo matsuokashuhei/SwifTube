@@ -74,10 +74,13 @@ class VideoViewController: UIViewController {
     }
 
     func play(#video: SwifTube.Video) {
+        SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
         video.streamURL(completion: { (streamURL, error) -> Void in
             if let URL = streamURL {
                 self.movieView.delegate = self
                 self.movieView.prepareToPlay(URL)
+            } else {
+                SVProgressHUD.dismiss()
             }
         })
     }
