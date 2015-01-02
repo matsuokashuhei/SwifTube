@@ -43,7 +43,6 @@ class VideoTableViewCell: ItemTableTableViewCell {
         durationLabel.text = item.duration
         channelTitle.text = item.channelTitle
         viewCountLabel.text = "\(item.viewCount) views"
-        println(item.duration)
     }
 }
 

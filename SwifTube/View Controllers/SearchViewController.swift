@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 
 class SearchViewController: UIViewController {
-    
 
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var segmentedControl: UISegmentedControl!
@@ -55,6 +54,7 @@ class SearchViewController: UIViewController {
             view.hidden = true
         }
         containerViewAtSelectedSegmentIndex().hidden = false
+        itemViewControllerAtSelectedSegmentIndex().tableView.delegate = self
     }
 
     func configure(#searchBar: UISearchBar) {
@@ -75,5 +75,20 @@ class SearchViewController: UIViewController {
     func itemViewControllerAtSelectedSegmentIndex() -> ItemsViewController {
         return childViewControllers[segmentedControl.selectedSegmentIndex] as ItemsViewController
     }
-    
+
+}
+
+extension SearchViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+
+}
+
+extension SearchViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        searchBar.resignFirstResponder()
+    }
 }
