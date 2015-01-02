@@ -89,7 +89,9 @@ class ItemsViewController: UIViewController {
 
     func pullToRefresh() {
         searchParameters.removeValueForKey("pageToken")
-        searchItems(parameters: searchParameters)
+        if !searchParameters.values.isEmpty {
+            searchItems(parameters: searchParameters)
+        }
         refreshControll.endRefreshing()
     }
 

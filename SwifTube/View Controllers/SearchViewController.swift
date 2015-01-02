@@ -11,6 +11,8 @@ import Alamofire
 
 class SearchViewController: UIViewController {
 
+    let logger = XCGLogger.defaultInstance()
+
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var videosView: UIView!
@@ -84,6 +86,14 @@ extension SearchViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
     }
+
+//    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//        let endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height
+//        logger.debug("endScrolling: \(endScrolling), scrollView.contentSize.height: \(scrollView.contentSize.height)")
+//        if endScrolling >= scrollView.contentSize.height {
+//            itemViewControllerAtSelectedSegmentIndex().loadMoreItems()
+//        }
+//    }
 
 }
 
