@@ -128,7 +128,9 @@ extension ItemsViewController: UITableViewDelegate {
 extension ItemsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        // TODO: 無駄に検索しない。
+        if searchBar.text.isEmpty {
+            return
+        }
         items = []
         tableView.reloadData()
         searchBar.resignFirstResponder()
