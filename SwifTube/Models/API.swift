@@ -38,7 +38,7 @@ extension SwifTube {
         private static let secretKey = "AIzaSyBkKOxRcHXfTvMrKHRsWy2cO5dF899agZg"
         private var baseParameters: [String: String] {
             get {
-                var baseParamters = ["key": API.secretKey, "maxResults": "30"]
+                var baseParamters = ["key": API.secretKey, "maxResults": "25"]
                 switch self {
                 case .Search(_):
                     baseParamters.updateValue("snippet", forKey: "part")

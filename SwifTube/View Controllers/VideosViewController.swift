@@ -37,15 +37,15 @@ class VideosViewController: ItemsViewController {
 
     override func searchItems(#parameters: [String: String]) {
         super.searchItems(parameters: parameters)
-        SwifTube.search(parameters: parameters, completion: { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
-            self.searchItemsCompletion(items: videos, token: token, error: error)
+        SwifTube.search(parameters: parameters, completion: { (pageInfo: SwifTube.PageInfo!, videos: [SwifTube.Video]!, error: NSError!) in
+            self.searchItemsCompletion(pageInfo: pageInfo, items: videos, error: error)
         })
     }
 
     override func loadMoreItems() {
         super.loadMoreItems()
-        SwifTube.search(parameters: searchParameters) { (videos: [SwifTube.Video]!, token: SwifTube.PageToken!, error: NSError!) in
-            self.loadMoreItemsCompletion(items: videos, token: token, error: error)
+        SwifTube.search(parameters: searchParameters) { (pageInfo: SwifTube.PageInfo!, videos: [SwifTube.Video]!, error: NSError!) in
+            self.loadMoreItemsCompletion(pageInfo: pageInfo, items: videos, error: error)
         }
     }
 }

@@ -50,13 +50,13 @@ class ItemsViewController: UIViewController {
         SVProgressHUD.show()
     }
 
-    func setTokenToSearchParameters(#token: SwifTube.PageToken!) {
-        if let token = token {
-            searchParameters["pageToken"] = token.next.isEmpty ? "" : token.next
+    func setTokenToSearchParameters(#pageInfo: SwifTube.PageInfo!) {
+        if let pageInfo = pageInfo {
+            searchParameters["pageToken"] = pageInfo.nextPageToken
         }
     }
 
-    func searchItemsCompletion(#items: [SwifTube.Item]!, token: SwifTube.PageToken!, error: NSError!) {
+    func searchItemsCompletion(#pageInfo: SwifTube.PageInfo, items: [SwifTube.Item]!, error: NSError!) {
         if let items = items {
             /*
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
@@ -68,7 +68,7 @@ class ItemsViewController: UIViewController {
             }
             */
             Async.background {
-                self.setTokenToSearchParameters(token: token)
+                self.setTokenToSearchParameters(pageInfo: pageInfo)
                 self.items = items
             }.main {
                 self.tableView.reloadData()
@@ -77,9 +77,9 @@ class ItemsViewController: UIViewController {
         }
     }
 
-    func loadMoreItemsCompletion(#items: [SwifTube.Item]!, token: SwifTube.PageToken!, error: NSError!) {
+    func loadMoreItemsCompletion(#pageInfo: SwifTube.PageInfo, items: [SwifTube.Item]!, error: NSError!) {
         if let items = items {
-            self.setTokenToSearchParameters(token: token)
+            self.setTokenToSearchParameters(pageInfo: pageInfo)
             /*
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 for item in items {
@@ -104,7 +104,7 @@ class ItemsViewController: UIViewController {
 }
 
 extension ItemsViewController: UITableViewDelegate {
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if items.count > 0 {
             if let nextPageToken = searchParameters["pageToken"] {
@@ -117,6 +117,7 @@ extension ItemsViewController: UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        logger.debug("indexPath.row: \(indexPath.row), items.count: \(items.count)")
         if indexPath.row < items.count {
             return 100
         } else {

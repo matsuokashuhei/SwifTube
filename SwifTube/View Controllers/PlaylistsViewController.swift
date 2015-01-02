@@ -37,15 +37,15 @@ class PlaylistsViewController: ItemsViewController {
     
     override func searchItems(#parameters: [String: String]) {
         super.searchItems(parameters: parameters)
-        SwifTube.search(parameters: parameters) { (playlists: [SwifTube.Playlist]!, token: SwifTube.PageToken!, error: NSError!) in
-            self.searchItemsCompletion(items: playlists, token: token, error: error)
+        SwifTube.search(parameters: parameters) { (pageInfo: SwifTube.PageInfo!, playlists: [SwifTube.Playlist]!, error: NSError!) in
+            self.searchItemsCompletion(pageInfo: pageInfo, items: playlists, error: error)
         }
     }
 
     override func loadMoreItems() {
         super.loadMoreItems()
-        SwifTube.search(parameters: searchParameters) { (playlists: [SwifTube.Playlist]!, token: SwifTube.PageToken!, error: NSError!) in
-            self.loadMoreItemsCompletion(items: playlists, token: token, error: error)
+        SwifTube.search(parameters: searchParameters) { (pageInfo: SwifTube.PageInfo!, playlists: [SwifTube.Playlist]!, error: NSError!) in
+            self.loadMoreItemsCompletion(pageInfo: pageInfo, items: playlists, error: error)
         }
     }
 }

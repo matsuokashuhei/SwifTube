@@ -16,7 +16,7 @@ struct SwifTube {
     :param: parameters キーワード
     :param: completion ハンドラー
     */
-    static func search(#parameters: [String: String], completion: (videos: [Video]!, token: PageToken!, error: NSError!) -> Void) {
+    static func search(#parameters: [String: String], completion: (pageInfo: PageInfo!, videos: [Video]!, error: NSError!) -> Void) {
         Client.sharedInstance.search(parameters: parameters, completion: completion)
     }
 
@@ -26,7 +26,7 @@ struct SwifTube {
     :param: keyword キーワード
     :param: completion ハンドラー
     */
-    static func search(#parameters: [String: String], completion: (playlists: [Playlist]!, token: PageToken!, error: NSError!) -> Void) {
+    static func search(#parameters: [String: String], completion: (pageInfo: PageInfo!, playlists: [Playlist]!, error: NSError!) -> Void) {
         Client.sharedInstance.search(parameters: parameters, completion: completion)
     }
     
@@ -36,7 +36,7 @@ struct SwifTube {
     :param: keyword キーワード
     :param: completion ハンドラー
     */
-    static func search(#parameters: [String: String], completion: (channels: [Channel]!, token: PageToken!, error: NSError!) -> Void) {
+    static func search(#parameters: [String: String], completion: (pageInfo: PageInfo!, channels: [Channel]!, error: NSError!) -> Void) {
         Client.sharedInstance.search(parameters: parameters, completion: completion)
     }
     
@@ -46,11 +46,11 @@ struct SwifTube {
     :param: playlistId プレイリストのID
     :param: completion ハンドラー
     */
-    static func playlistItems(#parameters: [String: String], completion: (videos: [Video]!, token: PageToken!, error: NSError!) -> Void) {
+    static func playlistItems(#parameters: [String: String], completion: (pageInfo: PageInfo!, videos: [Video]!, error: NSError!) -> Void) {
         Client.sharedInstance.playlistItems(parameters: parameters, completion: completion)
     }
 
-    typealias PageToken = (next: String, prev: String)
+    typealias PageInfo = (nextPageToken: String, prevPageToken: String, totalResults: Int, resultsPerPage: Int)
 
     class Client {
         
@@ -61,7 +61,7 @@ struct SwifTube {
             return Singleton.instance
         }
 
-        func search(#parameters: [String: String], completion: (videos: [Video]!, token: PageToken!, error: NSError!) -> Void) {
+        func search(#parameters: [String: String], completion: (pageInfo: PageInfo!, videos: [Video]!, error: NSError!) -> Void) {
             var APIParameters = ["type": "video",]
             for (key, value) in parameters {
                 APIParameters.updateValue(value, forKey: key)
@@ -69,7 +69,7 @@ struct SwifTube {
             _search(parameters: APIParameters, completion: completion)
         }
 
-        func search(#parameters: [String: String], completion: (playlists: [Playlist]!, token: PageToken!, error: NSError!) -> Void) {
+        func search(#parameters: [String: String], completion: (pageInfo: PageInfo!, playlists: [Playlist]!, error: NSError!) -> Void) {
             //var APIParameters = ["type": "playlist", "order": "viewCount"]
             var APIParameters = ["type": "playlist",]
             for (key, value) in parameters {
@@ -78,7 +78,7 @@ struct SwifTube {
             _search(parameters: APIParameters, completion: completion)
         }
 
-        func search(#parameters: [String: String], completion: (channels: [Channel]!, token: PageToken!, error: NSError!) -> Void) {
+        func search(#parameters: [String: String], completion: (pageInfo: PageInfo!, channels: [Channel]!, error: NSError!) -> Void) {
             //var APIParameters = ["type": "channel", "order": "viewCount"]
             var APIParameters = ["type": "channel",]
             for (key, value) in parameters {
@@ -87,10 +87,10 @@ struct SwifTube {
             _search(parameters: APIParameters, completion: completion)
         }
 
-        func playlistItems<T: APICaller>(#parameters: [String: String], completion: (items: [T]!, token: PageToken!, error: NSError!) -> Void) {
+        func playlistItems<T: APICaller>(#parameters: [String: String], completion: (pageInfo: PageInfo!, items: [T]!, error: NSError!) -> Void) {
             if let token = parameters["pageToken"] {
                 if token.isEmpty {
-                    completion(items: [], token: (next: "", prev: ""), error: nil)
+                    completion(pageInfo: pageInfo(), items: [], error: nil)
                     return
                 }
             }
@@ -99,7 +99,8 @@ struct SwifTube {
             debugPrintln(request)
             request.responseJSON { (_, _, JSON, error) -> Void in
                 if let JSON = JSON as? NSDictionary {
-                    let token = self.extractPageToken(JSON: JSON)
+                    //let token = self.extractPageToken(JSON: JSON)
+                    let pageInfo = self.pageInfo(JSON: JSON)
                     let objects = JSON["items"] as [NSDictionary]
                     let ids = objects.map { (object: NSDictionary) -> String in
                         let contentDetails = object["contentDetails"] as NSDictionary
@@ -107,19 +108,19 @@ struct SwifTube {
                     }
                     self.showLoadingIndicator(false)
                     self.find(ids: ids) { (items: [T]!, error: NSError!) in
-                        completion(items: items, token: token, error: error)
+                        completion(pageInfo: pageInfo, items: items, error: error)
                     }
                 } else {
                     self.showLoadingIndicator(false)
-                    completion(items: nil, token: nil, error: error)
+                    completion(pageInfo: nil, items: nil, error: error)
                 }
             }
         }
 
-        func _search<T: APICaller>(#parameters: [String: String], completion: (items: [T]!, token: PageToken!, error: NSError!) -> Void) {
+        private func _search<T: APICaller>(#parameters: [String: String], completion: (pageInfo: PageInfo!, items: [T]!, error: NSError!) -> Void) {
             if let token = parameters["pageToken"] {
                 if token.isEmpty {
-                    completion(items: [], token: (next: "", prev: ""), error: nil)
+                    completion(pageInfo: pageInfo(), items: [], error: nil)
                     return
                 }
             }
@@ -128,7 +129,8 @@ struct SwifTube {
             debugPrintln(request)
             request.responseJSON { (_, _, JSON, error) -> Void in
                 if let JSON = JSON as? NSDictionary {
-                    let token = self.extractPageToken(JSON: JSON)
+                    //let token = self.extractPageToken(JSON: JSON)
+                    let pageInfo = self.pageInfo(JSON: JSON)
                     let type = parameters["type"] as String!
                     let objects = JSON["items"] as [NSDictionary]
                     let ids = objects.map { (object: NSDictionary) -> String in
@@ -137,16 +139,17 @@ struct SwifTube {
                     }
                     self.showLoadingIndicator(false)
                     self.find(ids: ids) { (items: [T]!, error: NSError!) in
-                        completion(items: items, token: token, error: error)
+                        //completion(items: items, token: token, error: error)
+                        completion(pageInfo: pageInfo, items: items, error: error)
                     }
                 } else {
                     self.showLoadingIndicator(false)
-                    completion(items: nil, token: nil, error: error)
+                    completion(pageInfo: nil, items: nil, error: error)
                 }
             }
         }
 
-        func find<T: APICaller>(#ids: [String], completion: (items: [T]!, error: NSError!) -> Void) {
+        private func find<T: APICaller>(#ids: [String], completion: (items: [T]!, error: NSError!) -> Void) {
             showLoadingIndicator(true)
             let request = Alamofire.request(T.callAPI(ids))
             debugPrintln(request)
@@ -165,21 +168,27 @@ struct SwifTube {
             }
         }
 
-        private func extractPageToken(#JSON: NSDictionary) -> PageToken {
-            var token: PageToken = (next: "", prev: "")
+        private func pageInfo() -> PageInfo {
+            return (nextPageToken: "", prevPageToken: "", totalResults: 0, resultsPerPage: 0)
+        }
+
+        private func pageInfo(#JSON: NSDictionary) -> PageInfo {
+            var pageInfo = self.pageInfo()
             if let nextPageToken = JSON["nextPageToken"] as? String {
-                token.next = nextPageToken
+                pageInfo.nextPageToken = nextPageToken
             }
             if let prevPageToken = JSON["prevPageToken"] as? String {
-                token.prev = prevPageToken
+                pageInfo.prevPageToken = prevPageToken
             }
-            return token
+            pageInfo.totalResults = (JSON["pageInfo"] as NSDictionary)["totalResults"] as Int
+            pageInfo.resultsPerPage = (JSON["pageInfo"] as NSDictionary)["resultsPerPage"] as Int
+            return pageInfo
         }
-    
+
         private func showLoadingIndicator(show: Bool) {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = show
         }
-        
+
     }
 
 }

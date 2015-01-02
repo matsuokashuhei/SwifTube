@@ -36,15 +36,15 @@ class ChannelsViewController: ItemsViewController {
 
     override func searchItems(#parameters: [String: String]) {
         super.searchItems(parameters: parameters)
-        SwifTube.search(parameters: parameters) { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
-            self.searchItemsCompletion(items: channels, token: token, error: error)
+        SwifTube.search(parameters: parameters) { (pageInfo: SwifTube.PageInfo!, channels: [SwifTube.Channel]!, error: NSError!) in
+            self.searchItemsCompletion(pageInfo: pageInfo, items: channels, error: error)
         }
     }
     
     override func loadMoreItems() {
         super.loadMoreItems()
-        SwifTube.search(parameters: searchParameters) { (channels: [SwifTube.Channel]!, token: SwifTube.PageToken!, error: NSError!) in
-            self.loadMoreItemsCompletion(items: channels, token: token, error: error)
+        SwifTube.search(parameters: searchParameters) { (pageInfo: SwifTube.PageInfo!, channels: [SwifTube.Channel]!, error: NSError!) in
+            self.loadMoreItemsCompletion(pageInfo: pageInfo, items: channels, error: error)
         }
     }
 }
