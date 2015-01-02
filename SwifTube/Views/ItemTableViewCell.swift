@@ -29,7 +29,15 @@ class ItemTableTableViewCell: UITableViewCell {
             }
         }
     }
-    
+
+    func formatStringFromInt(integer: Int) -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        return formatter.stringFromNumber(NSNumber(integer: integer))!
+    }
+
 }
 
 class VideoTableViewCell: ItemTableTableViewCell {
@@ -42,7 +50,7 @@ class VideoTableViewCell: ItemTableTableViewCell {
         super.configure(item)
         durationLabel.text = item.duration
         channelTitle.text = item.channelTitle
-        viewCountLabel.text = "\(item.viewCount) views"
+        viewCountLabel.text = "\(formatStringFromInt(item.viewCount)) views"
     }
 }
 
@@ -55,7 +63,7 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
         super.configure(item)
         channelTitle.text = item.channelTitle
         if let itemCount = item.itemCount {
-            itemCountLabel.text = "\(itemCount) videos"
+            itemCountLabel.text = "\(formatStringFromInt(itemCount)) videos"
         } else {
             itemCountLabel.text = ""
         }
@@ -70,12 +78,12 @@ class ChannelTableViewCell: ItemTableTableViewCell {
     func configure(item: SwifTube.Channel) {
         super.configure(item)
         if let viewCount = item.viewCount {
-            viewCountLabel.text = "\(viewCount) views"
+            viewCountLabel.text = "\(formatStringFromInt(viewCount)) views"
         } else {
             viewCountLabel.text = ""
         }
         if let videoCount = item.videoCount {
-            videoCountLabel.text = "\(videoCount) videos"
+            videoCountLabel.text = "\(formatStringFromInt(videoCount)) videos"
         } else {
             videoCountLabel.text = ""
         }
