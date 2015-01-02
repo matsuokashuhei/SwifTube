@@ -26,7 +26,7 @@ class ChannelViewController: UIViewController {
         configure(navigationItem: navigationItem)
         configure(segmentedControl)
         segmentChanged(segmentedControl)
-        
+
         if let videosViewController = childViewControllers[0] as? VideosViewController {
             videosViewController.searchItems(parameters: ["channelId": self.channel.id])
         }
