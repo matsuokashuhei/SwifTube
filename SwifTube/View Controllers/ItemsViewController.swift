@@ -13,6 +13,7 @@ class ItemsViewController: UIViewController {
     let logger = XCGLogger.defaultInstance()
 
     @IBOutlet var tableView: UITableView!
+    let refreshControll = UIRefreshControl()
 
     var items: [SwifTube.Item] = []
 
@@ -24,6 +25,8 @@ class ItemsViewController: UIViewController {
         configure(navigationItem: navigationItem)
         configure(tableView: tableView)
 
+        refreshControll.addTarget(self, action: "pullToRefresh", forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControll)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -60,15 +63,6 @@ class ItemsViewController: UIViewController {
 
     func searchItemsCompletion(#pageInfo: SwifTube.PageInfo, items: [SwifTube.Item]!, error: NSError!) {
         if let items = items {
-            /*
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                self.setTokenToSearchParameters(token: token)
-                self.items = items
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-            }
-            */
             Async.background {
                 self.setTokenToSearchParameters(pageInfo: pageInfo)
                 self.items = items
@@ -82,16 +76,6 @@ class ItemsViewController: UIViewController {
     func loadMoreItemsCompletion(#pageInfo: SwifTube.PageInfo, items: [SwifTube.Item]!, error: NSError!) {
         if let items = items {
             self.setTokenToSearchParameters(pageInfo: pageInfo)
-            /*
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                for item in items {
-                    self.items.append(item)
-                }
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-            }
-            */
             Async.background {
                 for item in items {
                     self.items.append(item)
@@ -102,7 +86,13 @@ class ItemsViewController: UIViewController {
             }
         }
     }
-    
+
+    func pullToRefresh() {
+        searchParameters.removeValueForKey("pageToken")
+        searchItems(parameters: searchParameters)
+        refreshControll.endRefreshing()
+    }
+
 }
 
 extension ItemsViewController: UITableViewDelegate {
@@ -129,7 +119,7 @@ extension ItemsViewController: UITableViewDelegate {
 }
 
 extension ItemsViewController: UISearchBarDelegate {
-    
+
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if searchBar.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).isEmpty {
