@@ -27,6 +27,9 @@ class VideoViewController: UIViewController {
 
         configure(seekBar: seekBar)
         configure(prevButton: prevButton, playButton: playButton, nextButton: nextButton)
+
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: UIDevice.currentDevice())
         movieView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "toggleNavigationControll"))
 
         play(video: video)
@@ -122,26 +125,36 @@ class VideoViewController: UIViewController {
         delegate?.playPrevVideo(self)
     }
 
-    func toggleNavigationControll() {
-        let device = UIDevice.currentDevice()
-        if device.userInterfaceIdiom == .Phone {
-            switch device.orientation {
-            case .LandscapeLeft, .LandscapeRight:
-                navigationController?.setNavigationBarHidden(!navigationController!.navigationBarHidden, animated: false)
-                for view in [seekBar, prevButton, playButton, nextButton] {
-                    view.hidden = !view.hidden
-                }
-            default:
-                return
-            }
+    func orientationChanged(notification: NSNotification) {
+        log.debug("")
+        let device = notification.object as UIDevice
+        switch device.orientation {
+        case .Portrait, .PortraitUpsideDown:
+            showOnlyMovieView(false)
+        default:
+            break
         }
-        // TODO: iPadときはMovieViewの位置を直す。ナビゲーションバーが消えると位置が変わるため。
-        // 仮コード（正しく動かない）
-        //if device.userInterfaceIdiom == .Pad {
-        //    movieView.frame.origin.y = 42
-        //}
-        // TODO: ナビゲーションバーその他が消えているときにポートレイトモードに変わるとナビゲーションバーがないため、操作できなくなる。
     }
+
+    func toggleNavigationControll() {
+        log.debug("")
+        switch UIDevice.currentDevice().orientation {
+        case .LandscapeLeft, .LandscapeRight:
+            if let navigationController = navigationController {
+                showOnlyMovieView(!navigationController.navigationBarHidden)
+            }
+        default:
+            return
+        }
+    }
+
+    func showOnlyMovieView(only: Bool) {
+        navigationController?.setNavigationBarHidden(only, animated: false)
+        for view in [seekBar, prevButton, playButton, nextButton] {
+            view.hidden = only
+        }
+    }
+
 }
 
 extension VideoViewController: MovieViewDelegate {

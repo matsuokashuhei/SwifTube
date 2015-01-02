@@ -234,7 +234,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGk-bm-cor" customClass="MovieView" customModule="SwifTube" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="600" height="338"/>
+                                <rect key="frame" x="1" y="64" width="600" height="338"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="kGk-bm-cor" secondAttribute="height" multiplier="300:169" id="Dpp-Za-YRE"/>
@@ -325,6 +325,7 @@
                             <constraint firstAttribute="bottom" secondItem="fkF-k1-96O" secondAttribute="bottom" constant="10" id="RWj-C3-E0a"/>
                             <constraint firstItem="fkF-k1-96O" firstAttribute="leading" secondItem="60q-b9-3rv" secondAttribute="trailing" constant="100" id="U5G-hW-5Hc"/>
                             <constraint firstAttribute="trailing" secondItem="FUt-i4-1Rl" secondAttribute="trailing" id="Vyz-l8-zdF"/>
+                            <constraint firstItem="kGk-bm-cor" firstAttribute="top" secondItem="VXz-b3-Gy4" secondAttribute="top" constant="64" id="W9j-GS-0KN"/>
                             <constraint firstItem="kGk-bm-cor" firstAttribute="leading" secondItem="VXz-b3-Gy4" secondAttribute="leading" id="WrT-Vm-3MS"/>
                             <constraint firstItem="FUt-i4-1Rl" firstAttribute="leading" secondItem="VXz-b3-Gy4" secondAttribute="leading" id="Xza-S2-cn1"/>
                             <constraint firstAttribute="trailing" secondItem="kGk-bm-cor" secondAttribute="trailing" id="Z0p-Zq-ST1"/>
@@ -337,6 +338,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="W9j-GS-0KN"/>
                                 <exclude reference="cDS-rR-eCN"/>
                                 <exclude reference="QnC-Vw-iDP"/>
                                 <exclude reference="RWj-C3-E0a"/>
@@ -357,6 +359,11 @@
                                 <exclude reference="QnC-Vw-iDP"/>
                                 <include reference="hdt-Pb-UfP"/>
                                 <include reference="f1V-zT-VhI"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="W9j-GS-0KN"/>
                             </mask>
                         </variation>
                     </view>
