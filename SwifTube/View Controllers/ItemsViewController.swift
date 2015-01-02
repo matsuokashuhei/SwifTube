@@ -9,7 +9,9 @@
 import UIKit
 
 class ItemsViewController: UIViewController {
-    
+
+    let logger = XCGLogger.defaultInstance()
+
     @IBOutlet var tableView: UITableView!
 
     var items: [SwifTube.Item] = []
@@ -129,12 +131,15 @@ extension ItemsViewController: UITableViewDelegate {
 extension ItemsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        if searchBar.text.isEmpty {
+        searchBar.resignFirstResponder()
+        if searchBar.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).isEmpty {
+            return
+        }
+        if searchParameters["q"] == searchBar.text {
             return
         }
         items = []
         tableView.reloadData()
-        searchBar.resignFirstResponder()
         searchItems(parameters: ["q": searchBar.text])
     }
     
