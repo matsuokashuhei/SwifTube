@@ -33,14 +33,17 @@ class ItemTableTableViewCell: UITableViewCell {
 }
 
 class VideoTableViewCell: ItemTableTableViewCell {
-    
+
+    @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var channelTitle: UILabel!
     @IBOutlet weak var viewCountLabel: UILabel!
     
     func configure(item: SwifTube.Video) {
         super.configure(item)
+        durationLabel.text = item.duration
         channelTitle.text = item.channelTitle
         viewCountLabel.text = "\(item.viewCount) views"
+        println(item.duration)
     }
 }
 

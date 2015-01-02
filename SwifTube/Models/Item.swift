@@ -8,13 +8,41 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 import Alamofire
 
 
 extension SwifTube {
 
+    static func dateFromPublisehdAt(publishedAt: String) -> NSDate {
+            var formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            return formatter.dateFromString(publishedAt)!
+    }
+
+    static func formatFromDuration(duration: String) -> String {
+        let scanner = NSScanner(string: duration)
+        scanner.charactersToBeSkipped = NSCharacterSet.letterCharacterSet()
+        var scanned = [Int]()
+        while !scanner.atEnd {
+            var int: Int32 = 0
+            scanner.scanInt(&int)
+            scanned.append(Int(int))
+        }
+        switch scanned.count {
+        case 3:
+            return NSString(format: "%d:%02d:%02d", scanned[0], scanned[1], scanned[2])
+        case 2:
+            return NSString(format: "%d:%02d", scanned[0], scanned[1])
+        case 1:
+            return NSString(format: "0:%02d", scanned[0])
+        default:
+            return "00:00"
+        }
+    }
+
     class Item {
-        
+
         let id: String
         let publishedAt: NSDate
         let title: String
@@ -28,10 +56,7 @@ extension SwifTube {
             self.id = item["id"] as String
             self.title = snippet["title"] as String
             self.description = snippet["description"] as String
-            //self.publishedAt = snippet["publishedAt"] as String
-            var formatter = NSDateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            self.publishedAt = formatter.dateFromString(snippet["publishedAt"] as String)!
+            self.publishedAt = SwifTube.dateFromPublisehdAt(snippet["publishedAt"] as String)
             for quality in ["standard", "high", "medium", "default"] {
                 if let thumbnail = thumbnails.valueForKey(quality) as? NSDictionary {
                     self.thumbnailURL = thumbnail["url"] as String
@@ -71,12 +96,13 @@ extension SwifTube {
             let statistics = item["statistics"] as NSDictionary
             
             self.channelTitle = snippet["channelTitle"] as String
-            self.duration = contentDetails["duration"] as String
+            //self.duration = contentDetails["duration"] as String
+            self.duration = SwifTube.formatFromDuration(contentDetails["duration"] as String)
             self.viewCount = (statistics["viewCount"] as String).toInt()!
             
             super.init(item: item)
         }
-        
+
         func streamURL(quality: Quality = Quality.High, completion: (streamURL: NSURL!, error: NSError!) -> Void) {
             XCDYouTubeClient.defaultClient().getVideoWithIdentifier(id) { (video: XCDYouTubeVideo!, error: NSError!) in
                 if video != nil {
