@@ -15,9 +15,9 @@ import Alamofire
 extension SwifTube {
 
     static func dateFromPublisehdAt(publishedAt: String) -> NSDate {
-            var formatter = NSDateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            return formatter.dateFromString(publishedAt)!
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        return formatter.dateFromString(publishedAt)!
     }
 
     static func formatFromDuration(duration: String) -> String {
@@ -44,7 +44,7 @@ extension SwifTube {
     class Item {
 
         let id: String
-        let publishedAt: NSDate
+        let publishedAt: NSDate?
         let title: String
         let description: String
         let thumbnailURL: String!
@@ -56,7 +56,9 @@ extension SwifTube {
             self.id = item["id"] as String
             self.title = snippet["title"] as String
             self.description = snippet["description"] as String
-            self.publishedAt = SwifTube.dateFromPublisehdAt(snippet["publishedAt"] as String)
+            if let publishedAt = snippet["publishedat"] as? String {
+                self.publishedAt = SwifTube.dateFromPublisehdAt(publishedAt)
+            }
             for quality in ["standard", "high", "medium", "default"] {
                 if let thumbnail = thumbnails.valueForKey(quality) as? NSDictionary {
                     self.thumbnailURL = thumbnail["url"] as String
@@ -167,7 +169,7 @@ extension SwifTube {
             }
             super.init(item: item)
         }
-        
+
 //        func videos(completion: (videos: [Video]!, error: NSError!) -> Void) {
 //            SwifTube.search(parameters: ["channelId": id]) { (videos: [Video]!, token: PageToken!, error: NSError!) in
 //                if let videos = videos {
