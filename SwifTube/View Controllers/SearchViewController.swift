@@ -62,7 +62,7 @@ class SearchViewController: UIViewController {
         searchBar.becomeFirstResponder()
         
     }
-    
+
     func segmentChanged(sender: UISegmentedControl) {
         configure(containerViews: containerViews)
         searchBar.delegate = itemViewControllerAtSelectedSegmentIndex()
@@ -92,4 +92,9 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         searchBar.resignFirstResponder()
     }
+
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return itemViewControllerAtSelectedSegmentIndex().tableView(tableView, heightForRowAtIndexPath: indexPath)
+    }
+
 }
