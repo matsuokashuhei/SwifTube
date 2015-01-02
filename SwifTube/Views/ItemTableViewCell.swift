@@ -72,16 +72,24 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
 
 class ChannelTableViewCell: ItemTableTableViewCell {
     
-    @IBOutlet weak var viewCountLabel: UILabel!
+    @IBOutlet weak var subscriberCountLabel: UILabel!
     @IBOutlet weak var videoCountLabel: UILabel!
     
     func configure(item: SwifTube.Channel) {
         super.configure(item)
+        /*
         if let viewCount = item.viewCount {
             viewCountLabel.text = "\(formatStringFromInt(viewCount)) views"
         } else {
             viewCountLabel.text = ""
         }
+        */
+        if let subscriberCount = item.subscriberCount {
+            subscriberCountLabel.text = "\(formatStringFromInt(subscriberCount)) subscribes"
+        } else {
+            subscriberCountLabel.text = ""
+        }
+
         if let videoCount = item.videoCount {
             videoCountLabel.text = "\(formatStringFromInt(videoCount)) videos"
         } else {

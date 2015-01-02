@@ -674,7 +674,7 @@
                                                         <rect key="frame" x="333" y="79" width="459" height="17"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="view count" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOS-UN-I50">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subscriber count" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOS-UN-I50">
                                                     <rect key="frame" x="133" y="57" width="459" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="459" id="ROh-XS-K5c"/>
@@ -721,10 +721,10 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="subscriberCountLabel" destination="QOS-UN-I50" id="pug-iH-zII"/>
                                             <outlet property="thumbnailImageView" destination="8X3-3J-rrH" id="5Gr-24-Fys"/>
                                             <outlet property="titleLabel" destination="o0M-VF-053" id="6ie-zT-gGy"/>
                                             <outlet property="videoCountLabel" destination="ljE-MC-V0J" id="sW0-65-3tS"/>
-                                            <outlet property="viewCountLabel" destination="QOS-UN-I50" id="I61-iR-6dq"/>
                                             <segue destination="4Yb-tw-fiF" kind="show" identifier="showChannel" id="Olo-RP-l0W"/>
                                         </connections>
                                     </tableViewCell>
